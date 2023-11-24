@@ -1,5 +1,12 @@
-import React from "react";
+import { AuthLayout } from "../../layaout";
+import { useDocumentTitle } from "../../hooks";
 
+import { RegisterForm } from "../../components/RegisterForm";
 export const RegisterPage = () => {
-  return <div>RegisterPage</div>;
+  useDocumentTitle("Register | Esencia.ai");
+  return (
+    <AuthLayout>
+      <RegisterForm />
+    </AuthLayout>
+  );
 };
