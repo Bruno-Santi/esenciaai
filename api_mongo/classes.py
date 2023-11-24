@@ -8,3 +8,4 @@ class dailySurvey(BaseModel):
     question2: int
     question3: int
     question4: int
+

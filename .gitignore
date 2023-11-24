@@ -2,3 +2,4 @@ venv
 stream.py
 api_mongo\__pycache__
 __pycache__
+.env

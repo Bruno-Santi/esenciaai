@@ -3,12 +3,18 @@ from api_mongo.classes import *
 from pymongo.mongo_client import MongoClient
 from bson import json_util, ObjectId
 from datetime import datetime
+from dotenv import load_dotenv
+import os
 import json
 
 app = FastAPI()
 
 #mongodb connection
-uri = "mongodb+srv://development:esencia1234@esenciaia.xeknyc8.mongodb.net/?retryWrites=true&w=majority"
+load_dotenv()
+user = os.environ.get("USER")
+pwd = os.environ.get("PASSWORD")
+print(user, pwd)
+uri = f"mongodb+srv://{user}:{pwd}@esenciaia.xeknyc8.mongodb.net/?retryWrites=true&w=majority"
 client = MongoClient(uri)
 db = client["essenciaIA_app"]
 
@@ -17,11 +23,11 @@ db = client["essenciaIA_app"]
 def add_daily_survey(survey:dailySurvey):
     try:
         db["survey_data"].update_one(filter={
-            "user_id": survey.user_id,
-            "team_id": survey.team_id,
+            "team_id": survey.team_id
         }, update={
   "$push": {
     "daily_survey": {
+      "user_id": survey.user_id,
       "date": datetime.now(),
       "sprint": survey.sprint,
       "question1": survey.question1,
