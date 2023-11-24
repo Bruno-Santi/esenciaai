@@ -1,0 +1,80 @@
+{
+    "userId": {
+        "$oid": "655961a8e7c6f2e97d4ae650"
+      },
+    "project_name":"skynet.ia",
+    "logo":"drive.logo2.com",
+    "members":[
+        {
+            "name":"paola",
+            "email":"paola@gmail.com"    
+        },
+        {
+            "name":"lionel",
+            "email":"lionel@gmail.com"    
+        }
+    ],
+    "daily_survey":[
+        {
+        "date":"2023-11-16",
+        "sprint_number": 1,
+        "responses":[
+        {
+            "member":"paola@gmail.com",
+            "question1": 10,
+            "question2": 5,
+            "question3": 8,
+            "question4": 8,
+            "last_comment":"everything goes well"
+        },
+        {
+            "member":"lionel@gmail.com",
+            "question1": 10,
+            "question2": 5,
+            "question3": 8,
+            "question4": 8,
+            "last_comment":"good team"
+        }
+    ]
+    },
+    {
+        "date":"2023-11-17",
+        "sprint_number": 1,
+        "responses":[
+        {
+            "member":"paola@gmail.com",
+            "question1": 10,
+            "question2": 5,
+            "question3": 8,
+            "question4": 2,
+            "last_comment":"Uncompromising people"
+        },
+        {
+            "member":"lionel@gmail.com",
+            "question1": 1,
+            "question2": 5,
+            "question3": 8,
+            "question4": 5,
+            "last_comment":"..."
+        }
+    ]
+    }
+],
+    "retro": [
+        {
+            "sprint":1,
+            "cards":[
+                {
+                    "question": "waht went wrong",
+                    "topic":[
+                        {
+                            "content": "Unpunctual people",
+                            "thumb_up":3,
+                            "thumb_down":1
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
