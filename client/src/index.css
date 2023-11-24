@@ -9,6 +9,13 @@
   cursor: pointer;
 }
 
+.btn-disabled {
+  background-color: gray;
+  color: white;
+  font-weight: normal;
+  cursor: wait;
+}
+
 .importantWord {
   font-weight: bold;
   color: #d07380;

@@ -3,13 +3,15 @@ import { User, UserTeams } from "../store/dashboard/interfaces";
 export const users: User[] = [
   {
     id: 1,
-    name: "John Doe",
+    name: "John",
+    lastName: "Doe",
     email: "john@doe.com",
     password: "123456",
   },
   {
     id: 2,
     name: "Don Jon",
+    lastName: "Doe",
     email: "don@doe.com",
     password: "123456",
   },

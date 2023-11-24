@@ -1,10 +1,10 @@
-import authbg from "../assets/auth-bg.png";
 import { Divider } from "../components";
-import logo from "../assets/Logo.png";
-export const AuthLayout = ({ children }) => {
+import { LayoutProps } from "../interface/index";
+import { logo, authbg } from "../assets";
+export const AuthLayout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <section className='w-full h-screen bg-primary'>
-      <div className='flex'>
+    <section className='w-full h-screen bg-primary '>
+      <div className='flex animate__animated animate__fadeIn animate__slower animate__delay-0.8s'>
         <div className='w-1/2'>
           <section className='w-5/6 flex flex-col  text-center justify-center m-auto pt-20'>
             <h1 className='text-tertiary font-manrope font-bold text-6xl'>
@@ -31,7 +31,7 @@ export const AuthLayout = ({ children }) => {
           </section>
         </div>
         <div className='w-1/2 h-screen relative'>
-          <div className='fixed top-1/2 transform -translate-y-1/2 right-40 w-2/6 bg-primary/60 h-3/4 z-50 rounded-xl'>
+          <div className='fixed top-1/2 transform -translate-y-1/2 right-40 w-2/6 bg-primary/60 h-fit pb-6 z-50 rounded-xl'>
             <img src={logo} alt='esencia logo' className='animate-pulse w-24 mt-14 m-auto' />
             <div className='flex m-auto justify-center'>{children}</div>
           </div>
