@@ -1,17 +1,18 @@
 import { useRef } from "react";
 import { OnBoardingLayout } from "../../layaout";
 import { MdUploadFile } from "react-icons/md";
-import { useImageUpload } from "../../hooks";
+import { useDocumentTitle, useImageUpload } from "../../hooks";
 
 export const StepTwo = () => {
+  useDocumentTitle("Onboard | Esencia.ai");
   const fileInputRef = useRef(null);
-  const { imageSelected, handleImageClick, handleFileChange } = useImageUpload(fileInputRef);
+  const { imageSelected, handleImageClick, handleFileChange, isLoading } = useImageUpload(fileInputRef);
 
   return (
     <OnBoardingLayout>
       <div className='flex flex-col animate__animated animate__fadeIn animate__slower'>
         <span className='w-2/6 font-light text-center font-manrope text-4xl text-tertiary mx-auto'>
-          Great! Now, let's set the stage for your team. What’s your{" "}
+          Great! Now, let's set the stage for your team. What's your{" "}
           <span className='font-bold text-secondary'>team name</span>?
           <div className='flex flex-col mt-12'>
             <label htmlFor='teamName' className='text-manrope text-2xl '>
@@ -35,15 +36,32 @@ export const StepTwo = () => {
                 />
               </div>
             ) : (
-              <MdUploadFile className='w-32 h-32 cursor-pointer m-auto mt-4 text-tertiary' onClick={handleImageClick} />
+              <MdUploadFile
+                className='w-32 h-32 cursor-pointer m-auto mt-4 text-tertiary duration-700 hover:text-secondary'
+                onClick={handleImageClick}
+              />
             )}
           </div>
         </span>
         <div className='flex w-2/6 m-auto'>
-          <button className='btn-secondary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-secondary hover:text-tertiary '>
+          <button
+            disabled={isLoading}
+            className={
+              isLoading
+                ? "btn-disabled p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg "
+                : "btn-secondary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
+            }
+          >
             Skip for now
           </button>
-          <button className='btn-primary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary'>
+          <button
+            disabled={isLoading}
+            className={
+              isLoading
+                ? "btn-disabled p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg "
+                : "btn-primary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
+            }
+          >
             Continue
           </button>
         </div>

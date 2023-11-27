@@ -1,5 +1,16 @@
-import React from "react";
+import { useMemo } from "react";
+import { useDashboard } from "../../hooks/useDashboard";
+import { DashboardLayout } from "../../layaout/DashboardLayout";
 
 export const Main = () => {
-  return <div>Main</div>;
+  const { startLoadingTeams } = useDashboard();
+  useMemo(() => {
+    startLoadingTeams();
+  }, []);
+
+  return (
+    <DashboardLayout>
+      <div>holas</div>
+    </DashboardLayout>
+  );
 };

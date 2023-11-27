@@ -1,8 +1,9 @@
 import { video } from "../../assets";
-import { useNavigateTo } from "../../hooks";
+import { useDocumentTitle, useNavigateTo } from "../../hooks";
 import { OnBoardingLayout } from "../../layaout";
 
 export const StepOne = () => {
+  useDocumentTitle("Onboard | Esencia.ai");
   const { handleNavigate } = useNavigateTo();
   return (
     <OnBoardingLayout>

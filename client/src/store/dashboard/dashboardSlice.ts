@@ -18,7 +18,7 @@ export const dashboardSlice = createSlice({
       state.user = [];
     },
     onSetUserTeams: (state, { payload }) => {
-      state.userTeams = payload.userTeams;
+      state.userTeams.push(payload);
     },
     onSetActiveTeam: (state, { payload }) => {
       state.activeTeam = state.userTeams.filter((team) => team.id === payload.activeTeam);
@@ -26,6 +26,6 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { onSetUser, onLogOutUser } = dashboardSlice.actions;
+export const { onSetUser, onLogOutUser, onSetUserTeams } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;
