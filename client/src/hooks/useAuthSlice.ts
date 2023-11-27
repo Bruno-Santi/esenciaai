@@ -19,6 +19,7 @@ export const useAuthSlice = () => {
       if (foundUser) {
         dispatch(onLogin({ userId: foundUser.id }));
         handleNavigate("/dashboard");
+        localStorage.setItem("userId", foundUser.id);
       } else {
         dispatch(onLogOut("Invalid Email or Password "));
       }

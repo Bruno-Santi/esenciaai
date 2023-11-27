@@ -26,7 +26,7 @@ export const teams: UserTeams[] = [
   {
     creatorId: 1,
     id: 102,
-    name: "John Doe's team 1",
+    name: "John Doe's team 2",
   },
 ];
 

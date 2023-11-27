@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const userLogged = localStorage.getItem("userId");
 const initialState = {
-  status: "non-authenticated",
-  user: {},
+  status: userLogged ? "authenticated" : "non-authenticated",
+  user: userLogged ? userLogged : {},
   errorMessage: undefined,
   errorRegisterMessage: undefined,
   loading: false,

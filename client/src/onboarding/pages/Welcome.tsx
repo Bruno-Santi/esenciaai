@@ -1,7 +1,8 @@
-import { useNavigateTo } from "../../hooks";
+import { useDocumentTitle, useNavigateTo } from "../../hooks";
 import { OnBoardingLayout } from "../../layaout";
 
 export const Welcome = () => {
+  useDocumentTitle("Onboard | Esencia.ai");
   const { handleNavigate } = useNavigateTo();
   return (
     <OnBoardingLayout>
