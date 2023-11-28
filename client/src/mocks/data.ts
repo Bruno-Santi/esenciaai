@@ -1,5 +1,5 @@
 import { User, UserTeams } from "../store/dashboard/interfaces";
-
+import { teamLogo } from "../assets";
 export const users: User[] = [
   {
     id: 1,
@@ -22,11 +22,13 @@ export const teams: UserTeams[] = [
     creatorId: 1,
     id: 101,
     name: "John Doe's team 1",
+    logo: teamLogo,
   },
   {
     creatorId: 1,
     id: 102,
     name: "John Doe's team 2",
+    logo: teamLogo,
   },
 ];
 

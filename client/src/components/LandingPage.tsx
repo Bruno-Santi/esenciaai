@@ -6,7 +6,7 @@ export const LandingPage = () => {
   const { handleNavigate } = useNavigateTo();
   return (
     <div className='bg-primary  h-screen lg:h-screen w-full'>
-      <div className='flex flex-col w-full justify-center pt-14 lg:pt-20 space-y-6 lg:space-y-10 animate__animated animate__fadeIn animate__slower '>
+      <div className='flex flex-col w-full justify-center pt-12 lg:pt-20 space-y-6 lg:space-y-10 animate__animated animate__fadeIn animate__slower '>
         <img src={logo} className=' w-1/6 lg:w-[129px] m-auto animate-pulse duration-700' alt='esencia.ai logo' />
         <span className='text-tertiary/40 text-lg lg:text-2xl font-poppins font-bold italic m-auto'>
           By Agile Leaders for Agile Leaders

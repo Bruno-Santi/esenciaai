@@ -1,8 +1,9 @@
-import React from "react";
 import { FaRegUserCircle } from "react-icons/fa";
 import { RxExit } from "react-icons/rx";
+import { useAuthSlice } from "../hooks/useAuthSlice";
 
 export const NavBar = () => {
+  const { startLogingOut } = useAuthSlice();
   return (
     <nav className='flex w-full bg-primary h-20  justify-around '>
       <div className='w-full flex justify-between items-center  '>
@@ -16,7 +17,10 @@ export const NavBar = () => {
             Members
           </span>
         </div>
-        <div className='flex btn-secondary p-2 rounded-lg font-poppins mr-4 w-fit hover:bg-secondary hover:text-tertiary duration-700'>
+        <div
+          onClick={() => startLogingOut()}
+          className='flex btn-secondary p-2 rounded-lg font-poppins mr-4 w-fit hover:bg-secondary hover:text-tertiary duration-700'
+        >
           <button className=' '>Log Out</button>
           <RxExit className='font-thin ml-2  my-auto h-6 w-6' />
         </div>
