@@ -17,16 +17,15 @@ export const AppRouter = () => {
         {isAuthenticated ? (
           <>
             {/* Rutas para usuarios autenticados */}
-
-            <Route element={<DashboardRoutes />} path='/dashboard/*' />
             <Route element={<OnBoardingRoutes />} path='/onboarding/*' />
+            <Route element={<DashboardRoutes />} path='/dashboard/*' />
             <Route element={<Navigate to='/dashboard' />} path='/auth/*' />
           </>
         ) : (
           <>
             {/* Rutas para usuarios no autenticados */}
             <Route element={<AuthRoutes />} path='/auth/*' />
-            <Route element={<Navigate to='/' />} path='/dashboard/*' />
+            <Route element={<Navigate to='/' />} path={"/dashboard/*" || "/onboarding/*"} />
           </>
         )}
       </Routes>

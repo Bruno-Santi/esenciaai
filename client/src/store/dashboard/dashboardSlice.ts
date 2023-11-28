@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DashBoardState } from ".";
+import { UserTeams } from "./interfaces";
 
 const initialState: DashBoardState = {
   user: [],
@@ -17,8 +18,8 @@ export const dashboardSlice = createSlice({
     onLogOutUser: (state) => {
       state.user = [];
     },
-    onSetUserTeams: (state, { payload }) => {
-      state.userTeams.push(payload);
+    onSetUserTeams: (state, action: PayloadAction<{ userTeams: UserTeams[] }>) => {
+      state.userTeams = action.payload.userTeams;
     },
     onSetActiveTeam: (state, { payload }) => {
       state.activeTeam = state.userTeams.filter((team) => team.id === payload.activeTeam);

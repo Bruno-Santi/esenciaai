@@ -29,11 +29,12 @@ export const LoginForm = () => {
             className='h-12 w-64 rounded-md p-2 text-sm font-thin  border-2 duration-500 text-primary focus:outline-none focus:border-2 focus:border-secondary/80 focus:font-bold'
             placeholder='Email'
             {...register("Email", {
-              required: true,
+              required: "This field is required",
               min: 5,
               maxLength: 30,
             })}
           />
+          {errors.Email && <span className='text-lg m-auto text-red-500 font-normal'>{errors.Email.message}</span>}
         </div>
         <div className='flex flex-col'>
           <label className=' text-tertiary text-lg font-normal' htmlFor='password'>
@@ -44,12 +45,16 @@ export const LoginForm = () => {
             className='h-12 w-64 rounded-md p-2 text-sm font-thin  border-2 duration-500 text-primary focus:outline-none focus:border-2 focus:border-secondary/80 focus:font-bold'
             placeholder='Password'
             {...register("Password", {
+              required: "This field is required",
               maxLength: {
                 value: 30,
                 message: "La contraseña no puede tener más de 30 caracteres",
               },
             })}
           />
+          {errors.Password && (
+            <span className='text-lg m-auto text-red-500 font-normal'>{errors.Password.message}</span>
+          )}
         </div>
         <button
           type='submit'

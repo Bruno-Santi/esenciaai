@@ -1,13 +1,13 @@
 import { useRef } from "react";
 import { OnBoardingLayout } from "../../layaout";
 import { MdUploadFile } from "react-icons/md";
-import { useDocumentTitle, useImageUpload } from "../../hooks";
+import { useDocumentTitle, useImageUpload, useNavigateTo } from "../../hooks";
 
 export const StepTwo = () => {
   useDocumentTitle("Onboard | Esencia.ai");
   const fileInputRef = useRef(null);
   const { imageSelected, handleImageClick, handleFileChange, isLoading } = useImageUpload(fileInputRef);
-
+  const { handleNavigate } = useNavigateTo();
   return (
     <OnBoardingLayout>
       <div className='flex flex-col animate__animated animate__fadeIn animate__slower'>
@@ -45,6 +45,7 @@ export const StepTwo = () => {
         </span>
         <div className='flex w-2/6 m-auto'>
           <button
+            onClick={() => handleNavigate("/dashboard")}
             disabled={isLoading}
             className={
               isLoading
