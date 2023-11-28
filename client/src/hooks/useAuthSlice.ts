@@ -5,21 +5,24 @@ import { users } from ".././mocks/data";
 import { useNavigateTo } from ".";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { useDashboard } from "./useDashboard";
+
 export const useAuthSlice = () => {
   const { loading, errorMessage, status } = useSelector((state) => state.auth);
+  const { startLoadingTeams } = useDashboard();
   const dispatch = useDispatch();
   const { handleNavigate } = useNavigateTo();
   useEffect(() => {}, [loading]);
 
   const startCheckingUser = (data: string[]) => {
     dispatch(onChecking());
-
     setTimeout(() => {
       const foundUser = users.find((user) => user.email === data.Email && user.password === data.Password);
       if (foundUser) {
+        handleNavigate("/onboarding");
         dispatch(onLogin({ userId: foundUser.id }));
-        handleNavigate("/dashboard");
         localStorage.setItem("userId", foundUser.id);
+        startLoadingTeams();
       } else {
         dispatch(onLogOut("Invalid Email or Password "));
       }
@@ -51,11 +54,18 @@ export const useAuthSlice = () => {
       }
     }, 3000);
   };
+
+  const startLogingOut = () => {
+    dispatch(onLogOut());
+    handleNavigate("/auth/login");
+    localStorage.clear();
+  };
   return {
     startCheckingUser,
     loading,
     errorMessage,
     status,
     startRegisteringUser,
+    startLogingOut,
   };
 };
