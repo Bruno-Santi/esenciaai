@@ -3,7 +3,7 @@ import { teamLogo } from "../assets";
 export const users: User[] = [
   {
     id: 1,
-    name: "John",
+    name: "Pepe",
     lastName: "Doe",
     email: "john@doe.com",
     password: "123456",

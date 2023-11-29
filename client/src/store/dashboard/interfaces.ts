@@ -15,5 +15,6 @@ export interface UserTeams {
 export interface DashBoardState {
   user: User[];
   userTeams: UserTeams[];
-  activeTeam: UserTeams[];
+  activeTeam: UserTeams | null;
+  isLoading: boolean;
 }
