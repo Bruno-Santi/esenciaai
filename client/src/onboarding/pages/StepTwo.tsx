@@ -22,10 +22,16 @@ export const StepTwo = () => {
               className='h-12 mt-4 m-auto w-64 rounded-md p-2 text-sm font-thin  border-2 duration-500 text-primary focus:outline-none focus:border-2 focus:border-secondary/80 focus:font-bold'
               type='text'
             ></input>
-            <label htmlFor='teamName' className='text-manrope text-2xl mt-4 '>
+            <label htmlFor='teamLogo' className='text-manrope text-2xl mt-4 '>
               Your team logo
             </label>
-            <input type='file' ref={fileInputRef} style={{ display: "none" }} onChange={handleFileChange} />
+            <input
+              type='file'
+              name='teamLogo'
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
             {imageSelected ? (
               <div className='w-32 h-32 m-auto mt-4'>
                 <img

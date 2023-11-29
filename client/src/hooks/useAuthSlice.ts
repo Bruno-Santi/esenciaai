@@ -6,6 +6,7 @@ import { useNavigateTo } from ".";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { useDashboard } from "./useDashboard";
+import { onLogOutUser } from "../store/dashboard/dashboardSlice";
 
 export const useAuthSlice = () => {
   const { loading, errorMessage, status } = useSelector((state) => state.auth);
@@ -16,13 +17,20 @@ export const useAuthSlice = () => {
 
   const startCheckingUser = (data: string[]) => {
     dispatch(onChecking());
+
     setTimeout(() => {
       const foundUser = users.find((user) => user.email === data.Email && user.password === data.Password);
       if (foundUser) {
+        console.log(foundUser);
+        const userObject = {
+          id: foundUser.id,
+          name: foundUser.name,
+          lastName: foundUser.lastName,
+        };
+        console.log(userObject);
         handleNavigate("/onboarding");
-        dispatch(onLogin({ userId: foundUser.id }));
-        localStorage.setItem("userId", foundUser.id);
-        startLoadingTeams();
+        dispatch(onLogin(userObject));
+        localStorage.setItem("userLogged", JSON.stringify(userObject));
       } else {
         dispatch(onLogOut("Invalid Email or Password "));
       }
@@ -56,9 +64,11 @@ export const useAuthSlice = () => {
   };
 
   const startLogingOut = () => {
-    dispatch(onLogOut());
-    handleNavigate("/auth/login");
     localStorage.clear();
+    localStorage.removeItem("userTeams");
+    dispatch(onLogOut());
+    dispatch(onLogOutUser());
+    handleNavigate("/auth/login");
   };
   return {
     startCheckingUser,

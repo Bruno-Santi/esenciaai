@@ -1,16 +1,13 @@
 import { useMemo } from "react";
 import { useDashboard } from "../../hooks/useDashboard";
 import { DashboardLayout } from "../../layaout/DashboardLayout";
+import { ActiveTeam, NoTeams } from "../../components";
 
 export const Main = () => {
-  const { startLoadingTeams } = useDashboard();
+  const { startSettingUser, userTeams } = useDashboard();
   useMemo(() => {
-    startLoadingTeams();
+    startSettingUser();
   }, []);
 
-  return (
-    <DashboardLayout>
-      <div>holas</div>
-    </DashboardLayout>
-  );
+  return <DashboardLayout>{userTeams.length ? <ActiveTeam /> : <NoTeams />}</DashboardLayout>;
 };
