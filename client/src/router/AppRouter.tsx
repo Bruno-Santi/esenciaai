@@ -26,6 +26,7 @@ export const AppRouter = () => {
             {/* Rutas para usuarios no autenticados */}
             <Route element={<AuthRoutes />} path='/auth/*' />
             <Route element={<Navigate to='/' />} path={"/dashboard/*" || "/onboarding/*"} />
+            <Route element={<Navigate to='/' />} path={"/onboarding/*"} />
           </>
         )}
       </Routes>
