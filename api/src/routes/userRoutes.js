@@ -7,12 +7,14 @@ const {
   userByEmail,
   updatePasswordPut,
   deletedUser,
-  updateUser
+  updateUser,
+  userScrumGet
 } = require("../controllers/userControllers");
 const { checkEmail, checkPhone, checkNickname } = require("../middleware/validate/routes/authValidate");
 
 
 router.get("/", usersGet);
+router.get("/scrum/:id", userScrumGet)
 router.put("/update_password",  updatePasswordPut);
 router.get("/id/:id", userById);
 router.get("/email/:email", userByEmail);
@@ -30,10 +32,5 @@ router.post("/check_email", checkEmail);
 router.post("/check_phone", checkPhone);
 router.post("/check_nickname", checkNickname);
 
-
-
-// PUT => PONER ID => podes cambiar nombre, apellido, ciudad, estado(provincia), genero y pais //  
-
-// //% Query's: {tag_name, price_value, price_comparison, current_page, per_page}
 
 module.exports = router;

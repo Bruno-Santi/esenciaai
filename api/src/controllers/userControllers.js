@@ -4,7 +4,8 @@ const {
   getByEmail,
   changePassword,
   deleteUser,
-  editProfileUser
+  editProfileUser,
+  scrumGet
 } = require("../services/userServices");
 const { sendResponse, sendError } = require("../helpers/managerController");
 const controller = {};
@@ -18,7 +19,16 @@ controller.usersGet = async (req, res) => {
     res.status(error.status || 404).json(error.payload || error.message);
   }
 };
-
+//GET SCRUM MASTER
+controller.userScrumGet = async(req, res) => {
+try {
+  const { id } = req.params
+  const result = await scrumGet(id)
+  res.status(200).json(result)
+} catch (error) {
+  res.status(error.status || 404).json(error.payload || error.message);
+}
+}
 
 // GET BY ID //
 controller.userById = async (req, res) => {
