@@ -6,16 +6,20 @@ import {
   onSetActiveTeam,
   onCreateTeam,
   onSetUser,
+  onSetActiveTeamMembers,
+  cleanActiveTeam,
 } from "../store/dashboard/dashboardSlice";
-import { teams } from "../mocks";
+import { Members, TeamMembers, teams } from "../mocks";
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useEffect } from "react";
+import { useModal } from ".";
+import { teamLogo } from "../assets";
 
 export const useDashboard = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const { userTeams, activeTeam } = useSelector((state) => state.dashboard);
-
+  const { userTeams, activeTeam, membersActiveTeam } = useSelector((state) => state.dashboard);
+  const { closeModal } = useModal();
   const startSettingUser = () => {
     dispatch(onSetUser(user));
   };
@@ -52,10 +56,10 @@ export const useDashboard = () => {
   }, [user]);
 
   const startSettingActiveTeam = (id: number) => {
+    dispatch(cleanActiveTeam());
     dispatch(onLoadingTeam());
-    setTimeout(() => {
-      dispatch(onSetActiveTeam({ id: id }));
-    }, 1000);
+
+    dispatch(onSetActiveTeam({ id: id }));
   };
 
   const startCreatingTeam = (team: UserTeams) => {
@@ -63,6 +67,7 @@ export const useDashboard = () => {
       ...team,
       creatorId: user.id,
       id: Math.random(),
+      logo: team.logo || teamLogo,
     };
     dispatch(onCreateTeam({ newTeam }));
 
@@ -71,6 +76,15 @@ export const useDashboard = () => {
 
     localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
     dispatch(onSetUserTeams({ userTeams: updatedUserTeams }));
+    closeModal();
+  };
+
+  const startSettingActiveMembers = (id) => {
+    console.log(id);
+
+    const membersById: Members[] = TeamMembers.filter((member) => member.teamId === id);
+    dispatch(onSetActiveTeamMembers({ members: membersById }));
+    console.log(membersById);
   };
   return {
     startSettingActiveTeam,
@@ -79,5 +93,7 @@ export const useDashboard = () => {
     activeTeam,
     user,
     startSettingUser,
+    startSettingActiveMembers,
+    membersActiveTeam,
   };
 };

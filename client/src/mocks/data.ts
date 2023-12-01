@@ -39,3 +39,31 @@ export const ActiveTeam: UserTeams[] = [
     name: teams[0].name,
   },
 ];
+
+export interface Members {
+  scrumId: number;
+  teamId: number;
+  name: string;
+  email: string;
+}
+
+export const TeamMembers: Members[] = [
+  {
+    scrumId: 1,
+    teamId: 101,
+    name: "Juan",
+    email: "juan@mail.com",
+  },
+  {
+    scrumId: 1,
+    teamId: 101,
+    name: "Marta",
+    email: "Marta@mail.com",
+  },
+  {
+    scrumId: 1,
+    teamId: 101,
+    name: "Pedro",
+    email: "pedro@mail.com",
+  },
+];

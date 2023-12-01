@@ -2,10 +2,13 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { RxExit } from "react-icons/rx";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { useDashboard } from "../hooks/useDashboard";
+import { useModal } from "../hooks";
+import { ModalMembers } from "./ModalMembers";
 
 export const NavBar = () => {
   const { startLogingOut } = useAuthSlice();
-  const { activeTeam, user } = useDashboard();
+  const { activeTeam, user, startSettingActiveMembers } = useDashboard();
+  const { isOpen, closeModal, openModal } = useModal();
   return (
     <nav className='flex w-full bg-primary h-20  justify-around '>
       <div className='w-full flex justify-between items-center  '>
@@ -18,7 +21,13 @@ export const NavBar = () => {
         {activeTeam && (
           <div className=''>
             <span className='text-tertiary font-poppins mr-4 my-auto text-xl'>{activeTeam.name}</span>
-            <span className='btn-primary rounded-lg p-2 font-poppins duration-700 hover:bg-tertiary hover:text-primary'>
+            <span
+              onClick={() => {
+                openModal();
+                startSettingActiveMembers(activeTeam.id);
+              }}
+              className='btn-primary rounded-lg p-2 font-poppins duration-700 hover:bg-tertiary hover:text-primary'
+            >
               Members
             </span>
           </div>
@@ -31,6 +40,7 @@ export const NavBar = () => {
           <RxExit className='font-thin ml-2  my-auto h-6 w-6' />
         </div>
       </div>
+      {isOpen && <ModalMembers closeModal={closeModal} />}
     </nav>
   );
 };

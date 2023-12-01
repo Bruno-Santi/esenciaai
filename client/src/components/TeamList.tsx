@@ -3,14 +3,26 @@ import { TeamListProps } from "../interface/index";
 import { useDashboard } from "../hooks/useDashboard";
 
 export const TeamList: React.FC<TeamListProps> = ({ id, name, logo }) => {
-  const { startSettingActiveTeam } = useDashboard();
-
+  const { startSettingActiveTeam, activeTeam } = useDashboard();
+  const isActive = activeTeam?.id === id;
   return (
-    <div className='rounded-full w-fit justify-center' onClick={() => startSettingActiveTeam(id)} key={id}>
+    <div
+      className={
+        isActive
+          ? "rounded-full opacity-100 w-fit  justify-center border-2 border-secondary"
+          : "rounded-full w-fit opacity-100  justify-center"
+      }
+      onClick={() => startSettingActiveTeam(id)}
+      key={id}
+    >
       <div className='object-cover rounded-full overflow-hidden'>
         <img
           src={logo}
-          className='w-16  cursor-pointer overflow-hidden rounded-full duration-500 hover:scale-110 '
+          className={
+            isActive
+              ? " w-16 h-16 cursor-pointer opacity-100 overflow-hidden rounded-full duration-500 hover:opacity-100  "
+              : " w-16 h-16 cursor-pointer opacity-60 overflow-hidden rounded-full duration-500 hover:opacity-100  "
+          }
           alt={name}
           style={{ objectFit: "cover" }}
         />
