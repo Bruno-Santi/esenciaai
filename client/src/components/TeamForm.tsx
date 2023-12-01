@@ -1,12 +1,12 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useImageUpload, useModal } from "../hooks";
+import { useImageUpload } from "../hooks";
 import { MdUploadFile } from "react-icons/md";
 import { useDashboard } from "../hooks/useDashboard";
 
-export const TeamForm = () => {
+export const TeamForm: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
   const fileInputRef = useRef(null);
-  const { closeModal } = useModal();
+
   const { startCreatingTeam } = useDashboard();
   const { imageSelected, handleImageClick, handleFileChange, isLoading } = useImageUpload(fileInputRef);
   const {
@@ -39,6 +39,7 @@ export const TeamForm = () => {
       </label>
       <input
         type='file'
+        accept='.png, .jpg, .jpeg'
         name='teamLogo'
         ref={fileInputRef}
         style={{ display: "none", fontSize: "20px" }}

@@ -13,7 +13,7 @@ export const ModalTeam: React.FC<{ closeModal: () => void }> = ({ closeModal }) 
         <IoMdClose />
       </div>
       <div className='flex flex-col'>
-        <TeamForm />
+        <TeamForm closeModal={closeModal} />
       </div>
     </Modal>
   );

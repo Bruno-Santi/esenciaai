@@ -51,7 +51,10 @@ export const StepTwo = () => {
         </span>
         <div className='flex w-2/6 m-auto'>
           <button
-            onClick={() => handleNavigate("/dashboard")}
+            onClick={() => {
+              localStorage.setItem("firstLoggin", "1");
+              handleNavigate("/dashboard");
+            }}
             disabled={isLoading}
             className={
               isLoading

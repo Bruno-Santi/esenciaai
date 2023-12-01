@@ -1,3 +1,5 @@
+import { Members } from "../../mocks";
+
 export interface User {
   id: number;
   name: string;
@@ -17,4 +19,5 @@ export interface DashBoardState {
   userTeams: UserTeams[];
   activeTeam: UserTeams | null;
   isLoading: boolean;
+  membersActiveTeam: Members | [];
 }

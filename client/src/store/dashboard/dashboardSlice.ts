@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DashBoardState } from ".";
 import { UserTeams } from "./interfaces";
+import { Members } from "../../mocks";
+import { Members } from "../../mocks/data";
 // const storedUserTeams = JSON.parse(localStorage.getItem("userTeams")) || [];
 const initialState: DashBoardState = {
   user: [],
   userTeams: [],
   activeTeam: null,
+  membersActiveTeam: [],
   isLoading: false,
 };
 
@@ -25,12 +28,23 @@ export const dashboardSlice = createSlice({
     onLoadingTeam: (state) => {
       state.isLoading = true;
     },
+    cleanActiveTeam: (state) => {
+      state.activeTeam = null;
+      state.membersActiveTeam = [];
+    },
     onSetUserTeams: (state, action: PayloadAction<{ userTeams: UserTeams[] }>) => {
       state.userTeams = action.payload.userTeams;
       state.isLoading = false;
     },
     onSetActiveTeam: (state, action: PayloadAction<{ id: number }>) => {
-      state.activeTeam = state.userTeams.find((team) => team.id === action.payload.id);
+      const userTeam = state.userTeams.find((team) => team.id === action.payload.id);
+      state.activeTeam = userTeam;
+      state.isLoading = false;
+    },
+    onSetActiveTeamMembers: (state, action: PayloadAction<{ members: Members[] }>) => {
+      console.log(action.payload.members);
+
+      state.membersActiveTeam = action.payload.members;
       state.isLoading = false;
     },
     onCreateTeam: (state, action: PayloadAction<{ team: UserTeams }>) => {
@@ -40,7 +54,15 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const { onSetUser, onLogOutUser, onSetUserTeams, onLoadingTeam, onSetActiveTeam, onCreateTeam } =
-  dashboardSlice.actions;
+export const {
+  onSetUser,
+  onLogOutUser,
+  onSetUserTeams,
+  onLoadingTeam,
+  onSetActiveTeam,
+  onCreateTeam,
+  onSetActiveTeamMembers,
+  cleanActiveTeam,
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

@@ -12,7 +12,6 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data: string[]): void => {
-    console.log(data, loading);
     startCheckingUser(data);
   };
 
