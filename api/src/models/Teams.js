@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
           isUrl: true,
         },
       },
-
+      
       history: {
         type: DataTypes.JSON,
         allowNull: false,

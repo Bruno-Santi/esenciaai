@@ -59,7 +59,7 @@ services.userDecrypt = async (email) => {
   }
 };
 
-services.userLogin = async (email, password, loginType) => {
+services.userLogin = async (email, password) => {
   const getUser = await User.findOne({ where: { email } });
 
   if (!getUser) {
@@ -67,13 +67,22 @@ services.userLogin = async (email, password, loginType) => {
   } else if (getUser.password !== password) {
     throwError("bad_request", 403, "Contraseña incorrecta.");
   }
-
   return await createUserToken(
     getUser.id,
     getUser.token_password,
     USER_TOKEN_KEY
-  );
-};
+    );
+  };
+  
+
+  services.userInvited = async(email, password) => {
+    
+  }
+  //AGREGAR ID, NOMBRE Y APELLIDO
+//RENDERIZAR TODOS LOS TEAM DE UN SCRUM MASTUR BY ID
+
+
+
 
 services.changeTokenPassword = async (email, password, loginType) => {
   const getUser = await User.findOne({ where: { email } });
@@ -91,14 +100,23 @@ services.changeTokenPassword = async (email, password, loginType) => {
   );
 };
 
-services.policyUse = async(value) => {
-  if(!value) {
-    throw new Error("No hay politica de uso")
+services.getTokenIdName = async(id) => {
+  if(!id) {
+    throw new Error("Datos incompletos")
   } else {
-    const arrPoliticy = []
+    const getUser = await User.findOne({where: { id },
+    attributes:  [
+      "id",
+      "first_name",
+      "last_name",
+      "email", 
+      "token_password"
+    ]})
+    if(!getUser) throw new Error("no existe este usuario")
+     
+    return getUser
   }
 }
-
 //$ Micro Services :
 
 

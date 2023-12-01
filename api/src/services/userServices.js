@@ -1,5 +1,6 @@
 const { Op } = require("sequelize");
-const { User } = require("../app/db");
+const { User, Team } = require("../app/db");
+const { UserTeam } = require("../app/dbRelations")
 const throwError = require("../helpers/customError");
 const { v4: uuidv4 } = require("uuid");
 const { getServices, addServices } = require(".");
@@ -27,6 +28,24 @@ userService.createUser = async (user) => {
   }
 };
 
+userService.scrumGet = async (userId) => {
+    const adminUser = await UserTeam.findAll({
+      where: { userId }, 
+      include: [
+        {
+          model: Team,
+          attributes:["name"]
+        },
+      ],
+    });
+
+    return adminUser;
+  }
+
+
+userService.inviteUser = async() => {
+  
+}
 
 userService.getAllUser = async(user) => {
   const getUsers = await User.findAll(user)
@@ -65,12 +84,9 @@ userService.getById = async (id) => {
       where: { id },
       attributes: [
         "id",
-        "name",
+        "first_name",
         "last_name",
-        "email",
-        "city",
-        "state",
-        "country",
+        "email"
       ],
     });
     if (!user) {
@@ -83,7 +99,7 @@ userService.getById = async (id) => {
 userService.getByEmail = async (email) => {
   const userEmail = await User.findAll({
     where: { email },
-    attributes: ["id", "name", "last_name", "email", "city", "country"],
+    attributes: ["id", "first_name", "last_name", "email", "city", "country"],
   });
   console.log("usuario :", userEmail)
   if (!userEmail) {
@@ -111,7 +127,7 @@ userService.deleteUser = async (id) => {
   }
 }
 
-userService.editProfileUser = async({id, name, last_name, genre, city, state, country }) => {
+userService.editProfileUser = async({id, first_name, last_name}) => {
   if(!id) {
     throw new Error("datos incompletos")
   } else {
@@ -122,12 +138,8 @@ userService.editProfileUser = async({id, name, last_name, genre, city, state, co
 
     userUpdate = {};
 
-    if(name && name != user.name) userUpdate.name = name;
+    if(first_name && first_name != user.first_name) userUpdate.first_name = first_name;
     if(last_name && last_name != user.last_name) userUpdate.last_name = last_name;
-    if(genre && genre != user.genre) userUpdate.genre = genre;
-    if(city && city != user.city) userUpdate.city = city;
-    if(state && state != user.state) userUpdate.state = state
-    if(country && country != user.country) userUpdate.country = country
 
     const updateUser = await User.update(userUpdate, {where: {id}})
 
@@ -135,7 +147,7 @@ userService.editProfileUser = async({id, name, last_name, genre, city, state, co
       throw new Error("El usuario no fue actualizado")
     }
 
-    return (`El Usuario ${user.name} ${user.last_name} ha sido actualizado`)
+    return (`El Usuario ${user.first_name} ${user.last_name} ha sido actualizado`)
   }
 
 }

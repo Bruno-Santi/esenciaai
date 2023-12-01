@@ -21,6 +21,7 @@ router.post(
 );
 router.post("/login", controllers.loginPost);
 router.get("/view/:email", controllers.viewPassword);
+router.get("/token", controllers.viewToken)
 router.post("/logout", checkUserToken, controllers.logoutPost);
 
 router.get("/test_token", checkUserToken, async (req, res) => {
