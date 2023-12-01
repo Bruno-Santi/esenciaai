@@ -1,11 +1,15 @@
 import { IoMdClose } from "react-icons/io";
 import { Modal } from "../layaout";
-import { TeamForm } from ".";
-import React from "react";
+import { CiCirclePlus } from "react-icons/ci";
+import React, { useState } from "react";
+import { MembersTable } from "./MembersTable";
 import { useDashboard } from "../hooks/useDashboard";
+import { AddMemberModal } from "./AddMemberModal";
 
 export const ModalMembers: React.FC<{ closeModal: () => void }> = ({ closeModal }) => {
-  const { membersActiveTeam } = useDashboard();
+  const { membersActiveTeam, activeTeam } = useDashboard();
+  const [addMember, setAddMember] = useState(false);
+  const toggleAddMember = () => setAddMember(!addMember);
   return (
     <Modal>
       <div
@@ -15,15 +19,18 @@ export const ModalMembers: React.FC<{ closeModal: () => void }> = ({ closeModal 
         <IoMdClose />
       </div>
       <div className='flex flex-col'>
-        <div>asfdasfas</div>
-        {membersActiveTeam?.map((member) => {
-          return (
-            <div className='flex odd:bg-gray-500 w-full space-x-2 p-6'>
-              <p>{member.name}</p>
-              <p>{member.email}</p>
-            </div>
-          );
-        })}
+        <div className='text-lg font-poppins '>{activeTeam.name} Members</div>
+        <div
+          onClick={toggleAddMember}
+          className='btn-primary flex w-fit text-xl  mt-4 p-2 rounded-md cursor-pointer duration-700 font-poppins hover:bg-tertiary hover:text-primary'
+        >
+          Add{" "}
+          <i className='text-3xl ml-2 my-auto'>
+            <CiCirclePlus />
+          </i>
+        </div>
+        {addMember && <AddMemberModal closeAddMember={toggleAddMember} />}
+        {membersActiveTeam.length ? <MembersTable /> : ""}
       </div>
     </Modal>
   );
