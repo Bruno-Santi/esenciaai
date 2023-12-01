@@ -9,8 +9,8 @@ export const TeamList: React.FC<TeamListProps> = ({ id, name, logo }) => {
     <div
       className={
         isActive
-          ? "rounded-full opacity-100 w-fit  justify-center border-2 border-secondary"
-          : "rounded-full w-fit opacity-100  justify-center"
+          ? "rounded-full opacity-100 w-fit my-auto -mx-2 justify-center border-2 border-secondary"
+          : "rounded-full w-fit opacity-100 -mx-2  justify-center"
       }
       onClick={() => startSettingActiveTeam(id)}
       key={id}
@@ -20,8 +20,8 @@ export const TeamList: React.FC<TeamListProps> = ({ id, name, logo }) => {
           src={logo}
           className={
             isActive
-              ? " w-16 h-16 cursor-pointer opacity-100 overflow-hidden rounded-full duration-500 hover:opacity-100  "
-              : " w-16 h-16 cursor-pointer opacity-60 overflow-hidden rounded-full duration-500 hover:opacity-100  "
+              ? " w-12 h-12 cursor-pointer opacity-100 overflow-hidden rounded-full duration-500 hover:opacity-100  "
+              : " w-12 h-12 cursor-pointer opacity-60  overflow-hidden rounded-full duration-500 hover:opacity-100  "
           }
           alt={name}
           style={{ objectFit: "cover" }}

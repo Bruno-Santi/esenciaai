@@ -57,3 +57,17 @@
   font-size: 20px;
   color: #fff;
 }
+
+::-webkit-scrollbar {
+  width: 12px; /* Ancho de la barra de desplazamiento */
+  height: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4caf50; /* Color del "pulgón" de la barra de desplazamiento */
+  border-radius: 8px; /* Radio de borde del "pulgón" */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+}
