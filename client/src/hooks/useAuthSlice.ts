@@ -23,7 +23,9 @@ export const useAuthSlice = () => {
     dispatch(onChecking());
 
     setTimeout(() => {
-      const foundUser = users.find((user) => user.email === data.Email && user.password === data.Password);
+      const foundUser = users.find(
+        (user) => user.email === data.Email && user.password === data.Password
+      );
       if (foundUser) {
         console.log(foundUser);
         const userObject = {

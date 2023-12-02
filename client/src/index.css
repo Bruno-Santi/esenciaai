@@ -59,15 +59,17 @@
 }
 
 ::-webkit-scrollbar {
-  width: 12px; /* Ancho de la barra de desplazamiento */
+  width: 12px;
   height: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #4caf50; /* Color del "pulgón" de la barra de desplazamiento */
-  border-radius: 8px; /* Radio de borde del "pulgón" */
+  background-color: #1a142380;
+  border-radius: 2px;
+  border-color: #d07380;
+  border-width: 2px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+  background-color: #f1f1f1;
 }

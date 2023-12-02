@@ -10,17 +10,19 @@ export const NavBar = () => {
   const { activeTeam, user, startSettingActiveMembers } = useDashboard();
   const { isOpen, closeModal, openModal } = useModal();
   return (
-    <nav className='flex w-full bg-primary h-16  justify-around '>
+    <nav className='flex w-full  sticky bg-primary h-16  justify-around '>
       <div className='w-full flex justify-between items-center  '>
-        <div className='flex ml-4'>
+        <div className='flex ml-20'>
           <FaRegUserCircle className='text-tertiary h-12 w-12 -mx-2 mr-1' />
-          <span className='text-tertiary my-auto ml-4 font-poppins text-lg'>
+          <span className='text-tertiary my-auto  font-poppins text-lg'>
             {user.name} {user.lastName}
           </span>
         </div>
         {activeTeam && (
           <div className=''>
-            <span className='text-tertiary font-poppins mr-4 my-auto text-lg'>{activeTeam.name}</span>
+            <span className='text-tertiary font-poppins mr-4 my-auto text-lg'>
+              {activeTeam.name}
+            </span>
             <span
               onClick={() => {
                 openModal();

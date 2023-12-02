@@ -4,12 +4,17 @@ import { AppRouter } from "./router/AppRouter";
 import { store } from "./store";
 import { ToastContainer } from "react-toastify";
 
-export const Dashboard = () => {
-  return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <AppRouter />
-      </BrowserRouter>
-    </Provider>
-  );
-};
+export const Dashboard =
+  () => {
+    return (
+      <Provider
+        store={
+          store
+        }
+      >
+        <BrowserRouter>
+          <AppRouter />
+        </BrowserRouter>
+      </Provider>
+    );
+  };
