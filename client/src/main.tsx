@@ -4,19 +4,29 @@ import { ToastContainer } from "react-toastify";
 import "./index.css";
 import { Dashboard } from "./Dashboard.tsx";
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(
+  document.getElementById(
+    "root"
+  )!
+).render(
   <React.StrictMode>
     <ToastContainer
-      position='bottom-center'
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
+      position="bottom-center"
+      autoClose={
+        5000
+      }
+      hideProgressBar={
+        false
+      }
+      newestOnTop={
+        false
+      }
       closeOnClick
       rtl={false}
       pauseOnFocusLoss
       draggable
       pauseOnHover
-      theme='dark'
+      theme="dark"
     />
     <Dashboard />
   </React.StrictMode>
