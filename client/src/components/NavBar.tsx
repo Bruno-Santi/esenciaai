@@ -3,7 +3,7 @@ import { RxExit } from "react-icons/rx";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { useDashboard } from "../hooks/useDashboard";
 import { useModal } from "../hooks";
-import { ModalMembers } from "./ModalMembers";
+import { ModalMembers } from "../dashboard/components/ModalMembers";
 
 export const NavBar = () => {
   const { startLogingOut } = useAuthSlice();
@@ -25,7 +25,7 @@ export const NavBar = () => {
             </span>
             <span
               onClick={() => {
-                openModal();
+                openModal("activeTeam");
                 startSettingActiveMembers(activeTeam.id);
               }}
               className='btn-primary rounded-lg p-2 text-lg font-poppins duration-700 hover:bg-tertiary hover:text-primary'

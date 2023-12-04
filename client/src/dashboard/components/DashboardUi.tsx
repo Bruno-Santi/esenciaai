@@ -72,6 +72,7 @@ export const DashboardUi = () => {
         <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>
           Data collection report
         </span>
+
         <div className='flex items-center justify-center h-3/6'>
           <span className='text-center mt-28 font-poppins w-3/6 text-primary/50 font-bold text-4xl'>
             NO DATA YET, TRY MAKING ACTIONS
