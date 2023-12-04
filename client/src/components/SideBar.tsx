@@ -1,7 +1,7 @@
 import { CiCirclePlus } from "react-icons/ci";
-import { Teams } from "./Teams";
+import { Teams } from "../dashboard/components/Teams";
 import { useModal } from "../hooks";
-import { ModalTeam } from "./ModalTeam";
+import { ModalTeam } from "../dashboard/components/ModalTeam";
 
 export const SideBar = () => {
   const { isOpen, openModal, closeModal } = useModal();
