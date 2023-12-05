@@ -10,7 +10,7 @@ const {
 let sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
 	host: DB_HOST
 	, dialect: "mysql"
-	, logging: false // *DEUBUG
+	, logging: true // *DEUBUG
 });
 
 const basename = path.basename(__filename);

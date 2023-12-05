@@ -8,6 +8,7 @@ const controller = {};
 controller.registerPost = async (req, res) => {
   try {
     const { user } = req.body;
+    console.log(user)
     const result = await userRegister(user);
     sendResponse(res, 200, result);
     
@@ -56,6 +57,9 @@ controller.viewToken = async(req, res) => {
     sendError(res, error)
   }
 }
+
+
+
 controller.logoutPost = async (req, res) => {
   try {
     // const { user, loginType, step } = req.body;
