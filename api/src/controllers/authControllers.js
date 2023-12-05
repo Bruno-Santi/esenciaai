@@ -1,5 +1,5 @@
 const { sendResponse, sendError } = require("../helpers/managerController");
-const { userRegister, userLogin, userDecrypt, getTokenIdName } = require("../services/authServices");
+const { userRegister, userLogin, userDecrypt, getTokenIdName, userInvited } = require("../services/authServices");
 const jwt = require("jsonwebtoken");
 const path = require('path');
 const controller = {};
@@ -7,14 +7,25 @@ const controller = {};
 
 controller.registerPost = async (req, res) => {
   try {
-    const { user, loginType, step } = req.body;
-    const result = await userRegister(user, loginType);
+    const { user } = req.body;
+    console.log(user)
+    const result = await userRegister(user);
     sendResponse(res, 200, result);
     
   } catch (error) {
     sendError(res, error);
   }
 };
+
+controller.registerInvitedPost = async (req, res) => {
+  try {
+    const { email, first_name } = req.body
+    const result = await userInvited(email, first_name)
+    res.status(200).json(result)
+  } catch (error) {
+    sendError(res, error);
+  }
+}
 
 controller.viewPassword = async(req, res) => {
   try {
@@ -46,6 +57,9 @@ controller.viewToken = async(req, res) => {
     sendError(res, error)
   }
 }
+
+
+
 controller.logoutPost = async (req, res) => {
   try {
     // const { user, loginType, step } = req.body;

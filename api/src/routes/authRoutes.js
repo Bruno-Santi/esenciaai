@@ -3,26 +3,38 @@ const router = Router();
 const controllers = require("../controllers/authControllers");
 const {
   checkUserToken,
-  viewPassword,
   checkUserValid,
 } = require("../middleware/authMiddlewares");
 const { sendResponse, sendError } = require("../helpers/managerController");
-const {
-  checkEmail,
-  checkPhone,
-  checkNickname,
-} = require("../middleware/validate/routes/authValidate");
-const { policyUseGet } = require("../controllers/authControllers")
 
-router.post(
-  "/register",
-  checkUserValid,
-  controllers.registerPost
-);
+//* it's used:
+router.post("/register", controllers.registerPost);
+//!return msg;
+
+//* body: {user}
 router.post("/login", controllers.loginPost);
-router.get("/view/:email", controllers.viewPassword);
-router.get("/token", controllers.viewToken)
+//!return msg;
+
+
 router.post("/logout", checkUserToken, controllers.logoutPost);
+//!return msg;
+
+//!envio de link para usuarios anoninos:
+
+// 1 agregar un miembro en la ruta post.
+
+// 2 crear un link con los parametros necesarios:
+// ej:
+// http://localhost:3000/survey?token=02i302i3012i3lñiswkdqawspd
+// &team_id=028310283102830128&user_id=woeijfoweuir23o23o4
+
+// 3 enviar ese link por mail.
+
+
+//? not sure:
+
+router.get("/view/:email", controllers.viewPassword);
+router.get("/token", controllers.viewToken);
 
 router.get("/test_token", checkUserToken, async (req, res) => {
   try {
@@ -33,27 +45,7 @@ router.get("/test_token", checkUserToken, async (req, res) => {
   }
 });
 
-router.get("/policy_use", policyUseGet)
-
+//Falta:
+//ruta password.
 
 module.exports = router;
-
-//$ Registro de Usuario || POST
-
-//% FUNC: Registrar un nuevo usuario en la base de datos.
-//% RTA: { "message": "Usuario registrado exitosamente" }.
-
-//$ Inicio de Sesión || POST
-
-//% FUNC: Autenticar al usuario y generar un token JWT.
-//% RTA: { "token": "Token_JWT" }.
-
-//$ Cierre de Sesión (opcional) || POST
-
-//% FUNC: Cerrar la sesión del usuario (puede ser opcional en una API).
-//% RTA: { "message": "Sesión cerrada" }
-
-//$ Obtener Perfil de Usuario (protegido por autenticación) || GET
-
-//% FUNC: Obtener los datos del perfil del usuario autenticado.
-//% RTA (Éxito): { "user": { "id": 1, "nombre": "Ejemplo" } }
