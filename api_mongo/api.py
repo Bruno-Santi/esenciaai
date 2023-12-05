@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from api_mongo.classes import *
 from pymongo.mongo_client import MongoClient
 from bson import json_util
-from datetime import datetime
+from datetime import datetime, date
 from dotenv import load_dotenv
 import os
 import json
@@ -21,7 +21,7 @@ client = MongoClient(uri)
 db = client["essenciaIA_app"]
 
 #post methods -----------------------
-@app.post("/daily_survey")
+@app.post("/daily_survey/alt")
 async def add_daily_survey(survey:dailySurvey):
         try:
             db["survey_data"].update_one(filter={
@@ -30,7 +30,7 @@ async def add_daily_survey(survey:dailySurvey):
         "$push": {
         "daily_survey": {
           "user_id": survey.user_id,
-          "date": datetime.now(),
+          "date": str(date.today()),
           "sprint": survey.sprint,
           "question1": survey.question1,
           "question2": survey.question2,
@@ -44,6 +44,40 @@ async def add_daily_survey(survey:dailySurvey):
               "work_engagement": survey.question2,
               "team_collaboration": survey.question3,
               "workspace": survey.question4},
+      "$set":{"retro_count":0, "reports_count":0}
+    }, upsert=True)
+            return {"status":200}
+        except Exception as e:
+            return {"status":422, "error":e }
+
+@app.post("/daily_survey")
+async def add_daily_survey(survey:dailySurvey):
+        current_date = str(date.today())
+        #current_date = "2023-12-07"
+        try:
+            db["survey_data"].update_one(filter={
+                "team_id": survey.team_id
+            }, update={
+      "$push":{
+            f"daily_survey.{current_date}.survey": {
+             "user_id": survey.user_id,
+             "sprint": survey.sprint,
+             "question1": survey.question1,
+             "question2": survey.question2,
+             "question3": survey.question3,
+             "question4": survey.question4,
+             "comment": survey.comment}
+              }, 
+      "$inc":{"daily_survey_count": 1, 
+              "self_satisfaction_general": survey.question1,
+              "work_engagement_general": survey.question2,
+              "team_collaboration_general": survey.question3,
+              "workspace_general": survey.question4,
+              f"daily_survey.{current_date}.self_satisfaction": survey.question1,
+              f"daily_survey.{current_date}.work_engagement": survey.question2,
+              f"daily_survey.{current_date}.team_collaboration": survey.question3,
+              f"daily_survey.{current_date}.workspace": survey.question4
+              },
       "$set":{"retro_count":0, "reports_count":0}
     }, upsert=True)
             return {"status":200}
@@ -109,6 +143,11 @@ async def get_reports():
         pass
 
 @app.get("/dashboard", response_class=HTMLResponse)
+#async def get_dash(team_id):
+#        result = json_util.dumps(db["survey_data"].find({"team_id": team_id},{
+#            "daily_survey":1,
+#            "_id":0}))
+        
 async def get_dash(team_id):
         return templates.TemplateResponse("index.html", {"request":{"status":200}})
 
