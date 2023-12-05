@@ -9,10 +9,10 @@ const Survey = require("./surveyRoutes");
 
 const router = Router();
 
-router.use("/users", checkUserToken, Users);
+router.use("/users", Users);
 router.use("/auth", Auth);
-router.use("/team", checkUserToken, Team);
-router.use("/analytics", checkUserToken, Analytics);
-router.use("/survey", checkUserToken, Survey);
+router.use("/team",  Team);
+router.use("/analytics", Analytics);
+router.use("/survey",  Survey);
 
 module.exports = router;

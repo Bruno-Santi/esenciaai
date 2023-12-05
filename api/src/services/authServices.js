@@ -69,12 +69,19 @@ services.userLogin = async (email, password) => {
   } else if (getUser.password !== password) {
     throwError("bad_request", 403, "Contraseña incorrecta.");
   }
-  return await createUserToken(
+
+
+
+  // Crear un token con la información del usuario
+ return await createUserToken(
     getUser.id,
     getUser.token_password,
     USER_TOKEN_KEY
-    );
-  };
+  );
+
+  // Devolver un objeto que contiene el token y la información del usuario
+  return { token, ...userData };
+};
   
 
   services.userInvited = async (user) => {

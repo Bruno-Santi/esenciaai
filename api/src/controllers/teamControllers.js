@@ -31,8 +31,8 @@ try {
 
 controller.userInvitedPost = async (req, res) => {
   try {
-    const { teamId, user } = req.body;
-    const result = await addUserToTeam(teamId, user);
+    const { team_id, user } = req.body;
+    const result = await addUserToTeam(team_id, user);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });

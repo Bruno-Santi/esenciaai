@@ -129,8 +129,12 @@ teamServices.scrumGetTeam = async (userId, job_role = "scrum master") => {
         include: [
           {
             model: Team,
-            attributes: ["teamId"],
+            attributes: ["id" ,"name", "logo", "description"],
           },
+          {
+            model: User,
+            attributes: ["id" ,"first_name", "last_name", "email"]
+          }
         ],
       });
 
