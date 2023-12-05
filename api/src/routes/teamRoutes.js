@@ -19,13 +19,13 @@ router.post("/", teamPost);
 //! return: {team};
 
 //? body:{teamId,user};
-router.post("/member", userInvitedPost);
+router.post("/members", userInvitedPost);
 
 //? body:{teamId,user};
-router.patch("/member", userInvitedPost); 
+router.patch("/members", userInvitedPost); 
 
 //? body:{teamId,userId};
-router.delete("/member", userInvitedPost);
+router.delete("/members", userInvitedPost);
 
 //? params:{teamId};
 router.get("/members/:id", teamMembersGet);

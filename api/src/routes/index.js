@@ -11,8 +11,8 @@ const router = Router();
 
 router.use("/users", Users);
 router.use("/auth", Auth);
-router.use("/team",  Team);
+router.use("/teams", Team);
 router.use("/analytics", Analytics);
-router.use("/survey",  Survey);
+router.use("/survey", Survey);
 
 module.exports = router;
