@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gráficos de Torta</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.1.1/Chart.min.js"></script>
+</head>
+<body>
+    <h1>Key Team Indicators</h1>
+
+    <div style="display: flex; justify-content: space-between;">
+        <div>
+            <h2>Self-Satisfaction Index</h2>
+            <canvas id="pieChart1" height="150" width="300"></canvas>
+        </div>
+        <div>
+            <h2>Work Engagement Score</h2>
+            <canvas id="pieChart2" height="150" width="300"></canvas>
+        </div>
+        <div>
+            <h2>Team Collaboration Quotient</h2>
+            <canvas id="pieChart3" height="150" width="300"></canvas>
+        </div>
+        <div>
+            <h2>Workpace well-being</h2>
+            <canvas id="pieChart4" height="150" width="300"></canvas>
+        </div>
+    </div>
+   
+    <style>
+        /* Estilos para los títulos */
+        h1 {
+            font-size: 26px;
+            color: #333;
+            text-align: left;
+            margin-bottom: 20px;
+            font-family: "Segoe UI";
+        }
+
+        h2 {
+            font-size: 16px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 10px;
+            font-family: "Segoe UI";
+        }
+    </style>
+
+    <script>
+        // Datos para los gráficos (puedes personalizarlos)
+        const pieData1 = [{ value: 30, color: "#979797", label: "" }, { value: 70, color: "#00CC00", label: "%" }];
+        const pieData2 = [{ value: 45, color: "#979797", label: "" }, { value: 55, color: "#6666FF", label: "%" }];
+        const pieData3 = [{ value: 20, color: "#979797", label: "" }, { value: 80, color: "#FF0000", label: "%" }];
+        const pieData4 = [{ value: 60, color: "#979797", label: "" }, { value: 40, color: "#66B2FF", label: "%" }];
+
+        // Opciones comunes para los gráficos
+        const pieOptions = {
+            segmentShowStroke: true,
+            segmentStrokeColor: "#fff",
+            segmentStrokeWidth: 4,
+            percentageInnerCutout: 50,
+            animationSteps: 300,
+            animationEasing: "easeOutBounce",
+            animateRotate: true,
+            animateScale: false
+        };
+
+        // Crear los gráficos
+        new Chart(document.getElementById("pieChart1").getContext("2d")).Pie(pieData1, pieOptions);
+        new Chart(document.getElementById("pieChart2").getContext("2d")).Pie(pieData2, pieOptions);
+        new Chart(document.getElementById("pieChart3").getContext("2d")).Pie(pieData3, pieOptions);
+        new Chart(document.getElementById("pieChart4").getContext("2d")).Pie(pieData4, pieOptions);
+    </script>
+</body>
+</html>
