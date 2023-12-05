@@ -11,14 +11,8 @@ module.exports = (sequelize) => {
         primaryKey: true,
         validate: { isUUID: 4 },
       },
-      
-      
+
       first_name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      
-      last_name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
@@ -26,12 +20,21 @@ module.exports = (sequelize) => {
         },
       },
 
+      last_name: {
+        type: DataTypes.STRING,
+        // allowNull: false,
+        defaultValue: "",
+        // validate: {
+        //   notEmpty: true,
+        // },
+      },
+
       nickname: {
         type: DataTypes.STRING,
         defaultValue: null,
-        unique: true
+        unique: true,
       },
-      
+
       email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -41,7 +44,7 @@ module.exports = (sequelize) => {
           isEmail: true,
         },
       },
-      
+
       password: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -49,14 +52,14 @@ module.exports = (sequelize) => {
           notEmpty: true,
         },
       },
-      
+
       token_password: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
-        validate: { isUUID: 4 }, 
+        validate: { isUUID: 4 },
       },
-      
+
       photo: {
         type: DataTypes.STRING,
         defaultValue:
@@ -65,29 +68,28 @@ module.exports = (sequelize) => {
           isUrl: true,
         },
       },
-      
+
       premium: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false,
+        // allowNull: false,
       },
 
       premium_id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
+        // allowNull: false,
       },
 
       super_admin: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
-        allowNull: false
-      }
-
+        // allowNull: false,
+      },
     },
-    { 
+    {
       timestamps: true,
       paranoid: true, // Habilitar el borrado lógico
-  }
+    }
   );
 };

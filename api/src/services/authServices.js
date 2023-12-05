@@ -9,7 +9,9 @@ dotenv.config();
 //const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const { sendExternalEmail } = require("../microServices/email/nodeMailer");
-const {checkEmail} = require("../middleware/validate/services/authValidate");
+const {  } = require("../services/userServices")
+const passwordGenerator = require('password-generator');
+
 
 //* Create a services and dependencies injection.
 
@@ -18,7 +20,7 @@ addServices("auth", services);
 
 //* Services :|
 
-services.userRegister = async (user, loginType) => {
+services.userRegister = async (user) => {
  
   // if (getUser && getUser.password) {
   //   const password = getUser.password;
@@ -37,7 +39,7 @@ services.userRegister = async (user, loginType) => {
 services.userDecrypt = async (email) => {
   const getUserEmail = await User.findOne({
     where: { email },
-    attributes: ["id", "email", "name", "last_name", "password"],
+    attributes: ["id", "email", "first_name", "last_name", "password"],
   });
 
   if (!getUserEmail) {
@@ -67,18 +69,47 @@ services.userLogin = async (email, password) => {
   } else if (getUser.password !== password) {
     throwError("bad_request", 403, "Contraseña incorrecta.");
   }
-  return await createUserToken(
+
+
+
+  // Crear un token con la información del usuario
+ return await createUserToken(
     getUser.id,
     getUser.token_password,
     USER_TOKEN_KEY
-    );
-  };
+  );
+
+  // Devolver un objeto que contiene el token y la información del usuario
+  return { token, ...userData };
+};
   
 
-  services.userInvited = async(email, password) => {
-    
-  }
-  //AGREGAR ID, NOMBRE Y APELLIDO
+  services.userInvited = async (user) => {
+
+      const getUser = await User.findOne({
+        where: { email: user.email }, 
+      });
+  
+      if (getUser) {
+        throwError("missing", 400, "El usuario ya existe.");
+      } else {
+        // Generar contraseña
+        const password = passwordGenerator(6, false);
+  
+        const userCreate = await User.create({
+          email: user.email,
+          password: password,
+        });
+  
+        const token = await createUserToken(
+          userCreate.id,
+          userCreate.token_password,
+          USER_TOKEN_KEY
+        );
+  
+        return token;
+      }
+      }  //AGREGAR ID, NOMBRE Y APELLIDO
 //RENDERIZAR TODOS LOS TEAM DE UN SCRUM MASTUR BY ID
 
 

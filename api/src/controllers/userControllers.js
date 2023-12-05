@@ -10,7 +10,7 @@ const {
 const { sendResponse, sendError } = require("../helpers/managerController");
 const controller = {};
 
-//GET ALL //
+//GET ALL //   
 controller.usersGet = async (req, res) => {
   const result = await getAllUser();
   try {
