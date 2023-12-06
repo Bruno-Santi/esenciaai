@@ -12,16 +12,19 @@ const controller = {};
 
 //GET ALL //
 controller.usersGet = async (req, res) => {
-  //$ S1 que devuelva solo un usuario.
-  //$ S2 que devuelva la lista de teams a los que pertenece el usuario. Ojo solo las id de los teams.
+
+  // const { user_id } = req.body;
+
+  //$ T1 que devuelva solo un usuario.
+  //$ T2 que devuelva la lista de teams a los que pertenece el usuario. Ojo solo las id de los teams en las lista.
 
   // const user = await getAllUser();
   // const teamsList = await getTeamList();
 
   // const result = { user, teamsList };
-  
+
   try {
-    res.status(200).json(result);
+    res.status(200).json("result");
   } catch (error) {
     res.status(error.status || 404).json(error.payload || error.message);
   }
