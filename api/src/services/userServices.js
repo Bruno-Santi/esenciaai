@@ -20,7 +20,7 @@ userService.createUser = async (user) => {
     if (userExists) throwError("missing", 400, "El usuario ya existe.");
     const newUser = await User.create(user);
 
-    return newUser;
+    return "User created successfully.";
   } catch (error) {
     throw error;
   }

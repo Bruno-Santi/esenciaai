@@ -13,13 +13,12 @@ controller.teamPost = async (req, res) => {
     const { team } = req.body;
     const user_id = req.user_id_token;
 
-    const result = await createTeamTest(user_id,team);
+    const result = await createTeamTest(user_id, team);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message, details: error.stack });
   }
 };
-
 
 controller.teamByScrumGet = async (req, res) => {
   try {
@@ -47,7 +46,7 @@ controller.userInvitedPost = async (req, res) => {
 controller.teamMembersGet = async (req, res) => {
   try {
     const { id } = req.params;
-    console.log(req.params.id)
+
     const result = await viewMembers(id);
     res.status(200).json(result);
   } catch (error) {

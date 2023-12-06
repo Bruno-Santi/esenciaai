@@ -1,12 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onChecking, onLogOut, onLogin } from "../store/auth/authSlice";
+import {
+  clearErrorMessage,
+  onChecking,
+  onLogOut,
+  onLogin,
+} from "../store/auth/authSlice";
 import "react-toastify/dist/ReactToastify.css";
-import { users } from ".././mocks/data";
+
 import { useNavigateTo } from ".";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
 import { onLogOutUser } from "../store/dashboard/dashboardSlice";
+import axios from "axios";
+import api from "../helpers/apiToken";
 
 export const useAuthSlice = () => {
   const { loading, errorMessage, status } = useSelector((state) => state.auth);
@@ -18,56 +25,78 @@ export const useAuthSlice = () => {
   if (!firstLog) localStorage.setItem("firstLoggin", "0");
 
   useEffect(() => {}, [loading]);
+  const startLoginUser = async (data) => {
+    console.log(data);
 
-  const startCheckingUser = (data: string[]) => {
+    try {
+      const resp = await axios.post(`http://localhost:3000/auth/login`, data);
+      console.log(resp);
+
+      dispatch(clearErrorMessage());
+      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
+
+      if (tkn) {
+        dispatch(onLogin());
+        handleNavigate("/dashboard");
+      }
+    } catch (error) {
+      const { payload } = error.response.data;
+      dispatch(onLogOut(payload));
+    }
+  };
+  const startCheckingUser = async () => {
     dispatch(onChecking());
 
-    setTimeout(() => {
-      const foundUser = users.find(
-        (user) => user.email === data.Email && user.password === data.Password
-      );
-      if (foundUser) {
-        console.log(foundUser);
-        const userObject = {
-          id: foundUser.id,
-          name: foundUser.name,
-          lastName: foundUser.lastName,
-        };
-        console.log(userObject);
+    try {
+      const resp = await api.get(`/auth/test_token`);
+      const user = await api.get(`/users`);
+      console.log(user.data);
 
-        dispatch(onLogin(userObject));
+      dispatch(onLogin(user));
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+      dispatch(onLogOut());
+    }
 
-        localStorage.setItem("userLogged", JSON.stringify(userObject));
-      } else {
-        dispatch(onLogOut("Invalid Email or Password "));
-      }
-    }, 3000);
+    // try {
+    //   const resp = await axios.post(`http://localhost:3000/auth/login`, data);
+    //   dispatch(clearErrorMessage());
+    //   localStorage.setItem("token", JSON.stringify(resp.data.token));
+
+    //   if (tkn) {
+    //     dispatch(onLogin());
+    //     handleNavigate("/dashboard");
+    //   }
+    // } catch (error) {
+    //   const { payload } = error.response.data;
+    //   dispatch(onLogOut(payload));
+    // }
   };
 
-  const startRegisteringUser = (data: string[]): void => {
-    dispatch(onChecking());
-    setTimeout(() => {
-      const foundUser = users.find((user) => user.email === data.email);
-      if (foundUser) {
-        dispatch(onLogOut("Email already in use"));
-      } else {
-        toast.success("Successfully registered. Redirecting to login. 👍", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-
-        setTimeout(() => {
-          dispatch(onLogOut());
-          handleNavigate("/auth/login");
-        }, 3000);
-      }
-    }, 3000);
+  const startRegisteringUser = async (data: string[]): void => {
+    const user = { user: data };
+    try {
+      const resp = await axios.post(
+        `http://localhost:3000/auth/register`,
+        user
+      );
+      toast.success("Successfully registered. Redirecting to login. 👍", {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      handleNavigate("/auth/login");
+      console.log(resp);
+    } catch (error) {
+      const { payload } = error.response.data;
+      dispatch(onLogOut(payload));
+    }
   };
 
   const startLogingOut = () => {
@@ -86,5 +115,6 @@ export const useAuthSlice = () => {
     startRegisteringUser,
     startLogingOut,
     firstLog,
+    startLoginUser,
   };
 };

@@ -41,16 +41,18 @@ teamServices.viewMembers = async ( teamId) => {
     ], 
   });
 
-  return {user_list: adminUser.map((item) => {
-    const {
-      User: { first_name, last_name, email },
-    } = item;
-    return { id: item.id, first_name, last_name, email };
-  })
-}
+  return {
+    user_list: adminUser.map((item) => {
+      const {
+        User: { first_name, last_name, email },
+      } = item;
+      return { id: item.id, first_name, last_name, email };
+    }),
+  };
 };
 
 teamServices.addUserToTeam = async (teamId, user) => {
+  console.log(user.email);
   const existingUser = await User.findOne({
     where: { email: user.email },
   });
@@ -62,6 +64,7 @@ teamServices.addUserToTeam = async (teamId, user) => {
     // Crea un nuevo usuario solo si no existe.
 
     const getTeam = await Team.findOne({where: { id: teamId }});
+
     if (!getTeam) {
       return "No se encontró el equipo con el ID proporcionado.";
     }
@@ -69,19 +72,21 @@ teamServices.addUserToTeam = async (teamId, user) => {
     const newUser = await User.create(user);
     console.log(newUser);
 
-      await UserTeam.create({
+    await UserTeam.create({
       userId: newUser.id,
       teamId: getTeam.id,
       role: "user",
       job_role: "developer",
       status: "accepted",
     });
-    return {user:{
-      id: newUser.id,
-      first_name: newUser.first_name,
-      last_name: newUser.last_name,
-      email: newUser.email
-    } }
+    return {
+      user: {
+        id: newUser.id,
+        first_name: newUser.first_name,
+        last_name: newUser.last_name,
+        email: newUser.email,
+      },
+    };
   }
 };
 
