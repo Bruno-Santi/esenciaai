@@ -14,8 +14,7 @@ const controller = {};
 //GET ALL //
 controller.usersGet = async (req, res) => {
   try {
-    // const user_id = req.user_id_token;
-    const { user_id } = req.params;
+    const user_id = req.user_id_token;
     const result = await getUserAndTheirTeams(user_id);
     
     res.status(200).json(result);
