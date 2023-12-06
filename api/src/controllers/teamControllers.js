@@ -45,6 +45,7 @@ controller.userInvitedPost = async (req, res) => {
 
 controller.teamMembersGet = async (req, res) => {
   try {
+    
     const { id } = req.params;
 
     const result = await viewMembers(id);
