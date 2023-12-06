@@ -28,19 +28,22 @@ userService.createUser = async (user) => {
   }
 };
 
-userService.scrumGet = async (userId) => {
-    const adminUser = await UserTeam.findAll({
-      where: { userId }, 
-      include: [
-        {
-          model: Team,
-          attributes:["name"]
-        },
-      ],
-    });
-
-    return adminUser;
-  }
+userService.scrumGetAllTeams = async (userId) => {
+  if(!userId) throw new Error("no existe este scrum por ID")
+  const scrumGet = await UserTeam.findAll({
+    where: { userId },
+    attributes: ["first_name", "last_name", "email"], 
+    include: [
+      {
+        model: Team,
+        as: 'team_list',
+        attributes:["id"]
+      },
+    ],
+  });
+  
+  return scrumGet;
+}
 
 
 userService.inviteUser = async() => {
@@ -127,29 +130,6 @@ userService.deleteUser = async (id) => {
   }
 }
 
-userService.editProfileUser = async({id, first_name, last_name}) => {
-  if(!id) {
-    throw new Error("datos incompletos")
-  } else {
-    const user = await User.findOne({where: {id}})
-    if(!user) {
-      throw new Error("El usuario no esta registrado")
-    }
 
-    userUpdate = {};
-
-    if(first_name && first_name != user.first_name) userUpdate.first_name = first_name;
-    if(last_name && last_name != user.last_name) userUpdate.last_name = last_name;
-
-    const updateUser = await User.update(userUpdate, {where: {id}})
-
-    if(updateUser[0] === 0) {
-      throw new Error("El usuario no fue actualizado")
-    }
-
-    return (`El Usuario ${user.first_name} ${user.last_name} ha sido actualizado`)
-  }
-
-}
 
 module.exports = userService;

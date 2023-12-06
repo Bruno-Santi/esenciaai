@@ -11,18 +11,15 @@ const controller = {};
 controller.teamPost = async (req, res) => {
   try {
     const { team } = req.body;
-
     const user_id = req.user_id_token;
 
-    //$ T1 crear un team.
-    //$ T2 añadir al scrum master como admin del team, la id del scrum master la sacas del token.
-
-    const result = await createTeamTest(team, user_id);
+    const result = await createTeamTest(user_id,team);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(400).json({ error: error.message, details: error.stack });
   }
 };
+
 
 controller.teamByScrumGet = async (req, res) => {
   try {
@@ -39,8 +36,8 @@ controller.teamByScrumGet = async (req, res) => {
 
 controller.userInvitedPost = async (req, res) => {
   try {
-    const { teamId, user } = req.body;
-    const result = await addUserToTeam(teamId, user);
+    const { team_id, user } = req.body;
+    const result = await addUserToTeam(team_id, user);
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
