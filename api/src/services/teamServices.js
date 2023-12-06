@@ -32,17 +32,19 @@ teamServices.viewMembers = async (teamId) => {
     where: { teamId },
     include: [
       {
-        model: Team,
-        attributes: ["name"],
-      },
-      {
         model: User,
         attributes: ["first_name", "last_name", "email"],
       },
     ],
   });
 
-  return adminUser;
+  return {user_list: adminUser.map((item) => {
+    const {
+      User: { first_name, last_name, email },
+    } = item;
+    return { id: item.id, first_name, last_name, email };
+  })
+}
 };
 
 teamServices.addUserToTeam = async (teamId, user) => {
@@ -55,23 +57,28 @@ teamServices.addUserToTeam = async (teamId, user) => {
     console.log("El usuario ya existe.");
   } else {
     // Crea un nuevo usuario solo si no existe.
-    const getTeam = await Team.findByPk(teamId);
 
+    const getTeam = await Team.findOne(teamId);
     if (!getTeam) {
-      console.error("No se encontró el equipo con el ID proporcionado.");
-      return;
+      return "No se encontró el equipo con el ID proporcionado.";
     }
 
     const newUser = await User.create(user);
     console.log(newUser);
 
-    await UserTeam.create({
+      await UserTeam.create({
       userId: newUser.id,
       teamId: getTeam.id,
       role: "user",
       job_role: "developer",
       status: "accepted",
     });
+    return {user:{
+      id: newUser.id,
+      first_name: newUser.first_name,
+      last_name: newUser.last_name,
+      email: newUser.email
+    } }
   }
 };
 
