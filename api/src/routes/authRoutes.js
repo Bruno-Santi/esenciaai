@@ -6,6 +6,7 @@ const {
   checkUserValid,
 } = require("../middleware/authMiddlewares");
 const { sendResponse, sendError } = require("../helpers/managerController");
+const { sendExternalEmail } = require("../microServices/email/nodeMailer");
 
 //* it's used:
 router.post("/register", controllers.registerPost);
@@ -14,7 +15,6 @@ router.post("/register", controllers.registerPost);
 //* body: {user}
 router.post("/login", controllers.loginPost);
 //!return msg;
-
 
 router.post("/logout", checkUserToken, controllers.logoutPost);
 //!return msg;
@@ -30,7 +30,6 @@ router.post("/logout", checkUserToken, controllers.logoutPost);
 
 // 3 enviar ese link por mail.
 
-
 //? not sure:
 
 router.get("/view/:email", controllers.viewPassword);
@@ -39,6 +38,15 @@ router.get("/token", controllers.viewToken);
 router.get("/test_token", checkUserToken, async (req, res) => {
   try {
     // req.user_id_token;
+    sendExternalEmail(
+      "facu995electro@hotmail.com",
+      "Complete the surveys of the day.",
+      {
+        token: "MY_TOKEN",
+        team_id: "TEAM_ID",
+        user_id: "USER_ID",
+      }
+    );
     sendResponse(res, 200, "Accediste con tu Token.");
   } catch (error) {
     sendError(res, error);
