@@ -20,11 +20,12 @@ router.post("/", teamPost);
 
 //? params:{teamId};
 router.get("/members/:id", teamMembersGet);
+ //$T1 obtener los miembros de un team.
 //! return: {members:[users]};
 
 //? body:{teamId,user};
 router.post("/members", () => {
-  //$T1 crear un miembro en el team y devolver el usuario creado.
+  //$T1 crear un miembro en el team y devolver el miembro creado.
 });
 
 //? body:{teamId,user};
