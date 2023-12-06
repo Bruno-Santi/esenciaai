@@ -11,7 +11,10 @@ import { useNavigateTo } from ".";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-import { onLogOutUser } from "../store/dashboard/dashboardSlice";
+import {
+  onLogOutUser,
+  onSetUserTeams,
+} from "../store/dashboard/dashboardSlice";
 import axios from "axios";
 import api from "../helpers/apiToken";
 
@@ -25,37 +28,17 @@ export const useAuthSlice = () => {
   if (!firstLog) localStorage.setItem("firstLoggin", "0");
 
   useEffect(() => {}, [loading]);
-  const startLoginUser = async (data) => {
-    console.log(data);
-
-    try {
-      const resp = await axios.post(`http://localhost:3000/auth/login`, data);
-      console.log(resp);
-
-      dispatch(clearErrorMessage());
-      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
-
-      if (tkn) {
-        dispatch(onLogin());
-        handleNavigate("/dashboard");
-      }
-    } catch (error) {
-      const { payload } = error.response.data;
-      dispatch(onLogOut(payload));
-    }
-  };
   const startCheckingUser = async () => {
     dispatch(onChecking());
 
     try {
-      const resp = await api.get(`/auth/test_token`);
       const user = await api.get(`/users`);
       console.log(user.data);
 
-      dispatch(onLogin(user));
-      console.log(resp);
+      dispatch(onLogin(user.data.user));
     } catch (error) {
       console.log(error);
+      localStorage.removeItem("authToken");
       dispatch(onLogOut());
     }
 
@@ -73,9 +56,31 @@ export const useAuthSlice = () => {
     //   dispatch(onLogOut(payload));
     // }
   };
+  const startLoginUser = async (data) => {
+    const user = { user: data };
+    console.log(user);
+
+    try {
+      const resp = await axios.post(`http://localhost:3000/auth/login`, user);
+      console.log(resp);
+
+      dispatch(clearErrorMessage());
+      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
+
+      const checkUser = await startCheckingUser();
+      checkUser().then(() => {
+        handleNavigate("/dashboard");
+      });
+    } catch (error) {
+      const { payload } = error.response.data;
+      dispatch(onLogOut(payload));
+    }
+  };
 
   const startRegisteringUser = async (data: string[]): void => {
     const user = { user: data };
+    console.log(user);
+
     try {
       const resp = await axios.post(
         `http://localhost:3000/auth/register`,
@@ -102,6 +107,7 @@ export const useAuthSlice = () => {
   const startLogingOut = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("userLogged");
+    localStorage.removeItem("authToken");
     localStorage.removeItem("userTeams");
     dispatch(onLogOut());
     dispatch(onLogOutUser());

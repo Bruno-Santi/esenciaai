@@ -1,17 +1,41 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SurveyLayout } from "../../layaout";
+import { useLocation } from "react-router-dom";
 
 export const AdditionalComments = () => {
-  const [comment, setComment] = useState<string>("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const finalBody = location.state?.finalBody || {};
+  const [comment, setComment] = useState<string>(finalBody.comment || "");
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      return (event.returnValue = "Are you sure you want to leave?");
+    };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
-    setComment(value);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+  useEffect(() => {
+    console.log("Received finalBody:", finalBody);
+  }, [finalBody]);
+
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setComment(e.target.value);
   };
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-    console.log(comment);
+
+    const updatedFinalBody = {
+      ...finalBody,
+      comment: comment,
+    };
+    navigate("/members/finished");
+    console.log(updatedFinalBody);
   };
   return (
     <SurveyLayout>
@@ -20,7 +44,7 @@ export const AdditionalComments = () => {
           Would you like to leave any additional comments?
         </span>
         <textarea
-          onChange={handleChange}
+          onChange={handleCommentChange}
           placeholder='Put any comment here...'
           className='bg-white rounded-md w-5/6 h-1/3 p-4 flex m-auto text-primary'
         ></textarea>
@@ -30,12 +54,12 @@ export const AdditionalComments = () => {
           </button>
           <button
             disabled={!comment}
+            onClick={handleSubmit}
             className={
               comment
                 ? "btn-primary mb-12 p-2 w-[150px] rounded-md m-auto"
                 : "btn-secondary mb-12 p-2 w-[150px] rounded-md m-auto"
             }
-            onClick={handleSubmit}
           >
             Continue
           </button>
