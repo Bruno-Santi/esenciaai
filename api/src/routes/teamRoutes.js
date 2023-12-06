@@ -4,7 +4,7 @@ const {
   teamPost,
   teamMembersGet,
   userInvitedPost,
-  teamByScrumGet
+  teamByScrumGet,
 } = require("../controllers/teamControllers");
 const express = require("express");
 
@@ -18,18 +18,24 @@ router.get("/:id", teamByScrumGet);
 router.post("/", teamPost);
 //! return: {team};
 
-//? body:{teamId,user};
-router.post("/members", userInvitedPost);
-
-//? body:{teamId,user};
-router.patch("/members", userInvitedPost); 
-
-//? body:{teamId,userId};
-router.delete("/members", userInvitedPost);
-
 //? params:{teamId};
 router.get("/members/:id", teamMembersGet);
 //! return: {members:[users]};
+
+//? body:{teamId,user};
+router.post("/members", () => {
+  //$T1 crear un miembro en el team y devolver el usuario creado.
+});
+
+//? body:{teamId,user};
+router.patch("/members", () => {
+  //$T1 editar un miembro en el team y devolver el usuario creado.
+});
+
+//? body:{teamId,userId};
+router.delete("/members", () => {
+  //$T1 eliminar un usuario y devolver un msg satifactorio.
+});
 
 //? not sure: nothings some here.
 
