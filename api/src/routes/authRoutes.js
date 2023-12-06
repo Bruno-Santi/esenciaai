@@ -38,7 +38,7 @@ router.get("/token", controllers.viewToken);
 
 router.get("/test_token", checkUserToken, async (req, res) => {
   try {
-    req.user_id_logged;
+    // req.user_id_token;
     sendResponse(res, 200, "Accediste con tu Token.");
   } catch (error) {
     sendError(res, error);
