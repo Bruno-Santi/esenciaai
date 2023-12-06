@@ -8,26 +8,43 @@ services = {};
 const transport = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
 
- const sendExternalEmail = async (recipientEmail, subject) => {
-  const body = await createBody("new_user");
+const generateLink = ({ token, team_id, user_id }) => {
+  return `http://localhost:3000/auth/link?token=${token}&team_id=${team_id}&user_id=${user_id}`;
+};
+
+const sendExternalEmail = async (
+  recipientEmail,
+  subject,
+  { token, team_id, user_id }
+) => {
+  const body = await createBody(
+    "add_user",
+    generateLink({ token, team_id, user_id })
+  );
   return await sendEmail(recipientEmail, subject, body);
 };
 
-const createBody = async (taskName, recipientName) => {
+const createBody = async (taskName, link) => {
   let body = "";
   switch (taskName) {
-    case "new_user":
-      body = await getDocument(taskName, recipientName);
+    case "add_user":
+      body = `<div>
+      <p>Tu link de registro es:</p>
+      <p>${link}</p>
+      </div>
+      `;
+      // body = await getDocument(taskName, recipientName);
       break;
 
     case "password_changed":
-      body = await getDocument(taskName, recipientName);
+      body = await getDocument(taskName);
       break;
     default:
       break;
@@ -37,13 +54,12 @@ const createBody = async (taskName, recipientName) => {
 
 const sendEmail = async (recipientEmail, subject = "Holidays", body) => {
   const info = await transport.sendMail({
-    from: "holidaysrama14@gmail.com",
+    from: process.env.EMAIL_USER,
     to: recipientEmail,
     subject,
     text: "",
     html: body,
   });
 };
-
 
 module.exports = { sendExternalEmail };

@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
 const { User, Team } = require("../app/db");
-const { UserTeam } = require("../app/dbRelations")
+const { UserTeam } = require("../app/dbRelations");
 const throwError = require("../helpers/customError");
 const { v4: uuidv4 } = require("uuid");
 const { getServices, addServices } = require(".");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 //* Create a services and dependencies injection.
 
 const userService = {};
@@ -12,9 +12,7 @@ addServices("user", userService);
 
 const saltRounds = 10;
 
-
 //* Services :'
-
 
 userService.createUser = async (user) => {
   try {
@@ -28,40 +26,37 @@ userService.createUser = async (user) => {
   }
 };
 
-userService.scrumGet = async (userId) => {
-    const adminUser = await UserTeam.findAll({
-      where: { userId }, 
-      include: [
-        {
-          model: Team,
-          attributes:["name"]
-        },
-      ],
-    });
+userService.getUserAndTheirTeams = async (userId) => {
+  const userExists = await User.findByPk(userId);
+  if (!userExists) throw new Error("no existe este scrum por ID");
 
-    return adminUser;
-  }
+  const { id, first_name, last_name, email } = userExists;
 
+  const getTeamList = await UserTeam.findAll({
+    where: { userId },
+    attributes: ["teamId"],
+  });
 
-userService.inviteUser = async() => {
-  
-}
+  const team_list = getTeamList.map((item) => item.teamId);
 
-userService.getAllUser = async(user) => {
-  const getUsers = await User.findAll(user)
+  return { user: { id, first_name, last_name, email }, team_list };
+};
+
+userService.inviteUser = async () => {};
+
+userService.getAllUser = async (user) => {
+  const getUsers = await User.findAll(user);
   try {
-    if(getUsers.length === 0 ) throw new Error("no hay usuarios registrado")
-    return getUsers
-    
+    if (getUsers.length === 0) throw new Error("no hay usuarios registrado");
+    return getUsers;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
-
+};
 
 userService.changePassword = async (email, password, new_password) => {
-  const getUser = await User.findOne({ where: { email} });
-//  list.findAll(user => user.email === email && user.password === password);
+  const getUser = await User.findOne({ where: { email } });
+  //  list.findAll(user => user.email === email && user.password === password);
   if (!getUser) {
     throwError("missing", 400, "El usuario no existe.");
   } else if (getUser.password !== password) {
@@ -82,12 +77,7 @@ userService.getById = async (id) => {
   } else {
     const user = await User.findOne({
       where: { id },
-      attributes: [
-        "id",
-        "first_name",
-        "last_name",
-        "email"
-      ],
+      attributes: ["id", "first_name", "last_name", "email"],
     });
     if (!user) {
       throw Error("El usuario no se encuentra registrado");
@@ -101,55 +91,29 @@ userService.getByEmail = async (email) => {
     where: { email },
     attributes: ["id", "first_name", "last_name", "email", "city", "country"],
   });
-  console.log("usuario :", userEmail)
+  console.log("usuario :", userEmail);
   if (!userEmail) {
     throw Error("no se encuentra el email de este usuario");
   }
   return userEmail;
 };
 
-
 userService.deleteUser = async (id) => {
-  if(!id) {
-    throw new Error("el ID del usuario no proporcionado")
+  if (!id) {
+    throw new Error("el ID del usuario no proporcionado");
   } else {
     const user = await User.findByPk(id);
 
-    if(!user) {
-      throw new Error("El usuario no existe")
+    if (!user) {
+      throw new Error("El usuario no existe");
     }
-    const deleteUser = await User.destroy({where: {id}})
-   
-    if(deleteUser === 0) {
-      throw new Error("El usuario no se pudo eliminar")
+    const deleteUser = await User.destroy({ where: { id } });
+
+    if (deleteUser === 0) {
+      throw new Error("El usuario no se pudo eliminar");
     }
-    return (`El usuario ${user.name} ${user.last_name} ha sido eliminado`)
+    return `El usuario ${user.name} ${user.last_name} ha sido eliminado`;
   }
-}
-
-userService.editProfileUser = async({id, first_name, last_name}) => {
-  if(!id) {
-    throw new Error("datos incompletos")
-  } else {
-    const user = await User.findOne({where: {id}})
-    if(!user) {
-      throw new Error("El usuario no esta registrado")
-    }
-
-    userUpdate = {};
-
-    if(first_name && first_name != user.first_name) userUpdate.first_name = first_name;
-    if(last_name && last_name != user.last_name) userUpdate.last_name = last_name;
-
-    const updateUser = await User.update(userUpdate, {where: {id}})
-
-    if(updateUser[0] === 0) {
-      throw new Error("El usuario no fue actualizado")
-    }
-
-    return (`El Usuario ${user.first_name} ${user.last_name} ha sido actualizado`)
-  }
-
-}
+};
 
 module.exports = userService;

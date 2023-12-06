@@ -6,17 +6,16 @@ const { getServices, addServices } = require(".");
 
 const teamServices = {};
 
-teamServices.createTeamTest = async (team, userId) => {
+teamServices.createTeamTest = async (userId, team) => {
   const existUser = await User.findByPk(userId);
-  
+
   if (!existUser) throw new Error("no existe este usuario por ID");
 
   const existTeam = await Team.findOne({ where: { name: team.name } });
-  
+
   if (existTeam) throw new Error("ya existe este Team");
 
   const newTeam = await Team.create(team);
-
   await UserTeam.create({
     userId,
     teamId: newTeam.id,
@@ -25,7 +24,7 @@ teamServices.createTeamTest = async (team, userId) => {
     status: "accepted",
   });
 
-  return newTeam;
+  return { team: { id: newTeam.id, name: newTeam.name, logo: newTeam.logo } };
 };
 
 teamServices.viewMembers = async (teamId) => {
@@ -47,68 +46,44 @@ teamServices.viewMembers = async (teamId) => {
 };
 
 teamServices.addUserToTeam = async (teamId, user) => {
-  
-    const existingUser = await User.findOne({
-      where: { email: user.email },
-    });
+  const existingUser = await User.findOne({
+    where: { email: user.email },
+  });
 
-    if (existingUser) {
-      // El usuario ya existe, no es necesario crear uno nuevo.
-      console.log("El usuario ya existe.");
-    } else {
-      // Crea un nuevo usuario solo si no existe.
-      const getTeam = await Team.findByPk(teamId);
+  if (existingUser) {
+    // El usuario ya existe, no es necesario crear uno nuevo.
+    console.log("El usuario ya existe.");
+  } else {
+    // Crea un nuevo usuario solo si no existe.
+    const getTeam = await Team.findByPk(teamId);
 
-      if (!getTeam) {
-        console.error("No se encontró el equipo con el ID proporcionado.");
-        return;
-      }
-
-      const newUser = await User.create(user);
-      console.log(newUser);
-
-      await UserTeam.create({
-        userId: newUser.id,
-        teamId: getTeam.id,
-        role: "user",
-        job_role: "developer",
-        status: "accepted",
-      });
+    if (!getTeam) {
+      console.error("No se encontró el equipo con el ID proporcionado.");
+      return;
     }
+
+    const newUser = await User.create(user);
+    console.log(newUser);
+
+    await UserTeam.create({
+      userId: newUser.id,
+      teamId: getTeam.id,
+      role: "user",
+      job_role: "developer",
+      status: "accepted",
+    });
+  }
 };
 
-
-teamServices.inviteUserByEmail = async(userId, job_role="scrum master", email, password, first_name, last_name, teamId) => {
-  const existScrum = await UserTeam.findOne({
-    where: {
-      userId,
-      job_role
-    }
-  });
-
-  if (existScrum) {
-    throw new Error("Ya existe un SCRUM MASTER para este usuario en este equipo");
-  }
-
-  const newUser = await User.create({
-    email,
-    password,
-    first_name,
-    last_name
-  });
-
-  await UserTeam.create({
-    userId: newUser.id,
-    teamId,
-    role: 'user', // Asigna un valor adecuado a 'role'
-    job_role,
-    status: "accepted"
-  });
-
-  return newUser;
-}
-
-teamServices.scrumGetTeam = async (userId, job_role = "scrum master") => {
+teamServices.inviteUserByEmail = async (
+  userId,
+  job_role = "scrum master",
+  email,
+  password,
+  first_name,
+  last_name,
+  teamId
+) => {
   const existScrum = await UserTeam.findOne({
     where: {
       userId,
@@ -116,30 +91,60 @@ teamServices.scrumGetTeam = async (userId, job_role = "scrum master") => {
     },
   });
 
+  if (existScrum) {
+    throw new Error(
+      "Ya existe un SCRUM MASTER para este usuario en este equipo"
+    );
+  }
+
+  const newUser = await User.create({
+    email,
+    password,
+    first_name,
+    last_name,
+  });
+
+  await UserTeam.create({
+    userId: newUser.id,
+    teamId,
+    role: "user", // Asigna un valor adecuado a 'role'
+    job_role,
+    status: "accepted",
+  });
+
+  return newUser;
+};
+
+teamServices.scrumGetTeam = async (userId, role = "admin") => {
+  const existScrum = await UserTeam.findOne({
+    where: {
+      userId,
+      role,
+    },
+  });
+
   if (!existScrum) {
     throw new Error("No existe el scrum master");
   } else {
-    
-      const teams = await UserTeam.findAll({
-        where: {
-          userId,
-          job_role,
+    const teams = await UserTeam.findAll({
+      where: {
+        userId,
+        job_role,
+      },
+      attributes: ["id", "role", "job_role"],
+      include: [
+        {
+          model: Team,
+          attributes: ["id", "name", "logo", "description"],
         },
-        attributes: ['id', 'role', 'job_role'], 
-        include: [
-          {
-            model: Team,
-            attributes: ["id" ,"name", "logo", "description"],
-          },
-          {
-            model: User,
-            attributes: ["id" ,"first_name", "last_name", "email"]
-          }
-        ],
-      });
+        {
+          model: User,
+          attributes: ["id", "first_name", "last_name", "email"],
+        },
+      ],
+    });
 
-      return teams;
-    
+    return teams;
   }
 };
 

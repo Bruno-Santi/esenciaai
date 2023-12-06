@@ -14,10 +14,12 @@ const {
   checkPhone,
   checkNickname,
 } = require("../middleware/validate/routes/authValidate");
+const { checkUserToken } = require("../middleware/authMiddlewares");
 
 //* it's used:
 
-router.get("/", usersGet); 
+//* params: {id}
+router.get("/:user_id", usersGet);
 //! return {user,teamsJoined:["teamId1","teamId2"]}
 
 //? not sure:

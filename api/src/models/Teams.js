@@ -36,19 +36,19 @@ module.exports = (sequelize) => {
         },
       },
       
-      history: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            msg: "El JSON no puede estar vacío.",
-          },
-        },
-      },
+      // history: {
+      //   type: DataTypes.JSON,
+      //  // allowNull: false,
+      //   validate: {
+      //     notEmpty: {
+      //       msg: "El JSON no puede estar vacío.",
+      //     },
+      //   },
+      // },
 
       description: {
         type: DataTypes.STRING,
-        allowNull: false,
+      //  allowNull: true,
         validate: {
           notEmpty: {
             msg: "La descripción no puede estar vacía.",
