@@ -5,30 +5,34 @@ const {
   changePassword,
   deleteUser,
   editProfileUser,
-  scrumGet
+  scrumGet,
+  getUserAndTheirTeams,
 } = require("../services/userServices");
 const { sendResponse, sendError } = require("../helpers/managerController");
 const controller = {};
 
-//GET ALL //   
+//GET ALL //
 controller.usersGet = async (req, res) => {
-  const result = await getAllUser();
   try {
+    const user_id = req.user_id_token;
+    const result = await getUserAndTheirTeams(user_id);
+    
     res.status(200).json(result);
   } catch (error) {
     res.status(error.status || 404).json(error.payload || error.message);
   }
 };
+
 //GET SCRUM MASTER
-controller.userScrumGet = async(req, res) => {
-try {
-  const { id } = req.params
-  const result = await scrumGet(id)
-  res.status(200).json(result)
-} catch (error) {
-  res.status(error.status || 404).json(error.payload || error.message);
-}
-}
+controller.userScrumGet = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await scrumGet(id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(error.status || 404).json(error.payload || error.message);
+  }
+};
 
 // GET BY ID //
 controller.userById = async (req, res) => {
@@ -65,22 +69,21 @@ controller.updatePasswordPut = async (req, res) => {
 
 controller.deletedUser = async (req, res) => {
   try {
-    const id = req.params.id
-    const result = await deleteUser(id)
-    res.status(200).json(result)
+    const id = req.params.id;
+    const result = await deleteUser(id);
+    res.status(200).json(result);
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-
-controller.updateUser = async(req, res) => {
-  const user = req.body
+controller.updateUser = async (req, res) => {
+  const user = req.body;
   try {
-    const result = await editProfileUser(user)
-    res.status(200).json(result)
+    const result = await editProfileUser(user);
+    res.status(200).json(result);
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 module.exports = controller;

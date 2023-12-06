@@ -78,9 +78,6 @@ services.userLogin = async (email, password) => {
     getUser.token_password,
     USER_TOKEN_KEY
   );
-
-  // Devolver un objeto que contiene el token y la información del usuario
-  return { token, ...userData };
 };
   
 

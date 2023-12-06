@@ -47,7 +47,8 @@ module.exports = (sequelize) => {
 
       password: {
         type: DataTypes.STRING,
-        allowNull: false,
+      //  allowNull: false,
+        defaultValue: "lalala123",
         validate: {
           notEmpty: true,
         },
