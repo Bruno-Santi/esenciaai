@@ -27,15 +27,18 @@ teamServices.createTeamTest = async (userId, team) => {
   return { team: { id: newTeam.id, name: newTeam.name, logo: newTeam.logo } };
 };
 
-teamServices.viewMembers = async (teamId) => {
+teamServices.viewMembers = async ( teamId) => {
+  //solo invitados
+
+
   const adminUser = await UserTeam.findAll({
-    where: { teamId },
+    where: { teamId, role:"user" },
     include: [
       {
         model: User,
         attributes: ["first_name", "last_name", "email"],
       },
-    ],
+    ], 
   });
 
   return {
@@ -60,7 +63,8 @@ teamServices.addUserToTeam = async (teamId, user) => {
   } else {
     // Crea un nuevo usuario solo si no existe.
 
-    const getTeam = await Team.findOne({ id: teamId });
+    const getTeam = await Team.findOne({where: { id: teamId }});
+
     if (!getTeam) {
       return "No se encontró el equipo con el ID proporcionado.";
     }
