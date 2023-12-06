@@ -1,10 +1,10 @@
 const { Op } = require("sequelize");
 const { User, Team } = require("../app/db");
-const { UserTeam } = require("../app/dbRelations")
+const { UserTeam } = require("../app/dbRelations");
 const throwError = require("../helpers/customError");
 const { v4: uuidv4 } = require("uuid");
 const { getServices, addServices } = require(".");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
 //* Create a services and dependencies injection.
 
 const userService = {};
@@ -12,9 +12,7 @@ addServices("user", userService);
 
 const saltRounds = 10;
 
-
 //* Services :'
-
 
 userService.createUser = async (user) => {
   try {
@@ -28,43 +26,37 @@ userService.createUser = async (user) => {
   }
 };
 
-userService.scrumGetAllTeams = async (userId) => {
-  if(!userId) throw new Error("no existe este scrum por ID")
-  const scrumGet = await UserTeam.findAll({
+userService.getUserAndTheirTeams = async (userId) => {
+  const userExists = await User.findByPk(userId);
+  if (!userExists) throw new Error("no existe este scrum por ID");
+
+  const { id, first_name, last_name, email } = userExists;
+
+  const getTeamList = await UserTeam.findAll({
     where: { userId },
-    attributes: ["first_name", "last_name", "email"], 
-    include: [
-      {
-        model: Team,
-        as: 'team_list',
-        attributes:["id"]
-      },
-    ],
+    attributes: ["teamId"],
   });
-  
-  return scrumGet;
-}
 
+  const team_list = getTeamList.map((item) => item.teamId);
 
-userService.inviteUser = async() => {
-  
-}
+  return { user: { id, first_name, last_name, email }, team_list };
+};
 
-userService.getAllUser = async(user) => {
-  const getUsers = await User.findAll(user)
+userService.inviteUser = async () => {};
+
+userService.getAllUser = async (user) => {
+  const getUsers = await User.findAll(user);
   try {
-    if(getUsers.length === 0 ) throw new Error("no hay usuarios registrado")
-    return getUsers
-    
+    if (getUsers.length === 0) throw new Error("no hay usuarios registrado");
+    return getUsers;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
-
+};
 
 userService.changePassword = async (email, password, new_password) => {
-  const getUser = await User.findOne({ where: { email} });
-//  list.findAll(user => user.email === email && user.password === password);
+  const getUser = await User.findOne({ where: { email } });
+  //  list.findAll(user => user.email === email && user.password === password);
   if (!getUser) {
     throwError("missing", 400, "El usuario no existe.");
   } else if (getUser.password !== password) {
@@ -85,12 +77,7 @@ userService.getById = async (id) => {
   } else {
     const user = await User.findOne({
       where: { id },
-      attributes: [
-        "id",
-        "first_name",
-        "last_name",
-        "email"
-      ],
+      attributes: ["id", "first_name", "last_name", "email"],
     });
     if (!user) {
       throw Error("El usuario no se encuentra registrado");
@@ -104,32 +91,29 @@ userService.getByEmail = async (email) => {
     where: { email },
     attributes: ["id", "first_name", "last_name", "email", "city", "country"],
   });
-  console.log("usuario :", userEmail)
+  console.log("usuario :", userEmail);
   if (!userEmail) {
     throw Error("no se encuentra el email de este usuario");
   }
   return userEmail;
 };
 
-
 userService.deleteUser = async (id) => {
-  if(!id) {
-    throw new Error("el ID del usuario no proporcionado")
+  if (!id) {
+    throw new Error("el ID del usuario no proporcionado");
   } else {
     const user = await User.findByPk(id);
 
-    if(!user) {
-      throw new Error("El usuario no existe")
+    if (!user) {
+      throw new Error("El usuario no existe");
     }
-    const deleteUser = await User.destroy({where: {id}})
-   
-    if(deleteUser === 0) {
-      throw new Error("El usuario no se pudo eliminar")
+    const deleteUser = await User.destroy({ where: { id } });
+
+    if (deleteUser === 0) {
+      throw new Error("El usuario no se pudo eliminar");
     }
-    return (`El usuario ${user.name} ${user.last_name} ha sido eliminado`)
+    return `El usuario ${user.name} ${user.last_name} ha sido eliminado`;
   }
-}
-
-
+};
 
 module.exports = userService;

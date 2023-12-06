@@ -6,28 +6,19 @@ const {
   deleteUser,
   editProfileUser,
   scrumGet,
+  getUserAndTheirTeams,
 } = require("../services/userServices");
 const { sendResponse, sendError } = require("../helpers/managerController");
 const controller = {};
 
 //GET ALL //
 controller.usersGet = async (req, res) => {
-
-  // const { user_id } = req.body;
-
-  // $ T1 que devuelva solo un usuario.
-  // $ T2 que devuelva la lista de teams a los que pertenece el usuario. Ojo solo las id de los teams en las lista.
-
-  // const user = await getAllUser();
-  // const teamsList = await getTeamList();
-
-  // const result = { user, teamsList };
-
-  const { user_id } = req.params
-  const result = await scrumGetAllTeams(user_id)
-  res.status(200).json(result)
   try {
-    res.status(200).json("result");
+    // const user_id = req.user_id_token;
+    const { user_id } = req.params;
+    const result = await getUserAndTheirTeams(user_id);
+    
+    res.status(200).json(result);
   } catch (error) {
     res.status(error.status || 404).json(error.payload || error.message);
   }
