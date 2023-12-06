@@ -11,7 +11,7 @@ const express = require("express");
 //* it's used:
 
 //? params:{teamId};
-//router.get("/:id", teamByScrumGet);
+router.get("/:id", teamByScrumGet);
 //! return: {team, members:[users]};
 
 //? body:{team};

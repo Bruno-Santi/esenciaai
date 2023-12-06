@@ -27,18 +27,17 @@ teamServices.createTeamTest = async (userId, team) => {
   return { team: { id: newTeam.id, name: newTeam.name, logo: newTeam.logo } };
 };
 
-teamServices.viewMembers = async ( teamId) => {
+teamServices.viewMembers = async (teamId) => {
   //solo invitados
 
-
   const adminUser = await UserTeam.findAll({
-    where: { teamId, role:"user" },
+    where: { teamId, role: "user" },
     include: [
       {
         model: User,
         attributes: ["first_name", "last_name", "email"],
       },
-    ], 
+    ],
   });
 
   return {
@@ -63,7 +62,7 @@ teamServices.addUserToTeam = async (teamId, user) => {
   } else {
     // Crea un nuevo usuario solo si no existe.
 
-    const getTeam = await Team.findOne({where: { id: teamId }});
+    const getTeam = await Team.findOne({ where: { id: teamId } });
 
     if (!getTeam) {
       return "No se encontró el equipo con el ID proporcionado.";
@@ -130,37 +129,61 @@ teamServices.inviteUserByEmail = async (
   return newUser;
 };
 
-teamServices.scrumGetTeam = async (userId, role = "admin") => {
-  const existScrum = await UserTeam.findOne({
-    where: {
-      userId,
-      role,
-    },
+teamServices.scrumGetTeam = async (teamId, role = "admin") => {
+  const teamExists = await Team.findByPk(teamId);
+  if (!teamExists) throw new Error("No existe este scrum por ID");
+
+  const { id, name, logo } = teamExists;
+
+  const getUserList = await UserTeam.findAll({
+    where: { teamId, role: "user" },
+    include: [
+      {
+        model: User,
+        attributes: ["id", "first_name", "last_name", "email"],
+      },
+    ],
   });
 
-  if (!existScrum) {
-    throw new Error("No existe el scrum master");
-  } else {
-    const teams = await UserTeam.findAll({
-      where: {
-        userId,
-        job_role,
-      },
-      attributes: ["id", "role", "job_role"],
-      include: [
-        {
-          model: Team,
-          attributes: ["id", "name", "logo", "description"],
-        },
-        {
-          model: User,
-          attributes: ["id", "first_name", "last_name", "email"],
-        },
-      ],
-    });
+  const user_list = getUserList.map((item) => ({
+    id: item.User.id,
+    first_name: item.User.first_name,
+    last_name: item.User.last_name,
+    email: item.User.email,
+  }));
 
-    return teams;
-  }
+  return { team: { id, name, logo }, user_list };
+
+  // const existScrum = await UserTeam.findOne({
+  //   where: {
+  //     userId,
+  //     role,
+  //   },
+  // });
+
+  // if (!existScrum) {
+  //   throw new Error("No existe el scrum master");
+  // } else {
+  //   const teams = await UserTeam.findAll({
+  //     where: {
+  //       userId,
+  //       job_role,
+  //     },
+  //     attributes: ["id", "role", "job_role"],
+  //     include: [
+  //       {
+  //         model: Team,
+  //         attributes: ["id", "name", "logo", "description"],
+  //       },
+  //       {
+  //         model: User,
+  //         attributes: ["id", "first_name", "last_name", "email"],
+  //       },
+  //     ],
+  //   });
+
+  //   return teams;
+  // }
 };
 
 module.exports = teamServices;
