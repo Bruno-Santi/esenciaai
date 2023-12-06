@@ -6,7 +6,7 @@ const { getServices, addServices } = require(".");
 
 const teamServices = {};
 
-teamServices.createTeamTest = async (team, userId) => {
+teamServices.createTeamTest = async (userId, team) => {
   const existUser = await User.findByPk(userId);
   
   if (!existUser) throw new Error("no existe este usuario por ID");

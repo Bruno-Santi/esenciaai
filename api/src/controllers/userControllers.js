@@ -15,14 +15,17 @@ controller.usersGet = async (req, res) => {
 
   // const { user_id } = req.body;
 
-  //$ T1 que devuelva solo un usuario.
-  //$ T2 que devuelva la lista de teams a los que pertenece el usuario. Ojo solo las id de los teams en las lista.
+  // $ T1 que devuelva solo un usuario.
+  // $ T2 que devuelva la lista de teams a los que pertenece el usuario. Ojo solo las id de los teams en las lista.
 
   // const user = await getAllUser();
   // const teamsList = await getTeamList();
 
   // const result = { user, teamsList };
 
+  const { user_id } = req.params
+  const result = await scrumGetAllTeams(user_id)
+  res.status(200).json(result)
   try {
     res.status(200).json("result");
   } catch (error) {
