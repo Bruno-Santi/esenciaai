@@ -15,7 +15,7 @@ export const NavBar = () => {
         <div className='flex ml-20'>
           <FaRegUserCircle className='text-tertiary h-12 w-12 -mx-2 mr-1' />
           <span className='text-tertiary my-auto  font-poppins text-lg'>
-            {user.name} {user.lastName}
+            {user.first_name} {user.last_name}
           </span>
         </div>
         {activeTeam && (
