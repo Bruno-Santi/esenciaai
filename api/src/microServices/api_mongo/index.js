@@ -1,5 +1,7 @@
 const { query } = require("express");
-const { daily_survey_post, testRequest } = require("./endpoints");
+const { exampleToEndpoint } = require("./endpoints");
+const { dailySurvey } = require("./mongoClass");
+
 const microServices = {};
 
 //* Services to modify data from mongo.
@@ -27,7 +29,6 @@ microServices.createDailySurvey = async (
     comment,
   };
 
-  const sendRequest = await daily_survey_post(body);
   return sendRequest;
 };
 
@@ -41,47 +42,28 @@ microServices.addCommentInDailySurvey = async (
     team_id,
     comment,
   };
-  const sendRequest = await daily_survey_post(query);
   return sendRequest;
 };
 
-microServices.createRetro = async (
-  team_id = "",
-  sprint = 0,
-  c1 = [],
-  c2 = [],
-  c3 = [],
-  c4 = []
-) => {
-  const body = {
-    team_id,
-    sprint,
-    c1,
-    c2,
-    c3,
-    c4
-  }
-const sendRequest = await  daily_survey_post(body);
-return sendRequest;
-};
+microServices.createRetro = async () => {};
 
 //* Services to get data from mongo.
 
-microServices.getAnalytics = async (                      
+microServices.getAnalytics = async (
   daily_survey = 0,
   date = 0,
   self_satisfaction = 15,
   survey = 0,
-  user_id= "",
+  user_id = "",
   sprint = 1,
   question1 = 5,
   question2 = 5,
   question3 = 6,
   question4 = 6,
-  comment = "good team",                   
+  comment = "good team",
   team_collaboration = 12,
-  work_engagement= 10,
-  workspace= 8    
+  work_engagement = 10,
+  workspace = 8
 ) => {
   const query = {
     daily_survey,
@@ -94,30 +76,28 @@ microServices.getAnalytics = async (
     question2,
     question3,
     question4,
-    comment,                   
+    comment,
     team_collaboration,
     work_engagement,
-    workspace   
+    workspace,
   };
-  const sendRequest = await daily_survey_post(query);
   return sendRequest;
-} 
+};
 
-
-microServices.getReports = async ( 
-  user_id="text",
-  comment="text"
-) =>{
+microServices.getReports = async (user_id = "text", comment = "text") => {
   const body = {
     user_id,
-    comment
+    comment,
   };
-  const sendRequest = await daily_survey_post(body);
   return sendRequest;
-}
+};
 
-microServices.getAnalyticsTimeline = async () => {
+microServices.getAnalyticsTimeline = async () => {};
 
-} 
+const micro = (daily = new dailySurvey()) => {
+  exampleToEndpoint(daily);
+};
+
+micro(new dailySurvey("1", "2"));
 
 module.exports = microServices;

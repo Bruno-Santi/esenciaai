@@ -1,48 +1,56 @@
 const { default: axios } = require("axios");
 const api = require("../../helpers/axiosConfig.js");
+const throwError = require("../../helpers/customError.js");
 
-const daily_survey_post = async (body) => {
-  const response = await api.post("/daily_survey", body);
-  return response.data;
+const sendRequest = async (
+  type = "get",
+  endpoint = "",
+  params = "",
+  query = {},
+  body = {}
+) => {
+  if (params) endpoint += endpoint === "/" ? params : `/${params}`;
+
+  if (Object.keys(query).length !== 0) {
+    endpoint += "?";
+    let count = 0;
+    for (const key in query) {
+      count++;
+      endpoint += `${key}=${query[key]}`;
+      if (count < Object.keys(query).length) endpoint += "&";
+    }
+  }
+
+  let result = {};
+
+  await new Promise((resolve, reject) => {
+    api[type](endpoint, body)
+      .then((resp) => {
+        result = resp.data;
+        resolve();
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  }).catch((err) => {
+    console.log(err.response.data);
+    throwError(
+      "send_endpoint_" + endpoint,
+      err.response.status,
+      err.response.data
+    );
+  });
+  return result;
 };
 
-const put_dailySurvey_comment = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-const postRetro = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-const getWelcome = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
+const exampleToEndpoint = async (body) => {
+  const type = "post";
+  const endpoint = "/";
+  const params = "";
+  const query = { test: "!" };
+  // const body = {};
+  console.log(await sendRequest(type, endpoint, params, query, body));
+  // return await sendRequest(type, endpoint, params, query, body);
 };
 
-const getDailySurvey_getallByTeam = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-const getRetro_get = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-const getDashboard_getAllData = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-const getReport_generate = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-const getDashboard = async () => {
-  const response = await api.get("/");
-  console.log(response.data.msg);
-};
-
-module.exports = { daily_survey_post, testRequest };
+module.exports = { exampleToEndpoint };
