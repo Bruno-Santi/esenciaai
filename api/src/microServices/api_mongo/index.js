@@ -1,103 +1,53 @@
-const { query } = require("express");
-const { exampleToEndpoint } = require("./endpoints");
-const { dailySurvey } = require("./mongoClass");
+const { sendReq } = require("../../helpers/axios.js");
+const { DailySurvey } = require("./classes.js");
 
-const microServices = {};
+const name = "mongo_api";
 
-//* Services to modify data from mongo.
+const mongoApi = {};
 
-//% Envía la encuesta diaria para cada usuario del team.
+mongoApi.example_to_endpoint = async () => {
+  //* tipo de petición.
+  const type = "post";
+  //* direción, la bases NO! esto "http://localhost:3000" no, lo siguiente.
+  const endpoint = "/";
+  //* solo string, si se requiere una id (o lo que sea) que es igual a 30219.
+  const params = "";
+  //* si se requieren querys de user_id=m2i32 team_id=we12ef.
+  const query = { user_id: "m2i32", team_id: "we12ef" };
+  //* si se requiere un body así { user_id, email }.
+  const body = { user_id: "23", email: "asd@gmail.com " };
 
-microServices.createDailySurvey = async (
-  user_id = "",
-  team_id = "",
-  sprint = 1,
-  question1 = 0,
-  question2 = 0,
-  question3 = 0,
-  question4 = 0,
-  comment = ""
-) => {
-  const body = {
-    user_id,
-    team_id,
-    sprint,
-    question1,
-    question2,
-    question3,
-    question4,
-    comment,
-  };
-
-  return sendRequest;
+  //* se envía la petición y en "response" se guardara la data.
+  const response = await sendRequest(name, type, endpoint, params, query, body);
+  //! en caso de error se lanza un error con throwError.
+  console.log(response);
+  return response;
 };
 
-microServices.addCommentInDailySurvey = async (
-  user_id = "",
-  team_id = "",
-  comment = ""
-) => {
-  const query = {
-    user_id,
-    team_id,
-    comment,
-  };
-  return sendRequest;
+mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
+  // * Se me pide por post golpear la ruta "/daily_survey/getallTeam" con un body de clase dailySurvey(ver en mongoClass), podes guiarte de las de python también para crear más.
+  const type = "post";
+  const endpoint = "/daily_survey";
+  const params = "";
+  const query = {};
+  // const body = {}; // * lo comento porque voy a usar directo el body que me pasan por parámetro.
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+  // console.log(JSON.stringify(response));
+  return response;
 };
 
-microServices.createRetro = async () => {};
+mongoApi.daily_survey_get = async (team_id) => {
+  // * Se me pide por get golpear la ruta "/daily_survey/getallTeam", con los querys : team_id.
+  const type = "get";
+  const endpoint = "/daily_survey/getallTeam";
+  const params = "";
+  const query = { team_id };
+  const body = {};
 
-//* Services to get data from mongo.
-
-microServices.getAnalytics = async (
-  daily_survey = 0,
-  date = 0,
-  self_satisfaction = 15,
-  survey = 0,
-  user_id = "",
-  sprint = 1,
-  question1 = 5,
-  question2 = 5,
-  question3 = 6,
-  question4 = 6,
-  comment = "good team",
-  team_collaboration = 12,
-  work_engagement = 10,
-  workspace = 8
-) => {
-  const query = {
-    daily_survey,
-    date,
-    self_satisfaction,
-    survey,
-    user_id,
-    sprint,
-    question1,
-    question2,
-    question3,
-    question4,
-    comment,
-    team_collaboration,
-    work_engagement,
-    workspace,
-  };
-  return sendRequest;
+  const response = await sendReq(name, type, endpoint, params, query, body);
+  // console.log(JSON.stringify(response));
+  return response;
 };
 
-microServices.getReports = async (user_id = "text", comment = "text") => {
-  const body = {
-    user_id,
-    comment,
-  };
-  return sendRequest;
-};
-
-microServices.getAnalyticsTimeline = async () => {};
-
-const micro = (daily = new dailySurvey()) => {
-  exampleToEndpoint(daily);
-};
-
-micro(new dailySurvey("1", "2"));
-
-module.exports = microServices;
+module.exports = mongoApi;
