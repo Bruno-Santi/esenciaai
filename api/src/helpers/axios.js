@@ -2,8 +2,8 @@ const axios = require("axios");
 const throwError = require("./customError");
 
 const api = axios.create({
-  // baseURL: "https://ds0zg6rj-8000.brs.devtunnels.ms/",
-  baseURL: "http://localhost:3002/",
+  baseURL: "https://ds0zg6rj-8000.brs.devtunnels.ms/",
+  // baseURL: "http://localhost:3002/",
 });
 
 const sendReq = async (
@@ -35,7 +35,6 @@ const sendReq = async (
         resolve();
       })
       .catch((err) => {
-        console.log("SI");
         reject(err);
       });
   }).catch((err) => {

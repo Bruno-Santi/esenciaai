@@ -18,7 +18,7 @@ mongoApi.example_to_endpoint = async () => {
   const body = { user_id: "23", email: "asd@gmail.com " };
 
   //* se envía la petición y en "response" se guardara la data.
-  const response = await sendRequest(name, type, endpoint, params, query, body);
+  const response = await sendReq(name, type, endpoint, params, query, body);
   //! en caso de error se lanza un error con throwError.
   console.log(response);
   return response;
@@ -47,6 +47,30 @@ mongoApi.daily_survey_get = async (team_id) => {
 
   const response = await sendReq(name, type, endpoint, params, query, body);
   // console.log(JSON.stringify(response));
+  return response;
+};
+
+mongoApi.welcome_get = async () => {
+  const type = "get";
+  const endpoint = "/";
+  const params = "";
+  const query = {};
+  const body = {};
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+  console.log(response);
+  return response;
+};
+
+mongoApi.get_daily_survey = async (team_id) => {
+  const type = "get";
+  const endpoint = "/daily_survey/getAllByTeam";
+  const params = "";
+  const query = { team_id };
+  const body = {};
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+
   return response;
 };
 
