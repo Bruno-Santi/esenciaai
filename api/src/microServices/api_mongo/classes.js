@@ -2,7 +2,7 @@
 
 class DailySurvey {
   constructor(
-    user_id = "",
+    user_id ,
     team_id = "",
     sprint = 0,
     question1 = 0,

@@ -1,4 +1,5 @@
 const { sendReq } = require("../../helpers/axios.js");
+const throwError = require("../../helpers/customError.js");
 const { DailySurvey } = require("./classes.js");
 
 const name = "mongo_api";
@@ -62,38 +63,15 @@ mongoApi.daily_survey_get = async (team_id) => {
 };
 
 mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
-  // * Se me pide por post golpear la ruta "/daily_survey/getallTeam" con un body de clase dailySurvey(ver en mongoClass), podes guiarte de las de python también para crear más.
   const type = "post";
   const endpoint = "/daily_survey";
   const params = "";
   const query = {};
-  // const body = {}; // * lo comento porque voy a usar directo el body que me pasan por parámetro.
+  // const body = {};
 
   const response = await sendReq(name, type, endpoint, params, query, body);
-  // //console.log(JSON.stringify(response));
+
   return response;
 };
-
-// user_id = "",
-// team_id = "",
-// sprint = 0,
-// question1 = 0,
-// question2 = 0,
-// question3 = 0,
-// question4 = 0,
-// comment = ""
-
-const servicesTest = async () => {
-  try {
-    const daily = new DailySurvey("facu", "esencia", 1, 1, 2, 3, 2, "xd");
-    //console.log(daily)
-    const dailyGet = await mongoApi.daily_survey_post(daily);
-    console.log(dailyGet);
-  } catch (error) {
-    console.log("salto")
-    console.log({error: error.message});
-  }
-};
-servicesTest();
 
 module.exports = mongoApi;

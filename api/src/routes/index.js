@@ -13,6 +13,6 @@ router.use("/auth", Auth);
 router.use("/users", checkUserToken, Users);
 router.use("/teams", checkUserToken, Team);
 router.use("/analytics", checkUserToken, Analytics);
-router.use("/survey", checkUserToken, Survey);
+router.use("/survey", Survey);
 
 module.exports = router;

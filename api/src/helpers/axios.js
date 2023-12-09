@@ -2,7 +2,7 @@ const axios = require("axios");
 const throwError = require("./customError");
 
 const api = axios.create({
-  baseURL: "https://ds0zg6rj-8000.brs.devtunnels.ms/",
+  baseURL: "https://us-central1-esencia-app.cloudfunctions.net/",
   // baseURL: "http://localhost:3002/",
 });
 
