@@ -24,19 +24,6 @@ mongoApi.example_to_endpoint = async () => {
   return response;
 };
 
-mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
-  // * Se me pide por post golpear la ruta "/daily_survey/getallTeam" con un body de clase dailySurvey(ver en mongoClass), podes guiarte de las de python también para crear más.
-  const type = "post";
-  const endpoint = "/daily_survey";
-  const params = "";
-  const query = {};
-  // const body = {}; // * lo comento porque voy a usar directo el body que me pasan por parámetro.
-
-  const response = await sendReq(name, type, endpoint, params, query, body);
-  // console.log(JSON.stringify(response));
-  return response;
-};
-
 mongoApi.daily_survey_get = async (team_id) => {
   // * Se me pide por get golpear la ruta "/daily_survey/getallTeam", con los querys : team_id.
   const type = "get";
@@ -62,7 +49,7 @@ mongoApi.welcome_get = async () => {
   return response;
 };
 
-mongoApi.get_daily_survey = async (team_id) => {
+mongoApi.daily_survey_get = async (team_id) => {
   const type = "get";
   const endpoint = "/daily_survey/getAllByTeam";
   const params = "";
@@ -73,5 +60,40 @@ mongoApi.get_daily_survey = async (team_id) => {
 
   return response;
 };
+
+mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
+  // * Se me pide por post golpear la ruta "/daily_survey/getallTeam" con un body de clase dailySurvey(ver en mongoClass), podes guiarte de las de python también para crear más.
+  const type = "post";
+  const endpoint = "/daily_survey";
+  const params = "";
+  const query = {};
+  // const body = {}; // * lo comento porque voy a usar directo el body que me pasan por parámetro.
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+  // //console.log(JSON.stringify(response));
+  return response;
+};
+
+// user_id = "",
+// team_id = "",
+// sprint = 0,
+// question1 = 0,
+// question2 = 0,
+// question3 = 0,
+// question4 = 0,
+// comment = ""
+
+const servicesTest = async () => {
+  try {
+    const daily = new DailySurvey("facu", "esencia", 1, 1, 2, 3, 2, "xd");
+    //console.log(daily)
+    const dailyGet = await mongoApi.daily_survey_post(daily);
+    console.log(dailyGet);
+  } catch (error) {
+    console.log("salto")
+    console.log({error: error.message});
+  }
+};
+servicesTest();
 
 module.exports = mongoApi;
