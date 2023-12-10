@@ -29,7 +29,7 @@ def testing(user_id, team_id):
                   "team_id": team_id,
                   f"daily_survey.{current_date}.survey":{"$elemMatch":{"user_id":user_id}}
                   }))
-      if daily_check is "null":
+      if daily_check == "null":
             return f"ok, {daily_check}"
       else:
             return f"fail, {daily_check}"
@@ -38,13 +38,13 @@ def testing(user_id, team_id):
 @app.post("/daily_survey")
 async def add_daily_survey(survey:dailySurvey):
         current_date = str(date.today())
-        #current_date = "2023-12-07"
+        #current_date = "2023-12-07"  
         try:
             daily_check = json_util.dumps(db["survey_data"].find_one({
                 "team_id": survey.team_id,
                 f"daily_survey.{current_date}.survey":{"$elemMatch":{"user_id":survey.user_id}}
                 }))
-            if daily_check is "null":   
+            if daily_check == "null":   
                 db["survey_data"].update_one(filter={
                 "team_id": survey.team_id
                 }, update={
@@ -104,7 +104,7 @@ async def retro_survey(retro:RetroItem):
                 "$push": {
                     "retro": {
                     "sprint": retro.sprint,
-                    "date": datetime.now(),
+                    "date": (date.today()),
                     "c1": c1_serialized,
                     "c2": c2_serialized,
                     "c3": c3_serialized,
@@ -139,6 +139,14 @@ async def get_retro(team_id):
 async def getall_dash_data(team_id):
         result = json_util.dumps(db["survey_data"].find({"team_id": team_id},{"_id":0}))
         result = json.loads(result)[0]
+        try:
+            retro_count = result["retro_count"]
+        except:
+            retro_count = 0
+        try:
+            report_count = result["reports_count"]
+        except:
+            report_count = 0
         self_satisfaction = []
         work_engagement = []
         team_collaboration = []
@@ -154,8 +162,8 @@ async def getall_dash_data(team_id):
                                 "team_collaboration": int((result["team_collaboration_general"] / result["daily_survey_count"])*10),
                                 "workspace": int((result["workspace_general"] / result["daily_survey_count"])*10)},
                 "data_amounts": {"daily_survey_amount": result["daily_survey_count"],
-                                    "retro_amount": result["retro_count"],
-                                    "report_amount": result["reports_count"]},
+                                    "retro_amount": retro_count,
+                                    "report_amount": report_count},
                 "lines_graph": {
                     "label_x": list(result['daily_survey'].keys()),
                     "self_satisfaction": self_satisfaction,
