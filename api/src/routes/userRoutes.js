@@ -9,11 +9,7 @@ const {
   updateUser,
   userScrumGet,
 } = require("../controllers/userControllers");
-const {
-  checkEmail,
-  checkPhone,
-  checkNickname,
-} = require("../middleware/validate/routes/authValidate");
+const { checkEmail, checkPhone, checkNickname } = require("../middleware/validate/routes/authValidate");
 const { checkUserToken } = require("../middleware/authMiddlewares");
 
 //* it's used:

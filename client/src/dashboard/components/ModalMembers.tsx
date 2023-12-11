@@ -1,7 +1,7 @@
 import { IoMdClose } from "react-icons/io";
 import { Modal } from "../../layaout";
 import { CiCirclePlus } from "react-icons/ci";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MembersTable } from "./MembersTable";
 import { useDashboard } from "../../hooks/useDashboard";
 import { AddMemberModal } from "./AddMemberModal";
@@ -11,7 +11,16 @@ export const ModalMembers: React.FC<{
 }> = ({ closeModal }) => {
   const { membersActiveTeam, activeTeam } = useDashboard();
   const [addMember, setAddMember] = useState(false);
-  const toggleAddMember = () => setAddMember(!addMember);
+  const [forceUpdate, setForceUpdate] = useState(false); // Estado adicional
+
+  const toggleAddMember = () => {
+    setAddMember((prevState) => {
+      console.log("Previous state:", prevState);
+      const newState = !prevState;
+      console.log("New state:", newState);
+      return newState;
+    });
+  };
   return (
     <Modal>
       <div
@@ -31,7 +40,7 @@ export const ModalMembers: React.FC<{
             <CiCirclePlus />
           </i>
         </div>
-        {addMember && <AddMemberModal closeAddMember={toggleAddMember} />}
+        {addMember && <AddMemberModal key={addMember.toString()} closeAddMember={toggleAddMember} />}
         {membersActiveTeam.length ? <MembersTable /> : ""}
       </div>
     </Modal>
