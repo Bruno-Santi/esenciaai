@@ -27,26 +27,25 @@ teamServices.createTeamTest = async (userId, team) => {
   return { team: { id: newTeam.id, name: newTeam.name, logo: newTeam.logo } };
 };
 
-teamServices.viewMembers = async ( teamId) => {
-  //solo invitados
-
+teamServices.viewMembers = async (teamId) => {
+  // Solo invitados
 
   const adminUser = await UserTeam.findAll({
-    where: { teamId, role:"user" },
+    where: { teamId, role: "user" },
     include: [
       {
         model: User,
-        attributes: ["first_name", "last_name", "email"],
+        attributes: ["id", "first_name", "last_name", "email"],
       },
-    ], 
+    ],
   });
 
   return {
     user_list: adminUser.map((item) => {
       const {
-        User: { first_name, last_name, email },
+        User: { id, first_name, last_name, email },
       } = item;
-      return { id: item.id, first_name, last_name, email };
+      return { id, first_name, last_name, email };
     }),
   };
 };
@@ -63,7 +62,7 @@ teamServices.addUserToTeam = async (teamId, user) => {
   } else {
     // Crea un nuevo usuario solo si no existe.
 
-    const getTeam = await Team.findOne({where: { id: teamId }});
+    const getTeam = await Team.findOne({ where: { id: teamId } });
 
     if (!getTeam) {
       return "No se encontró el equipo con el ID proporcionado.";
@@ -107,9 +106,7 @@ teamServices.inviteUserByEmail = async (
   });
 
   if (existScrum) {
-    throw new Error(
-      "Ya existe un SCRUM MASTER para este usuario en este equipo"
-    );
+    throw new Error("Ya existe un SCRUM MASTER para este usuario en este equipo");
   }
 
   const newUser = await User.create({

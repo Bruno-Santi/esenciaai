@@ -8,7 +8,6 @@ export interface User {
   password: string;
 }
 export interface UserTeams {
-  creatorId: number;
   id: number;
   name: string;
   logo?: string;
@@ -18,8 +17,9 @@ export interface DashBoardState {
   user: User[];
   userTeams: UserTeams[];
   activeTeam: UserTeams | null;
+  metricsForToday: string[] | null;
+  linesMetrics: string[] | null;
+  dataAmount: string[] | null;
   isLoading: boolean;
-  membersActiveTeam:
-    | Members
-    | [];
+  membersActiveTeam: Members | [];
 }
