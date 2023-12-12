@@ -67,6 +67,7 @@ mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
   const endpoint = "/daily_survey";
   const params = "";
   const query = {};
+  body.sprint = 0;
   // const body = {};
 
   const response = await sendReq(name, type, endpoint, params, query, body);

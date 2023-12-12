@@ -6,6 +6,23 @@ const { DailySurvey } = require("../microServices/api_mongo/classes");
 
 surveyService = {};
 
+surveyService.sendRequestOfDailySurvey = async (teamId, userId) => {
+  const teamExist = await UserTeam.findOne({
+    where: { teamId, userId },
+  });
+
+  if (!teamExist)
+    throwError(
+      "access_denied",
+      403,
+      "You not belong to this team or your team not exist."
+    );
+
+  const daily = await daily_survey_post(daily_survey);
+
+  if (daily) return "Daily survey created.";
+};
+
 surveyService.createSurvey = async (daily_survey = new DailySurvey()) => {
   const teamExist = await UserTeam.findOne({
     where: { teamId: daily_survey.team_id, userId: daily_survey.user_id },

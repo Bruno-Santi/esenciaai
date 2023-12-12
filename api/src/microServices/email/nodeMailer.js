@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
 });
 
 const generateLink = ({ token, team_id, user_id }) => {
-  return `http://localhost:3000/auth/link?token=${token}&team_id=${team_id}&user_id=${user_id}`;
+  return `http://localhost:3000/auth/link?token=${token}&team_id=${team_id}`;
 };
 
 const sendExternalEmail = async (
