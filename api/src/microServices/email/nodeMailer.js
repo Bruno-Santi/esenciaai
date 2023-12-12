@@ -17,20 +17,11 @@ const transport = nodemailer.createTransport({
 });
 
 const generateLink = ({ token, team_id }) => {
-  return `${process.env.CLIENT_URL}/auth/link?token=${token}&team_id=${team_id}`;
+  return `${process.env.CLIENT_URL}/members/survey?token=${token}&team_id=${team_id}`;
 };
 
-const sendExternalEmail = async (
-  recipientEmail,
-  subject,
-  { token, team_id, first_name, team_name }
-) => {
-  const body = await createBody(
-    "dailySurvey",
-    generateLink({ token, team_id }),
-    first_name,
-    team_name
-  );
+const sendExternalEmail = async (recipientEmail, subject, { token, team_id, first_name, team_name }) => {
+  const body = await createBody("dailySurvey", generateLink({ token, team_id }), first_name, team_name);
 
   return await sendEmail(recipientEmail, subject, body);
 };
@@ -40,7 +31,6 @@ const createBody = async (taskName, link, firsName, team_name) => {
   switch (taskName) {
     case "dailySurvey":
       return (body = getDailySurvey(link, firsName, team_name));
-      break;
 
     case "password_changed":
       // body = await getDocument(taskName);

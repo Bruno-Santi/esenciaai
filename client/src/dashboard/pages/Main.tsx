@@ -5,7 +5,7 @@ import { ActiveTeam, NoTeams } from "../components";
 import { useAuthSlice } from "../../hooks/useAuthSlice";
 
 export const Main = () => {
-  const { startSettingUser, startSettingTeams, membersActiveTeam } = useDashboard();
+  const { startSettingUser, startSettingTeams } = useDashboard();
   const { userTeams } = useAuthSlice();
 
   useEffect(() => {

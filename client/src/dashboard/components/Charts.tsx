@@ -1,16 +1,38 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { useDashboard } from "../../hooks/useDashboard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+// ... (código anterior)
+
 export const Charts = () => {
   const { metricsForToday } = useDashboard();
+  const surveyData = localStorage.getItem("surveyData");
   const [chartData, setChartData] = useState(null);
+  const [hasData, setHasData] = useState(false);
+
+  // Usar un arreglo de referencias para manejar múltiples gráficos
+  const doughnutRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null)]);
+
+  const isEmptyObject = (obj) => {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+  };
 
   useEffect(() => {
-    if (metricsForToday) {
+    const surveyData = localStorage.getItem("surveyData");
+    const parsedData = JSON.parse(surveyData);
+    if (!isEmptyObject(parsedData)) {
+      setHasData(true);
+      setChartData(parsedData);
+    } else {
+      setHasData(false);
+    }
+  }, [surveyData]);
+
+  useEffect(() => {
+    if (surveyData) {
       const todayMetrics = metricsForToday;
       const colors = [
         ["rgba(255, 99, 132, 0.5)", "rgba(255, 255, 255, 0)"],
@@ -72,10 +94,19 @@ export const Charts = () => {
         ],
       };
 
-      setChartData({ dataSelf, dataCollab, dataWork, dataWorkSpace });
+      setChartData({ dataSelf, dataCollab, dataWork, dataWorkSpace, hasData: true });
+    } else {
+      setChartData({ hasData: false });
+      // Destruir instancias de gráficos al desmontar el componente
+      doughnutRefs.current.forEach((ref) => {
+        if (ref.current && ref.current.chartInstance) {
+          ref.current.chartInstance.destroy();
+        }
+      });
     }
   }, [metricsForToday]);
 
+  // ...
   const doughnutOptions = {
     maintainAspectRatio: false,
     responsive: true,
@@ -89,28 +120,25 @@ export const Charts = () => {
       },
     },
   };
-
+  if (metricsForToday.length === 0) {
+    return <p>NO DATA YET, TRY MAKING ACTIONS</p>;
+  }
   return (
     <div className='flex -space-x-28 justify-center'>
-      {Object.keys(metricsForToday).length ? (
-        <>
-          <div className='flex '>
-            <Doughnut data={chartData.dataSelf} options={doughnutOptions} />
-          </div>
-          <div className=''>
-            <Doughnut data={chartData.dataCollab} options={doughnutOptions} />
-          </div>
-
-          <div className=''>
-            <Doughnut data={chartData.dataWork} options={doughnutOptions} />
-          </div>
-          <div className=''>
-            <Doughnut data={chartData.dataWorkSpace} options={doughnutOptions} />
-          </div>
-        </>
-      ) : (
-        <p>NO DATA YET, TRY MAKING ACTIONS</p>
-      )}
+      <>
+        <div className=''>
+          <Doughnut ref={doughnutRefs.current[0]} data={chartData.dataSelf} options={doughnutOptions} />
+        </div>
+        <div className=''>
+          <Doughnut ref={doughnutRefs.current[1]} data={chartData.dataCollab} options={doughnutOptions} />
+        </div>
+        <div className=''>
+          <Doughnut ref={doughnutRefs.current[2]} data={chartData.dataWork} options={doughnutOptions} />
+        </div>
+        <div className=''>
+          <Doughnut ref={doughnutRefs.current[3]} data={chartData.dataWorkSpace} options={doughnutOptions} />
+        </div>
+      </>
     </div>
   );
 };

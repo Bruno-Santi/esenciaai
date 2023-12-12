@@ -83,14 +83,10 @@ export const LineCharts = () => {
       }
     };
   }, [linesMetrics]);
-
+  if (linesMetrics.length === 0) return <p>NO DATA YET, TRY MAKING ACTIONS</p>;
   return (
     <div>
-      {linesMetrics.label_x && linesMetrics.label_x.length > 0 ? (
-        <canvas ref={chartContainer} style={{ marginBottom: "10px", width: "100%", height: "200px" }} />
-      ) : (
-        <p>NO DATA YET, TRY MAKING ACTIONS</p>
-      )}
+      <canvas ref={chartContainer} style={{ marginBottom: "10px", width: "100%", height: "200px" }} />
     </div>
   );
 };

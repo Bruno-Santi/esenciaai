@@ -1,11 +1,8 @@
 import { useQuestions } from "../../hooks";
 import { questions } from "../data/questions";
 
-export const Questions = (teamId, userId) => {
-  const { rangeValues, changesMade, handleChange, handleSubmit } = useQuestions(
-    teamId,
-    userId
-  );
+export const Questions = (team_id, token) => {
+  const { rangeValues, changesMade, handleChange, handleSubmit } = useQuestions(team_id, token);
   return (
     <div className='flex flex-col'>
       <div className='w-4/6 m-auto flex flex-col mt-12 h-fit bg-gray-600 rounded-md'>
