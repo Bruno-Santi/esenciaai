@@ -1,10 +1,10 @@
 import { SurveyLayout } from "../../layaout";
 import { Questions } from "../components/Questions";
 
-export const Survey = ({ teamId, userId }) => {
+export const Survey = ({ team_id, token }) => {
   return (
     <SurveyLayout>
-      <Questions teamId={teamId} userId={userId} />
+      <Questions team_id={team_id} token={token} />
     </SurveyLayout>
   );
 };

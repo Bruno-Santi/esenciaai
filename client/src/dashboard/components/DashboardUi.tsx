@@ -5,7 +5,7 @@ import { DataCollectionReport } from "./DataCollectionReport";
 import { useNavigateTo } from "../../hooks";
 
 export const DashboardUi = () => {
-  const { startCreatingSurvey, starGettingData, activeTeam } = useDashboard();
+  const { startCreatingSurvey, surveyLoading, activeTeam } = useDashboard();
   const { handleNavigate } = useNavigateTo();
   return (
     <div className=' w-full grid px-6 ml-16  py-4 grid-cols-12 grid-rows-2 gap-6'>
@@ -43,8 +43,13 @@ export const DashboardUi = () => {
         <div className='flex flex-col space-y-8 p-2 m-auto'>
           <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Avaible Actions</span>
           <button
+            disabled={surveyLoading}
             onClick={() => startCreatingSurvey(activeTeam.name, activeTeam.id)}
-            className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'
+            className={
+              !surveyLoading
+                ? "btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary"
+                : "btn-secondary font-poppins text-xl rounded-md p-2 duration-700 "
+            }
           >
             Pulse Survey
           </button>

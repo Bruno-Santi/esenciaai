@@ -7,32 +7,10 @@ import { useState, useEffect } from "react";
 const SurveyWrapper = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { teamId, userId } = queryString.parse(location.search);
-  const [team, setTeam] = useState(null);
+  const { token, team_id } = queryString.parse(location.search);
 
-  useEffect(() => {
-    const fetchTeam = async () => {
-      try {
-        const resp = await api.get(`/teams/members/${teamId}`);
-        console.log(resp.data);
-
-        const user = resp.data.user_list.find((user) => user.id === userId);
-
-        if (user) {
-          setTeam(resp.data);
-        } else {
-          navigate("/error");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTeam();
-  }, [teamId, userId, navigate]);
-
-  if (team) {
-    return <Survey teamId={teamId} userId={userId} />;
+  if (token && team_id) {
+    return <Survey team_id={team_id} token={token} />;
   }
 
   return null;

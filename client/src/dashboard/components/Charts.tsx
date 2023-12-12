@@ -5,21 +5,26 @@ import { useDashboard } from "../../hooks/useDashboard";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+// ... (código anterior)
+
 export const Charts = () => {
   const { metricsForToday } = useDashboard();
   const surveyData = localStorage.getItem("surveyData");
   const [chartData, setChartData] = useState(null);
   const [hasData, setHasData] = useState(false);
-  const doughnutRef = useRef(null);
+
+  // Usar un arreglo de referencias para manejar múltiples gráficos
+  const doughnutRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null)]);
+
   const isEmptyObject = (obj) => {
     return Object.keys(obj).length === 0 && obj.constructor === Object;
   };
+
   useEffect(() => {
     const surveyData = localStorage.getItem("surveyData");
     const parsedData = JSON.parse(surveyData);
     if (!isEmptyObject(parsedData)) {
       setHasData(true);
-
       setChartData(parsedData);
     } else {
       setHasData(false);
@@ -90,12 +95,14 @@ export const Charts = () => {
       };
 
       setChartData({ dataSelf, dataCollab, dataWork, dataWorkSpace, hasData: true });
-      console.log(chartData);
     } else {
       setChartData({ hasData: false });
-      if (doughnutRef.current) {
-        return doughnutRef.current.chartInstance.destroy();
-      }
+      // Destruir instancias de gráficos al desmontar el componente
+      doughnutRefs.current.forEach((ref) => {
+        if (ref.current && ref.current.chartInstance) {
+          ref.current.chartInstance.destroy();
+        }
+      });
     }
   }, [metricsForToday]);
 
@@ -113,22 +120,23 @@ export const Charts = () => {
       },
     },
   };
-
-  if (!hasData) return <p>NO DATA YET, TRY MAKING ACTIONS</p>;
+  if (metricsForToday.length === 0) {
+    return <p>NO DATA YET, TRY MAKING ACTIONS</p>;
+  }
   return (
     <div className='flex -space-x-28 justify-center'>
       <>
-        <div className='flex '>
-          <Doughnut ref={doughnutRef} data={chartData.dataSelf} options={doughnutOptions} />
+        <div className=''>
+          <Doughnut ref={doughnutRefs.current[0]} data={chartData.dataSelf} options={doughnutOptions} />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRef} data={chartData.dataCollab} options={doughnutOptions} />
+          <Doughnut ref={doughnutRefs.current[1]} data={chartData.dataCollab} options={doughnutOptions} />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRef} data={chartData.dataWork} options={doughnutOptions} />
+          <Doughnut ref={doughnutRefs.current[2]} data={chartData.dataWork} options={doughnutOptions} />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRef} data={chartData.dataWorkSpace} options={doughnutOptions} />
+          <Doughnut ref={doughnutRefs.current[3]} data={chartData.dataWorkSpace} options={doughnutOptions} />
         </div>
       </>
     </div>
