@@ -3,12 +3,13 @@ const { Sequelize, DataTypes } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 dotenv.config();
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 
 let sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
+  port: DB_PORT,
   dialect: "mysql",
-  logging: false, // *DEUBUG
+  logging: true, // *DEUBUG
 });
 
 const basename = path.basename(__filename);
