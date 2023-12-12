@@ -1,0 +1,28 @@
+const sendExternalEmail = async (
+  recipientEmail,
+  subject,
+  { token = "nada", team_id, first_name }
+) => {
+  const body = await createBody(
+    "dailySurvey",
+    generateLink({ token, team_id }),
+    first_name
+  );
+
+  return await sendEmail(recipientEmail, subject, body);
+};
+
+const createBody = async (taskName, link, firsName) => {
+  let body = "";
+  switch (taskName) {
+    case "dailySurvey":
+      body = ` 
+      `;
+      break;
+
+    case "password_changed":
+      // body = await getDocument(taskName);
+      break;
+  }
+  return body;
+};
