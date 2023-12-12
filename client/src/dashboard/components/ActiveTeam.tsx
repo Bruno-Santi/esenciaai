@@ -1,9 +1,14 @@
 import { useDashboard } from "../../hooks/useDashboard";
 import { RiLightbulbLine } from "react-icons/ri";
 import { DashboardUi } from "./DashboardUi";
+import { useEffect } from "react";
 
 export const ActiveTeam = () => {
-  const { activeTeam, isLoading } = useDashboard();
+  const { activeTeam, startGettingMembers, isLoading } = useDashboard();
+  useEffect(() => {
+    if (activeTeam) startGettingMembers(activeTeam.id);
+  }, []);
+
   return (
     <div className='flex mx-auto justify-center my-auto h-full '>
       {!activeTeam ? (

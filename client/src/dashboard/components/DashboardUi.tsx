@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import { Charts } from "./Charts";
 import { LineCharts } from "./LineCharts";
 import { useDashboard } from "../../hooks/useDashboard";
 import { DataCollectionReport } from "./DataCollectionReport";
+import { useNavigateTo } from "../../hooks";
 
 export const DashboardUi = () => {
   const { startCreatingSurvey, starGettingData, activeTeam } = useDashboard();
-
+  const { handleNavigate } = useNavigateTo();
   return (
     <div className=' w-full grid px-6 ml-16  py-4 grid-cols-12 grid-rows-2 gap-6'>
       <div
@@ -43,12 +43,15 @@ export const DashboardUi = () => {
         <div className='flex flex-col space-y-8 p-2 m-auto'>
           <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Avaible Actions</span>
           <button
-            onClick={() => startCreatingSurvey(activeTeam.name)}
+            onClick={() => startCreatingSurvey(activeTeam.name, activeTeam.id)}
             className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'
           >
             Pulse Survey
           </button>
-          <button className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'>
+          <button
+            onClick={() => handleNavigate("/dashboard/retro")}
+            className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'
+          >
             Retrospectives
           </button>
           <button

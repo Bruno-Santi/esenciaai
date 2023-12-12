@@ -73,10 +73,12 @@ export const useAuthSlice = () => {
   };
 
   const startLogingOut = () => {
+    localStorage.removeItem("isAuthenticated");
     localStorage.removeItem("userId");
     localStorage.removeItem("userLogged");
     localStorage.removeItem("authToken");
     localStorage.removeItem("userTeams");
+    localStorage.removeItem("surveyData");
     dispatch(onLogOut(""));
     dispatch(onLogOutUser());
     handleNavigate("/auth/login");

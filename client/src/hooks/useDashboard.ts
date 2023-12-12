@@ -60,11 +60,23 @@ export const useDashboard = () => {
           })
         );
       }
+      const dataToSave = {
+        metricsForToday: surveyData.pie_chart,
+        linesMetrics: surveyData.lines_graph,
+        dataAmount: surveyData.data_amounts,
+      };
+      localStorage.setItem("surveyData", JSON.stringify(dataToSave));
     } catch (error) {
       console.log(error);
     }
   };
   const startSettingActiveTeam = async (id: number) => {
+    const dataToSave = {
+      metricsForToday: [],
+      linesMetrics: [],
+      dataAmount: [],
+    };
+    localStorage.setItem("surveyData", JSON.stringify(dataToSave));
     dispatch(cleanActiveTeam());
     dispatch(onLoadingTeam());
     starGettingData(id);
@@ -126,20 +138,30 @@ export const useDashboard = () => {
       console.error("Error adding member:", error);
     }
   };
-  const startCreatingSurvey = (teamName: string) => {
-    if (membersActiveTeam.length != 0) {
-      return toastSuccess(`Survey sended to the team: ${teamName}`);
-    }
-    toastWarning(`The team ${teamName} doesnt have any member`);
-  };
-
   const startGettingMembers = async (id) => {
     try {
       const { data } = await api.get(`/teams/members/${id}`);
       console.log(data);
 
       dispatch(onSetActiveTeamMembers({ members: data.user_list }));
+      return data;
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const startCreatingSurvey = async (teamName: string, teamId) => {
+    try {
+      const users = await startGettingMembers(teamId);
+
+      console.log(users);
+
+      const response = await api.post(`/survey/newSurvey?teamId=${teamId}`, users);
+      console.log(response);
+
+      return toastSuccess(`Survey sended to the team: ${teamName}`);
+    } catch (error) {
+      toastWarning(`The team ${teamName} doesnt have any member`);
       console.log(error);
     }
   };
