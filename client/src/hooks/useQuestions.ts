@@ -1,28 +1,28 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useNavigateTo } from ".";
 import { Navigate, useNavigate } from "react-router-dom";
+import api from "../helpers/apiToken";
 
-export const useQuestions = ({ teamId, userId }) => {
-  const data = { teamId, userId };
+export const useQuestions = ({ team_id, token }) => {
   const { handleNavigate } = useNavigateTo();
   const navigate = useNavigate();
   const [isSendend, setIsSendend] = useState(false);
   const [changesMade, setChangesMade] = useState(false);
   const [rangeValues, setRangeValues] = useState([
     {
-      id: "q1",
+      id: "question1",
       value: 5,
     },
     {
-      id: "q2",
+      id: "question2",
       value: 5,
     },
     {
-      id: "q3",
+      id: "question3",
       value: 5,
     },
     {
-      id: "q4",
+      id: "question4",
       value: 5,
     },
   ]);
@@ -30,14 +30,12 @@ export const useQuestions = ({ teamId, userId }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRangeValues((prevValues) => [
-      ...prevValues.map((item) =>
-        item.id === name ? { ...item, value: parseInt(value, 10) } : item
-      ),
+      ...prevValues.map((item) => (item.id === name ? { ...item, value: parseInt(value, 10) } : item)),
     ]);
     setChangesMade(true);
   };
 
-  const handleSubmit = (e: SyntheticEvent) => {
+  const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     if (isSendend) return;
 
@@ -49,17 +47,22 @@ export const useQuestions = ({ teamId, userId }) => {
       };
     }, {});
 
-    const finalBody = {
-      user_id: data.userId,
-      team_id: data.teamId,
+    const dailySurvey = {
+      user_id: token,
+      team_id: team_id,
       sprint: 1,
       comment: "",
       ...requestBody,
     };
-
-    console.log(finalBody);
+    try {
+      const resp = await api.post(`/survey/daily_survey`, { daily_survey: dailySurvey });
+      console.log("todo bien " + resp);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(dailySurvey);
     setIsSendend(true);
-    navigate("/members/comments", { state: { finalBody } });
+    navigate("/members/comments", { state: { dailySurvey } });
   };
 
   return {
