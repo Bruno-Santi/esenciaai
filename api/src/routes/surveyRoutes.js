@@ -7,7 +7,7 @@ const { dailySurveyPost, sendAllMembersPost } = require("../controllers/surveyCo
 
 router.post("/daily_survey", checkUserToken, dailySurveyPost);
 
-router.post("/send_all_members", checkUserToken, sendAllMembersPost);
+router.post("/send_all_members/:team_id", checkUserToken, sendAllMembersPost);
 
 // * token u team_id
 

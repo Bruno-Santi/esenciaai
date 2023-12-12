@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Felicitación de Holidays</title>
+
+    <style>
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #1d1d1d;
+        font-family: "Poppins", sans-serif;
+        color: #ffffff;
+        background-image: url("https://i.postimg.cc/RZ0Wydgy/marissa-grootes-H0-Yxj-Mzc6-ZQ-unsplash-1.png");
+        background-size: cover;
+        background-position: bottom;
+        background-repeat: no-repeat;
+        overflow: hidden;
+      }
+      .container {
+        width: 400px;
+        height: 550px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 20px #1a1423cc;
+        background: #1a1423cc;
+        border-radius: 20px;
+      }
+
+      .container .top {
+        width: 100%;
+        height: 15%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .container .top .img-wrap {
+        width: 30px;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container .top .img-wrap img {
+        display: block;
+        width: 100%;
+      }
+
+      .container .body {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+      }
+
+      .container .body .box {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: #43bdbf; */
+      }
+
+      .container .body .text {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 30%;
+      }
+
+      .container .body .text p {
+        text-align: center;
+        font-size: 16px;
+        line-height: 45px;
+        padding: 0 20px;
+        margin: 0;
+      }
+
+      .container .body .wallpaper {
+        flex-basis: 110px;
+        background-image: url("https://i.postimg.cc/PrKczg2g/Yorizon-Header-survey-2x-800x276.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container .body .submit {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-basis: 10%;
+      }
+      .container .body .submit button {
+        width: 200px;
+        height: 40px;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        background-color: #43bdbf;
+        font-family: "Poppins", sans-serif;
+
+        background: linear-gradient(180deg, #03a63cc9 0%, #1d5f34c9 100%);
+        border-radius: 10px;
+      }
+
+      .container .body .submit button :hover {
+        background: linear-gradient(180deg, #08de53c9 0%, #247f44c9 100%);
+      }
+
+      footer {
+        padding: 10px;
+        font-size: 14px;
+        color: #43bdbf;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="top">
+        <div class="img-wrap">
+          <img
+            src="https://i.postimg.cc/HLtTQZ8j/LOGO-ESENCIA.png"
+            alt="logo"
+            width="100px"
+          />
+        </div>
+        <p>ESENCIA</p></div
+      >
+      <div class="body">
+        <div class="text"
+          ><p>
+            Hello Facundo,<br />
+            The <span style="color: #368f20">Gerios</span> Team has requested
+            you to complete today's Daily Survey. Thanks for your time.
+          </p></div
+        >
+        <div class="wallpaper"></div>
+        <div class="submit">
+          <button>COMPLETE NOW</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -22,8 +22,8 @@ controller.dailySurveyPost = async (req, res) => {
 
 controller.sendAllMembersPost = async (req, res) => {
   try {
-    const { teamId } = req.body;
-    const result = await sendRequestOfDailySurvey(teamId, req.user_id_token);
+    const { team_id } = req.params;
+    const result = await sendRequestOfDailySurvey(team_id, req.user_id_token);
 
     sendResponse(res, 200, result);
   } catch (error) {

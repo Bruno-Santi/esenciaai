@@ -70,8 +70,6 @@ services.userLogin = async (email, password) => {
     throwError("bad_request", 403, "Contraseña incorrecta.");
   }
 
-
-
   // Crear un token con la información del usuario
  return await createUserToken(
     getUser.id,
