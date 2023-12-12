@@ -4,7 +4,7 @@ from pymongo.mongo_client import MongoClient
 from bson import json_util
 from datetime import datetime, date
 from dotenv import load_dotenv
-import os
+import osapi_mongo
 import json
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -21,69 +21,75 @@ client = MongoClient(uri)
 db = client["essenciaIA_app"]
 
 #post methods -----------------------
-@app.post("/daily_survey/alt")
-async def add_daily_survey(survey:dailySurvey):
-        try:
-            db["survey_data"].update_one(filter={
-                "team_id": survey.team_id
-            }, update={
-        "$push": {
-        "daily_survey": {
-          "user_id": survey.user_id,
-          "date": str(date.today()),
-          "sprint": survey.sprint,
-          "question1": survey.question1,
-          "question2": survey.question2,
-          "question3": survey.question3,
-          "question4": survey.question4,
-          "comment": survey.comment
-        }
-      }, 
-      "$inc":{"daily_survey_count": 1, 
-              "self_satisfaction": survey.question1,
-              "work_engagement": survey.question2,
-              "team_collaboration": survey.question3,
-              "workspace": survey.question4},
-      "$set":{"retro_count":0, "reports_count":0}
-    }, upsert=True)
-            return {"status":200}
-        except Exception as e:
-            return {"status":422, "error":e }
+
+@app.get("/test")
+def testing(user_id, team_id):
+      current_date = str(date.today())
+      daily_check = json_util.dumps(db["survey_data"].find_one({
+                  "team_id": team_id,
+                  f"daily_survey.{current_date}.survey":{"$elemMatch":{"user_id":user_id}}
+                  }))
+      if daily_check == "null":
+            return f"ok, {daily_check}"
+      else:
+            return f"fail, {daily_check}"
+      #return json.loads(daily_check)
 
 @app.post("/daily_survey")
 async def add_daily_survey(survey:dailySurvey):
         current_date = str(date.today())
-        #current_date = "2023-12-07"
+        #current_date = "2023-12-07"  
         try:
-            db["survey_data"].update_one(filter={
+            daily_check = json_util.dumps(db["survey_data"].find_one({
+                "team_id": survey.team_id,
+                f"daily_survey.{current_date}.survey":{"$elemMatch":{"user_id":survey.user_id}}
+                }))
+            if daily_check == "null":   
+                db["survey_data"].update_one(filter={
                 "team_id": survey.team_id
-            }, update={
-      "$push":{
-            f"daily_survey.{current_date}.survey": {
-             "user_id": survey.user_id,
-             "sprint": survey.sprint,
-             "question1": survey.question1,
-             "question2": survey.question2,
-             "question3": survey.question3,
-             "question4": survey.question4,
-             "comment": survey.comment}
-              }, 
-      "$inc":{"daily_survey_count": 1, 
-              "self_satisfaction_general": survey.question1,
-              "work_engagement_general": survey.question2,
-              "team_collaboration_general": survey.question3,
-              "workspace_general": survey.question4,
-              f"daily_survey.{current_date}.self_satisfaction": survey.question1,
-              f"daily_survey.{current_date}.work_engagement": survey.question2,
-              f"daily_survey.{current_date}.team_collaboration": survey.question3,
-              f"daily_survey.{current_date}.workspace": survey.question4
-              },
-      "$set":{"retro_count":0, "reports_count":0}
-    }, upsert=True)
-            return {"status":200}
+                }, update={
+                "$push":{
+                f"daily_survey.{current_date}.survey": {
+                "user_id": survey.user_id,
+                "sprint": survey.sprint,
+                "question1": survey.question1,
+                "question2": survey.question2,
+                "question3": survey.question3,
+                "question4": survey.question4,
+                "comment": {"content": survey.comment}}
+                }, 
+                "$inc":{"daily_survey_count": 1, 
+                "self_satisfaction_general": survey.question1,
+                "work_engagement_general": survey.question2,
+                "team_collaboration_general": survey.question3,
+                "workspace_general": survey.question4,
+                f"daily_survey.{current_date}.self_satisfaction": survey.question1,
+                f"daily_survey.{current_date}.work_engagement": survey.question2,
+                f"daily_survey.{current_date}.team_collaboration": survey.question3,
+                f"daily_survey.{current_date}.workspace": survey.question4
+                },
+                "$set":{"retro_count":0, "reports_count":0}
+                }, upsert=True)
+                return {"status":200}
+            else:
+                return {"status":400, "msg": "user already completed the survey"}
         except Exception as e:
             return {"status":422, "error":e }
 
+@app.put("/daily_survey/comment")
+async def add_daily_survey(user_id:str, team_id:str, comment:str = None):
+        try:
+            current_date = str(date.today())
+            db["survey_data"].update_one(filter={
+                "team_id": team_id,
+                f"daily_survey.{current_date}.survey":{"$elemMatch":{"user_id": user_id}}
+            }, update={"$set":{
+                f"daily_survey.{current_date}.survey.$.comment.content": comment
+            }})
+            return {"status":200}
+        except Exception as e:
+            return {"status":422, "error":e }
+            
 
 @app.post("/retro")
 async def retro_survey(retro:RetroItem):
@@ -98,7 +104,7 @@ async def retro_survey(retro:RetroItem):
                 "$push": {
                     "retro": {
                     "sprint": retro.sprint,
-                    "date": datetime.now(),
+                    "date": (date.today()),
                     "c1": c1_serialized,
                     "c2": c2_serialized,
                     "c3": c3_serialized,
@@ -116,7 +122,7 @@ async def retro_survey(retro:RetroItem):
 def welcome():
     return {"status":200, "msg": "welcome to esencia"}
 
-@app.get("/daily_survey/getallTeam")
+@app.get("/daily_survey/getAllByTeam")
 async def get_daily_survey(team_id):
         result = json_util.dumps(db["survey_data"].find({"team_id": team_id},{
             "daily_survey":1,
@@ -131,12 +137,42 @@ async def get_retro(team_id):
 
 @app.get("/dashboard/getall_data")
 async def getall_dash_data(team_id):
-        result = json_util.dumps(db["survey_data"].find({"team_id": team_id},
-                                                        {"daily_survey_count":1,
-                                                         "reports_count":1,
-                                                         "retro_count":1,
-                                                         "daily_survey":1}))
-        return(json.loads(result))
+        result = json_util.dumps(db["survey_data"].find({"team_id": team_id},{"_id":0}))
+        result = json.loads(result)[0]
+        try:
+            retro_count = result["retro_count"]
+        except:
+            retro_count = 0
+        try:
+            report_count = result["reports_count"]
+        except:
+            report_count = 0
+        self_satisfaction = []
+        work_engagement = []
+        team_collaboration = []
+        workspace = []
+        for days in list(result['daily_survey'].keys()):
+            self_satisfaction.append(result['daily_survey'][days]["self_satisfaction"])
+            work_engagement.append(result['daily_survey'][days]["work_engagement"])
+            team_collaboration.append(result['daily_survey'][days]["team_collaboration"])
+            workspace.append(result['daily_survey'][days]["workspace"])
+        dashboard = {
+                "pie_chart": {"self_satisfaction": int((result["self_satisfaction_general"] / result["daily_survey_count"])*10),
+                                "work_engagement":int((result["work_engagement_general"] / result["daily_survey_count"])*10),
+                                "team_collaboration": int((result["team_collaboration_general"] / result["daily_survey_count"])*10),
+                                "workspace": int((result["workspace_general"] / result["daily_survey_count"])*10)},
+                "data_amounts": {"daily_survey_amount": result["daily_survey_count"],
+                                    "retro_amount": retro_count,
+                                    "report_amount": report_count},
+                "lines_graph": {
+                    "label_x": list(result['daily_survey'].keys()),
+                    "self_satisfaction": self_satisfaction,
+                    "work_engagement": work_engagement,
+                    "team_collaboration": team_collaboration,
+                    "workspace": workspace
+                }
+            }
+        return(dashboard)
 
 @app.get("/reports/generate")
 async def get_reports():
@@ -149,7 +185,7 @@ async def get_reports():
 #            "_id":0}))
         
 async def get_dash(team_id):
-        return templates.TemplateResponse("index.html", {"request":{"status":200}})
+        return templates.TemplateResponse("index2.html", {"request":{"status":200}})
 
 
 

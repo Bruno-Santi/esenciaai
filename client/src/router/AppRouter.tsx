@@ -6,11 +6,15 @@ import { useAuthSlice } from "../hooks/useAuthSlice";
 import { OnBoardingRoutes } from "../onboarding/routes/OnBoardingRoutes";
 import { MembersRoutes } from "../members/routes/";
 import ROUTES from "../constants/routes";
+import { useEffect } from "react";
 
 export const AppRouter = () => {
   const { status, firstLog } = useAuthSlice();
   const isAuthenticated = status === "authenticated";
-
+  const { startCheckingUser } = useAuthSlice();
+  useEffect(() => {
+    startCheckingUser();
+  }, []);
   return (
     <div>
       <Routes>

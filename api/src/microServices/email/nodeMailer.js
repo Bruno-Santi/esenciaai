@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const { getDocument } = require("./emailBody");
 const dotenv = require("dotenv");
+const { getDailySurvey } = require("./emailBody/document");
 dotenv.config();
 
 services = {};
@@ -15,38 +16,34 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const generateLink = ({ token, team_id, user_id }) => {
-  return `http://localhost:3000/auth/link?token=${token}&team_id=${team_id}&user_id=${user_id}`;
+const generateLink = ({ token, team_id }) => {
+  return `${process.env.CLIENT_URL}/auth/link?token=${token}&team_id=${team_id}`;
 };
 
 const sendExternalEmail = async (
   recipientEmail,
   subject,
-  { token, team_id, user_id }
+  { token, team_id, first_name, team_name }
 ) => {
   const body = await createBody(
-    "add_user",
-    generateLink({ token, team_id, user_id })
+    "dailySurvey",
+    generateLink({ token, team_id }),
+    first_name,
+    team_name
   );
+
   return await sendEmail(recipientEmail, subject, body);
 };
 
-const createBody = async (taskName, link) => {
+const createBody = async (taskName, link, firsName, team_name) => {
   let body = "";
   switch (taskName) {
-    case "add_user":
-      body = `<div>
-      <p>Tu link de registro es:</p>
-      <p>${link}</p>
-      </div>
-      `;
-      // body = await getDocument(taskName, recipientName);
+    case "dailySurvey":
+      return (body = getDailySurvey(link, firsName, team_name));
       break;
 
     case "password_changed":
-      body = await getDocument(taskName);
-      break;
-    default:
+      // body = await getDocument(taskName);
       break;
   }
   return body;

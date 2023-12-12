@@ -9,17 +9,13 @@ const {
   updateUser,
   userScrumGet,
 } = require("../controllers/userControllers");
-const {
-  checkEmail,
-  checkPhone,
-  checkNickname,
-} = require("../middleware/validate/routes/authValidate");
+const { checkEmail, checkPhone, checkNickname } = require("../middleware/validate/routes/authValidate");
 const { checkUserToken } = require("../middleware/authMiddlewares");
 
 //* it's used:
 
 //* params: {id}
-router.get("/:user_id", usersGet);
+router.get("/", usersGet);
 //! return {user,teamsJoined:["teamId1","teamId2"]}
 
 //? not sure:

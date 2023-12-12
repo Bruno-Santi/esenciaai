@@ -1,16 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
-import { onChecking, onLogOut, onLogin } from "../store/auth/authSlice";
+import { clearErrorMessage, onChecking, onLogOut, onLogin } from "../store/auth/authSlice";
 import "react-toastify/dist/ReactToastify.css";
-import { users } from ".././mocks/data";
+
 import { useNavigateTo } from ".";
 import { useEffect } from "react";
-import { toast } from "react-toastify";
 
-import { onLogOutUser } from "../store/dashboard/dashboardSlice";
+import { onLogOutUser, onSetUser } from "../store/dashboard/dashboardSlice";
+import axios from "axios";
+import api from "../helpers/apiToken";
+
+import { User } from "../store/dashboard/interfaces";
+import { toastSuccess } from "../helpers";
 
 export const useAuthSlice = () => {
-  const { loading, errorMessage, status } = useSelector((state) => state.auth);
-
+  const { loading, errorMessage, status, user } = useSelector((state) => state.auth);
+  const { userTeams } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const { handleNavigate } = useNavigateTo();
 
@@ -18,63 +22,62 @@ export const useAuthSlice = () => {
   if (!firstLog) localStorage.setItem("firstLoggin", "0");
 
   useEffect(() => {}, [loading]);
-
-  const startCheckingUser = (data: string[]) => {
+  const startCheckingUser = async () => {
     dispatch(onChecking());
 
-    setTimeout(() => {
-      const foundUser = users.find(
-        (user) => user.email === data.Email && user.password === data.Password
-      );
-      if (foundUser) {
-        console.log(foundUser);
-        const userObject = {
-          id: foundUser.id,
-          name: foundUser.name,
-          lastName: foundUser.lastName,
-        };
-        console.log(userObject);
+    try {
+      const user = await api.get(`/users`);
+      console.log(user.data.team_list);
+      dispatch(onSetUser(user.data.team_list));
+      dispatch(onLogin(user.data.user));
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem("authToken");
+      dispatch(onLogOut(""));
+    }
+  };
+  const startLoginUser = async (data: User) => {
+    const user = { user: data };
+    console.log(user);
 
-        dispatch(onLogin(userObject));
+    try {
+      const resp = await axios.post(`http://localhost:3000/auth/login`, user);
+      console.log(resp);
 
-        localStorage.setItem("userLogged", JSON.stringify(userObject));
-      } else {
-        dispatch(onLogOut("Invalid Email or Password "));
-      }
-    }, 3000);
+      dispatch(clearErrorMessage());
+      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
+
+      const checkUser = await startCheckingUser();
+      checkUser().then(() => {
+        handleNavigate("/dashboard");
+      });
+    } catch (error) {
+      const { payload } = error.response.data;
+      dispatch(onLogOut(payload));
+    }
   };
 
-  const startRegisteringUser = (data: string[]): void => {
-    dispatch(onChecking());
-    setTimeout(() => {
-      const foundUser = users.find((user) => user.email === data.email);
-      if (foundUser) {
-        dispatch(onLogOut("Email already in use"));
-      } else {
-        toast.success("Successfully registered. Redirecting to login. 👍", {
-          position: "bottom-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+  const startRegisteringUser = async (data: string[]): void => {
+    const user = { user: data };
+    console.log(user);
 
-        setTimeout(() => {
-          dispatch(onLogOut());
-          handleNavigate("/auth/login");
-        }, 3000);
-      }
-    }, 3000);
+    try {
+      const resp = await axios.post(`http://localhost:3000/auth/register`, user);
+      toastSuccess(`Successfully registered. Redirecting to login. 👍`);
+      handleNavigate("/auth/login");
+      console.log(resp);
+    } catch (error) {
+      const { payload } = error.response.data;
+      dispatch(onLogOut(payload));
+    }
   };
 
   const startLogingOut = () => {
     localStorage.removeItem("userId");
     localStorage.removeItem("userLogged");
+    localStorage.removeItem("authToken");
     localStorage.removeItem("userTeams");
-    dispatch(onLogOut());
+    dispatch(onLogOut(""));
     dispatch(onLogOutUser());
     handleNavigate("/auth/login");
   };
@@ -86,5 +89,8 @@ export const useAuthSlice = () => {
     startRegisteringUser,
     startLogingOut,
     firstLog,
+    startLoginUser,
+    userTeams,
+    user,
   };
 };

@@ -1,8 +1,4 @@
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
 import {
   onLoadingTeam,
   onSetUserTeams,
@@ -11,238 +7,160 @@ import {
   onSetUser,
   onSetActiveTeamMembers,
   cleanActiveTeam,
+  onSaveMetricsForToday,
 } from "../store/dashboard/dashboardSlice";
-import {
-  Members,
-  TeamMembers,
-  teams,
-} from "../mocks";
 import { UserTeams } from "../store/dashboard/interfaces";
-import { useEffect } from "react";
 import { useModal } from ".";
-import { teamLogo } from "../assets";
+import { useEffect, useState } from "react";
+import api from "../helpers/apiToken";
+import { getTeamData } from "../helpers/getTeamData";
 
-export const useDashboard =
-  () => {
-    const dispatch =
-      useDispatch();
-    const { user } =
-      useSelector(
-        (state) =>
-          state.auth
-      );
-    const {
-      userTeams,
-      activeTeam,
-      membersActiveTeam,
-    } = useSelector(
-      (state) =>
-        state.dashboard
-    );
-    const {
-      closeModal,
-    } = useModal();
-    const startSettingUser =
-      () => {
+import { toastSuccess, toastWarning } from "../helpers";
+
+export const useDashboard = () => {
+  const dispatch = useDispatch();
+  const { closeModal } = useModal();
+  const [loading, setLoading] = useState(true);
+  const { user } = useSelector(({ auth }) => auth);
+  const { userTeams, activeTeam, membersActiveTeam, metricsForToday, linesMetrics, dataAmount, isLoading } =
+    useSelector(({ dashboard }) => dashboard);
+
+  const startSettingUser = () => {
+    dispatch(onSetUser(user));
+  };
+
+  const startSettingTeams = async () => {
+    const { data } = await api.get(`/users`);
+    const { team_list } = data;
+    console.log(team_list);
+
+    dispatch(onSetUserTeams({ userTeams: team_list }));
+    setLoading(false);
+  };
+
+  const starGettingData = async (id) => {
+    try {
+      const surveyData = await getTeamData(id);
+      console.log(surveyData);
+
+      if (surveyData.error) {
         dispatch(
-          onSetUser(
-            user
-          )
-        );
-      };
-    // const startLoadingTeams = () => {
-    //   const localTeams = localStorage.getItem("userTeams");
-    //   if (localTeams) {
-    //     dispatch(onSetUserTeams({ userTeams: localTeams }));
-    //   } else {
-    //     const filteredUserTeams = teams.filter((team) => team.creatorId == user.id);
-    //     dispatch(onSetUserTeams({ userTeams: filteredUserTeams }));
-    //   }
-    // };
-    useEffect(() => {
-      const localTeams =
-        localStorage.getItem(
-          "userTeams"
-        );
-      const filteredUserTeams =
-        teams.filter(
-          (team) =>
-            team.creatorId ==
-            user.id
-        );
-
-      if (
-        localTeams
-      ) {
-        const parsedLocalTeams =
-          JSON.parse(
-            localTeams
-          );
-
-        const uniqueLocalTeams =
-          parsedLocalTeams.filter(
-            (
-              localTeam
-            ) =>
-              !filteredUserTeams.some(
-                (
-                  filteredTeam
-                ) =>
-                  filteredTeam.id ===
-                  localTeam.id
-              )
-          );
-
-        const mergedTeams =
-          [
-            ...uniqueLocalTeams,
-            ...filteredUserTeams,
-          ];
-
-        dispatch(
-          onSetUserTeams(
-            {
-              userTeams:
-                mergedTeams,
-            }
-          )
+          onSaveMetricsForToday({
+            metricsForToday: [],
+            linesMetrics: [],
+            dataAmount: [],
+          })
         );
       } else {
         dispatch(
-          onSetUserTeams(
-            {
-              userTeams:
-                filteredUserTeams,
-            }
-          )
+          onSaveMetricsForToday({
+            metricsForToday: surveyData.pie_chart,
+            linesMetrics: surveyData.lines_graph,
+            dataAmount: surveyData.data_amounts,
+          })
         );
       }
-      if (
-        !localTeams
-      ) {
-        localStorage.setItem(
-          "userTeams",
-          JSON.stringify(
-            filteredUserTeams
-          )
-        );
-        dispatch(
-          onSetUserTeams(
-            {
-              userTeams:
-                filteredUserTeams,
-            }
-          )
-        );
-      }
-    }, [user]);
-
-    const startSettingActiveTeam =
-      (
-        id: number
-      ) => {
-        dispatch(
-          cleanActiveTeam()
-        );
-        dispatch(
-          onLoadingTeam()
-        );
-
-        dispatch(
-          onSetActiveTeam(
-            {
-              id: id,
-            }
-          )
-        );
-      };
-
-    const startCreatingTeam =
-      (
-        team: UserTeams
-      ) => {
-        const newTeam =
-          {
-            ...team,
-            creatorId:
-              user.id,
-            id: Math.random(),
-            logo:
-              team.logo ||
-              teamLogo,
-          };
-        dispatch(
-          onCreateTeam(
-            {
-              newTeam,
-            }
-          )
-        );
-
-        const updatedUserTeams =
-          userTeams
-            ? [
-                ...userTeams,
-                newTeam,
-              ]
-            : [
-                newTeam,
-              ];
-        console.log(
-          updatedUserTeams
-        );
-
-        localStorage.setItem(
-          "userTeams",
-          JSON.stringify(
-            updatedUserTeams
-          )
-        );
-        dispatch(
-          onSetUserTeams(
-            {
-              userTeams:
-                updatedUserTeams,
-            }
-          )
-        );
-        closeModal();
-      };
-
-    const startSettingActiveMembers =
-      (id) => {
-        console.log(
-          id
-        );
-
-        const membersById: Members[] =
-          TeamMembers.filter(
-            (
-              member
-            ) =>
-              member.teamId ===
-              id
-          );
-        dispatch(
-          onSetActiveTeamMembers(
-            {
-              members:
-                membersById,
-            }
-          )
-        );
-        console.log(
-          membersById
-        );
-      };
-    return {
-      startSettingActiveTeam,
-      startCreatingTeam,
-      userTeams,
-      activeTeam,
-      user,
-      startSettingUser,
-      startSettingActiveMembers,
-      membersActiveTeam,
-    };
+    } catch (error) {
+      console.log(error);
+    }
   };
+  const startSettingActiveTeam = async (id: number) => {
+    dispatch(cleanActiveTeam());
+    dispatch(onLoadingTeam());
+    starGettingData(id);
+    console.log(id);
+
+    dispatch(
+      onSetActiveTeam({
+        id: id,
+      })
+    );
+  };
+
+  const startCreatingTeam = async (newTeam: UserTeams) => {
+    const team = { team: newTeam };
+    team.logo =
+      newTeam.logo ||
+      "https://res.cloudinary.com/di92lsbym/image/upload/c_thumb,w_200,g_face/v1701895638/team-logo_2_fq5yev.png";
+
+    try {
+      const resp = await api.post("/teams/", team);
+    } catch (error) {
+      console.log(error);
+    }
+    dispatch(
+      onCreateTeam({
+        newTeam,
+      })
+    );
+
+    const updatedUserTeams = userTeams ? [...userTeams, newTeam] : [newTeam];
+
+    localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
+    dispatch(
+      onSetUserTeams({
+        userTeams: updatedUserTeams,
+      })
+    );
+    closeModal();
+  };
+  const startAddingMember = async (userData, teamId) => {
+    console.log(userData, teamId);
+
+    try {
+      const formData = {
+        team_id: teamId,
+        user: {
+          first_name: userData.first_name,
+          last_name: userData.last_name || "",
+          email: userData.email,
+        },
+      };
+
+      const response = await api.post(`/teams/members/`, formData);
+      startGettingMembers(teamId);
+      console.log(formData);
+
+      console.log(response.data);
+    } catch (error) {
+      console.error("Error adding member:", error);
+    }
+  };
+  const startCreatingSurvey = (teamName: string) => {
+    if (membersActiveTeam.length != 0) {
+      return toastSuccess(`Survey sended to the team: ${teamName}`);
+    }
+    toastWarning(`The team ${teamName} doesnt have any member`);
+  };
+
+  const startGettingMembers = async (id) => {
+    try {
+      const { data } = await api.get(`/teams/members/${id}`);
+      console.log(data);
+
+      dispatch(onSetActiveTeamMembers({ members: data.user_list }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return {
+    startSettingActiveTeam,
+    starGettingData,
+    startGettingMembers,
+    startCreatingTeam,
+    userTeams,
+    activeTeam,
+    linesMetrics,
+    dataAmount,
+    user,
+    isLoading,
+    startSettingUser,
+    startAddingMember,
+    membersActiveTeam,
+    startSettingTeams,
+    loading,
+    metricsForToday,
+    startCreatingSurvey,
+  };
+};

@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { Modal } from "../../layaout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+import { useSelector } from "react-redux";
+import { useDashboard } from "../../hooks/useDashboard";
 
 export const AddMemberModal: React.FC<{
   closeAddMember(): void;
@@ -11,8 +14,20 @@ export const AddMemberModal: React.FC<{
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { activeTeam, startAddingMember, membersActiveTeam } = useDashboard();
+  const [forceRender, setForceRender] = useState(false);
+  const [modalKey, setModalKey] = useState(Date.now()); // Estado para manejar el key del modal
+  useEffect(() => {
+    setForceRender((prev) => !prev); // Invierte el valor actual para forzar un nuevo renderizado
+  }, [membersActiveTeam]);
+
   const onSubmit = (data) => {
-    toast.success(`${data.name} added to the team`, {
+    // Puedes acceder a activeTeam.id aquí
+    setModalKey(Date.now());
+    const teamId = activeTeam.id;
+    startAddingMember(data, teamId);
+    // Resto de tu lógica de onSubmit
+    toast.success(`${data.first_name} added to the team `, {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -22,11 +37,12 @@ export const AddMemberModal: React.FC<{
       progress: undefined,
       theme: "dark",
     });
+
     closeAddMember();
   };
 
   return (
-    <Modal>
+    <Modal key={modalKey}>
       <form className='flex flex-col w-4/6 mx-auto font-poppins text-xl'>
         <div className='my-6 flex flex-col mx-auto'>
           <label htmlFor='name'>Name</label>
@@ -35,7 +51,7 @@ export const AddMemberModal: React.FC<{
             className='h-12 w-64 rounded-md p-2 text-sm font-normal  border-2 duration-500 text-primary focus:outline-none focus:border-2 focus:border-secondary/80 focus:font-bold'
             type='text'
             placeholder='Name'
-            {...register("name", {
+            {...register("first_name", {
               required: true,
               maxLength: 20,
             })}

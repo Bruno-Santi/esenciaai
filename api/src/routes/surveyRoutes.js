@@ -1,13 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const { checkUserToken } = require("../middleware/authMiddlewares");
+const { dailySurveyPost, sendAllMembersPost } = require("../controllers/surveyController");
 
-// //? body:{teamId,sprint,answers:[r1:2,r2:10]};
 // router.post("/retro", checkUserToken, () => {});
-// //! return ok;
 
-// //? body:{teamId};
-// router.post("/daily", checkUserToken, () => {});
-// //! return ok;
+router.post("/daily_survey", checkUserToken, dailySurveyPost);
+
+router.post("/send_all_members/:team_id", checkUserToken, sendAllMembersPost);
+
+// * token u team_id
 
 module.exports = router;

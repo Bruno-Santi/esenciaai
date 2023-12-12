@@ -20,27 +20,39 @@ userService.createUser = async (user) => {
     if (userExists) throwError("missing", 400, "El usuario ya existe.");
     const newUser = await User.create(user);
 
-     return "User created successfully.";
+    return "User created successfully.";
   } catch (error) {
     throw error;
   }
 };
 
 userService.getUserAndTheirTeams = async (userId) => {
+  //logo, name, id
   const userExists = await User.findByPk(userId);
-  if (!userExists) throw new Error("no existe este scrum por ID");
+  if (!userExists) throw new Error("No existe este scrum por ID");
 
   const { id, first_name, last_name, email } = userExists;
 
   const getTeamList = await UserTeam.findAll({
     where: { userId },
     attributes: ["teamId"],
+    include: [
+      {
+        model: Team,
+        attributes: ["id", "name", "logo"]
+      }
+    ]
   });
 
-  const team_list = getTeamList.map((item) => item.teamId);
+  const team_list = getTeamList.map((item) => ({
+    id: item.Team.id,
+    name: item.Team.name,
+    logo: item.Team.logo
+  }));
 
   return { user: { id, first_name, last_name, email }, team_list };
 };
+
 
 userService.inviteUser = async () => {};
 
