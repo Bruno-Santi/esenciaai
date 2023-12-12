@@ -28,14 +28,14 @@ teamServices.createTeamTest = async (userId, team) => {
 };
 
 teamServices.viewMembers = async (teamId) => {
-  //solo invitados
+
 
   const adminUser = await UserTeam.findAll({
     where: { teamId, role: "user" },
     include: [
       {
         model: User,
-        attributes: ["first_name", "last_name", "email"],
+        attributes: ["id", "first_name", "last_name", "email"],
       },
     ],
   });
@@ -43,9 +43,9 @@ teamServices.viewMembers = async (teamId) => {
   return {
     user_list: adminUser.map((item) => {
       const {
-        User: { first_name, last_name, email },
+        User: { id, first_name, last_name, email },
       } = item;
-      return { id: item.id, first_name, last_name, email };
+      return { id, first_name, last_name, email };
     }),
   };
 };
@@ -106,9 +106,7 @@ teamServices.inviteUserByEmail = async (
   });
 
   if (existScrum) {
-    throw new Error(
-      "Ya existe un SCRUM MASTER para este usuario en este equipo"
-    );
+    throw new Error("Ya existe un SCRUM MASTER para este usuario en este equipo");
   }
 
   const newUser = await User.create({

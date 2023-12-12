@@ -10,7 +10,7 @@ class dailySurvey(BaseModel):
     question2: int = 0
     question3: int = 0
     question4: int = 0
-    comment: str
+    comment: str = "string"
 
 class Comment(BaseModel):
     note: str
