@@ -13,7 +13,8 @@ export const LoginForm = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data): void => {
-    startLoginUser(data);
+    const {email, password} = data
+    startLoginUser({email, password});
   };
 
   return (
