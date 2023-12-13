@@ -12,7 +12,7 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data): void => {
+  const onSubmit = (data) => {
     const {email, password} = data
     startLoginUser({email, password});
   };
