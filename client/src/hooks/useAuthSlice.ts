@@ -49,6 +49,7 @@ const startLoginUser = async ({ email, password }: { email: string; password: st
     localStorage.setItem("authToken", JSON.stringify(resp.data.token));
 
     await startCheckingUser();
+    localStorage.setItem("isAuthenticated", true)
     handleNavigate("/dashboard");
   } catch (error) {
     console.error(error);
