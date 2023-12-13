@@ -59,12 +59,12 @@ export const useAuthSlice = () => {
     }
   };
 
-  const startRegisteringUser = async (data: string[]) => {
-    const user = { user: data };
+  const startRegisteringUser = async ({first_name, email, password}) => {
+    
     console.log(user);
 
     try {
-      const resp = await axios.post(`/auth/register`, {user: {data.first_name, data.email, data.password}});
+      const resp = await axios.post(`/auth/register`, {user: {first_name, email, password}});
       toastSuccess(`Successfully registered. Redirecting to login. 👍`);
       handleNavigate("/auth/login");
       console.log(resp);
