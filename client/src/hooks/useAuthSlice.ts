@@ -42,7 +42,7 @@ export const useAuthSlice = () => {
     console.log(user);
 
     try {
-      const resp = await axios.post(`http://localhost:3000/auth/login`, { user: { email, password } });
+      const resp = await axios.post(`/auth/login`, { user: { email, password } });
       console.log(resp);
 
       dispatch(clearErrorMessage());
@@ -64,7 +64,7 @@ export const useAuthSlice = () => {
     console.log(user);
 
     try {
-      const resp = await axios.post(`http://localhost:3000/auth/register`, user);
+      const resp = await axios.post(`/auth/register`, {user: {data.first_name, data.email, data.password}});
       toastSuccess(`Successfully registered. Redirecting to login. 👍`);
       handleNavigate("/auth/login");
       console.log(resp);
