@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LandingPage } from "../components";
 import { AuthRoutes } from "../auth/routes/AuthRoutes";
@@ -6,26 +5,22 @@ import { DashboardRoutes } from "../dashboard/routes/DashboardRoutes";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { OnBoardingRoutes } from "../onboarding/routes/OnBoardingRoutes";
 import { MembersRoutes } from "../members/routes/";
+import { useEffect } from "react";
 
 export const AppRouter = () => {
-  const { status, firstLog, startCheckingUser } = useAuthSlice();
-
+  const { status, firstLog } = useAuthSlice();
+  const isAuthenticated = status === "authenticated";
+  const { startCheckingUser } = useAuthSlice();
   useEffect(() => {
     startCheckingUser();
-  }, [startCheckingUser]);
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      localStorage.setItem("isAuthenticated", true);
-    }
-  }, [status]);
-
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
+    if (status === "authenticated") localStorage.setItem("isAuthenticated", 'true');
+  }, []);
+  const isAuthenticated1 = localStorage.getItem("isAuthenticated");
 
   return (
     <div>
       <Routes>
-        {isAuthenticated ? (
+        {isAuthenticated1 ? (
           <>
             {/* Rutas para usuarios autenticados */}
             <Route element={<LandingPage />} path={"/"} />
@@ -51,4 +46,3 @@ export const AppRouter = () => {
     </div>
   );
 };
-
