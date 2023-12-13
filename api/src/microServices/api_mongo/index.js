@@ -26,9 +26,8 @@ mongoApi.example_to_endpoint = async () => {
 };
 
 mongoApi.daily_survey_get = async (team_id) => {
-  // * Se me pide por get golpear la ruta "/daily_survey/getallTeam", con los querys : team_id.
   const type = "get";
-  const endpoint = "/daily_survey/getallTeam";
+  const endpoint = "/daily_survey_get_all_by_team";
   const params = "";
   const query = { team_id };
   const body = {};
@@ -37,6 +36,7 @@ mongoApi.daily_survey_get = async (team_id) => {
   // console.log(JSON.stringify(response));
   return response;
 };
+
 
 mongoApi.welcome_get = async () => {
   const type = "get";
@@ -47,18 +47,6 @@ mongoApi.welcome_get = async () => {
 
   const response = await sendReq(name, type, endpoint, params, query, body);
   console.log(response);
-  return response;
-};
-
-mongoApi.daily_survey_get = async (team_id) => {
-  const type = "get";
-  const endpoint = "/daily_survey/getAllByTeam";
-  const params = "";
-  const query = { team_id };
-  const body = {};
-
-  const response = await sendReq(name, type, endpoint, params, query, body);
-
   return response;
 };
 

@@ -5,6 +5,7 @@ compiler.sendResponse = (res, status, result) => {
 };
 
 compiler.sendError = (res, error) => {
+  console.error({ details: error.stack });
   return res.status(error.status || 404).json({
     type: error.type || "unknown",
     payload: error.payload || error.message

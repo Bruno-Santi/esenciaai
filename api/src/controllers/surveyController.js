@@ -1,13 +1,24 @@
-
 const { sendError, sendResponse } = require("../helpers/managerController");
 const { daily_survey_post } = require("../microServices/api_mongo");
 const { DailySurvey } = require("../microServices/api_mongo/classes");
 const {
   createSurvey,
   sendRequestOfDailySurvey,
+  getSurveyByTeam,
 } = require("../services/surveyServices");
 
 const controller = {};
+
+controller.surveyGet = async (req, res) => {
+  try {
+    const { team_id } = req.query;
+    const result = await getSurveyByTeam(team_id, req.user_id_token);
+    
+    sendResponse(res, 200, result);
+  } catch (error) {
+    sendError(res, error);
+  }
+};
 
 controller.dailySurveyPost = async (req, res) => {
   try {
