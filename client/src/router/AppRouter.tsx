@@ -20,7 +20,7 @@ export const AppRouter = () => {
   return (
     <div>
       <Routes>
-        {isAuthenticated1 ? (
+        {isAuthenticated ? (
           <>
             {/* Rutas para usuarios autenticados */}
             <Route element={<LandingPage />} path={"/"} />
