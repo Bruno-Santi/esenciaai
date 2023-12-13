@@ -2,28 +2,23 @@ import { useForm } from "react-hook-form";
 import { Divider } from "./";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { useNavigateTo } from "../hooks";
+import { renderErrorMessage } from "../helpers/renderErrorMessage";
 
 export const LoginForm = () => {
-  const { startCheckingUser, startLoginUser, loading, errorMessage } =
-    useAuthSlice();
+  const { startLoginUser, loading, errorMessage } = useAuthSlice();
   const { handleNavigate } = useNavigateTo();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data: string[]): void => {
+  const onSubmit = (data): void => {
     startLoginUser(data);
-    console.log(data);
   };
 
-  console.log(errors);
   return (
     <>
-      <form
-        className='flex flex-col space-y-6 pt-6'
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className='flex flex-col space-y-6 pt-6' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex flex-col'>
           <label className=' text-tertiary text-lg font-normal' htmlFor='email'>
             Email
@@ -39,16 +34,11 @@ export const LoginForm = () => {
             })}
           />
           {errors.Email && (
-            <span className='text-lg m-auto text-red-500 font-normal'>
-              {errors.Email.message}
-            </span>
-          )}
+            <span className='text-lg m-auto text-red-500 font-normal'>{renderErrorMessage(errors.Email)}</span>
+          )}{" "}
         </div>
         <div className='flex flex-col'>
-          <label
-            className=' text-tertiary text-lg font-normal'
-            htmlFor='password'
-          >
+          <label className=' text-tertiary text-lg font-normal' htmlFor='password'>
             Password
           </label>
           <input
@@ -64,9 +54,7 @@ export const LoginForm = () => {
             })}
           />
           {errors.Password && (
-            <span className='text-lg m-auto text-red-500 font-normal'>
-              {errors.Password.message}
-            </span>
+            <span className='text-lg m-auto text-red-500 font-normal'>{renderErrorMessage(errors.Password)}</span>
           )}
         </div>
         <button
@@ -80,9 +68,7 @@ export const LoginForm = () => {
         >
           Log In
         </button>
-        {errorMessage && (
-          <p className='font-poppins text-red-500 m-auto'>{errorMessage}</p>
-        )}
+        {errorMessage && <p className='font-poppins text-red-500 m-auto'>{errorMessage}</p>}
       </form>
       <span className='text-tertiary font-normal mt-6 font-poppins cursor-pointer text-lg m-auto  duration-500 hover:text-secondary '>
         Forgot password?

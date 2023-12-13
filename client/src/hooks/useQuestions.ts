@@ -4,7 +4,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import api from "../helpers/apiToken";
 
 export const useQuestions = ({ team_id, token }) => {
-  const { handleNavigate } = useNavigateTo();
   const navigate = useNavigate();
   const [isSendend, setIsSendend] = useState(false);
   const [changesMade, setChangesMade] = useState(false);

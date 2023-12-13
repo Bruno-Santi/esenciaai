@@ -1,16 +1,13 @@
-import { Members } from "../../mocks";
-
 export interface User {
-  id: number;
-  name: string;
-  lastName: string;
+  id?: string;
+  first_name: string;
   email: string;
   password: string;
 }
 export interface UserTeams {
-  id: number;
+  id: string;
   name: string;
-  logo?: string;
+  logo: string;
 }
 
 export interface DashBoardState {
@@ -21,5 +18,6 @@ export interface DashBoardState {
   linesMetrics: string[] | null;
   dataAmount: string[] | null;
   isLoading: boolean;
+  //@ts-expect-error 'fafaf'
   membersActiveTeam: Members | [];
 }

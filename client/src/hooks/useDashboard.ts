@@ -81,6 +81,7 @@ export const useDashboard = () => {
     localStorage.setItem("surveyData", JSON.stringify(dataToSave));
     dispatch(cleanActiveTeam());
     dispatch(onLoadingTeam());
+    //@ts-expect-error 'efefe'
     starGettingData(id);
     console.log(id);
 
@@ -93,12 +94,14 @@ export const useDashboard = () => {
 
   const startCreatingTeam = async (newTeam: UserTeams) => {
     const team = { team: newTeam };
+    //@ts-expect-error 'efefe'
     team.logo =
       newTeam.logo ||
       "https://res.cloudinary.com/di92lsbym/image/upload/c_thumb,w_200,g_face/v1701895638/team-logo_2_fq5yev.png";
 
     try {
       const resp = await api.post("/teams/", team);
+      return resp;
     } catch (error) {
       console.log(error);
     }

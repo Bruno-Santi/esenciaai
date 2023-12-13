@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { DashBoardState } from ".";
 import { UserTeams } from "./interfaces";
-import { Members } from "../../mocks";
 
 const initialState: DashBoardState = {
   user: [],

@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { Divider } from ".";
 import { useNavigateTo } from "../hooks";
 import { useAuthSlice } from "../hooks/useAuthSlice";
+import { renderErrorMessage } from "../helpers/renderErrorMessage";
 
 export const RegisterForm = () => {
   const { loading, startRegisteringUser, errorMessage } = useAuthSlice();
@@ -16,10 +17,7 @@ export const RegisterForm = () => {
 
   return (
     <section>
-      <form
-        className='flex flex-col space-y-2 pt-4 w-[250px]'
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className='flex flex-col space-y-2 pt-4 w-[250px]' onSubmit={handleSubmit(onSubmit)}>
         <label className=' text-tertiary text-lg font-normal' htmlFor='name'>
           Name (*)
         </label>
@@ -32,11 +30,7 @@ export const RegisterForm = () => {
             maxLength: 20,
           })}
         />
-        {errors.name && (
-          <p className='  w-fit text-red-500 font-poppins m-auto'>
-            {errors.name.message}
-          </p>
-        )}
+        {errors.name && <p className='w-fit text-red-500 font-poppins m-auto'>{renderErrorMessage(errors.name)}</p>}
 
         <label className=' text-tertiary text-lg font-normal' htmlFor='email'>
           Email (*)
@@ -51,15 +45,8 @@ export const RegisterForm = () => {
             pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/i,
           })}
         />
-        {errors.email && (
-          <p className=' w-fit text-red-500 font-poppins m-auto'>
-            {errors.email.message}
-          </p>
-        )}
-        <label
-          className=' text-tertiary text-lg font-normal'
-          htmlFor='password'
-        >
+        {errors.email && <p className='w-fit text-red-500 font-poppins m-auto'>{renderErrorMessage(errors.email)}</p>}
+        <label className=' text-tertiary text-lg font-normal' htmlFor='password'>
           Password (*)
         </label>
         <input
@@ -75,9 +62,7 @@ export const RegisterForm = () => {
           })}
         />
         {errors.password && (
-          <p className='w-fit text-red-500 font-poppins m-auto'>
-            {errors.password.message}
-          </p>
+          <p className='w-fit text-red-500 font-poppins m-auto'>{renderErrorMessage(errors.password)}</p>
         )}
 
         <button
@@ -91,9 +76,7 @@ export const RegisterForm = () => {
         >
           Register
         </button>
-        {errorMessage && (
-          <p className='font-poppins text-red-500 m-auto'>{errorMessage}</p>
-        )}
+        {errorMessage && <p className='font-poppins text-red-500 m-auto'>{errorMessage}</p>}
       </form>
       <div className='m-auto flex flex-col'>
         <div className='mt-6'>

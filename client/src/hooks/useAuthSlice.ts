@@ -9,11 +9,13 @@ import { onLogOutUser, onSetUser } from "../store/dashboard/dashboardSlice";
 import axios from "axios";
 import api from "../helpers/apiToken";
 
-import { User } from "../store/dashboard/interfaces";
 import { toastSuccess } from "../helpers";
+import { AuthState } from "../store/auth/interfaces";
 
 export const useAuthSlice = () => {
+  //@ts-expect-error 'efefe'
   const { loading, errorMessage, status, user } = useSelector((state) => state.auth);
+  //@ts-expect-error 'efefe'
   const { userTeams } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
   const { handleNavigate } = useNavigateTo();
@@ -36,18 +38,18 @@ export const useAuthSlice = () => {
       dispatch(onLogOut(""));
     }
   };
-  const startLoginUser = async (data: User) => {
-    const user = { user: data };
+  const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
     console.log(user);
 
     try {
-      const resp = await axios.post(`http://localhost:3000/auth/login`, user);
+      const resp = await axios.post(`http://localhost:3000/auth/login`, { user: { email, password } });
       console.log(resp);
 
       dispatch(clearErrorMessage());
       localStorage.setItem("authToken", JSON.stringify(resp.data.token));
 
       const checkUser = await startCheckingUser();
+      //@ts-expect-error 'efefe'
       checkUser().then(() => {
         handleNavigate("/dashboard");
       });
@@ -57,7 +59,7 @@ export const useAuthSlice = () => {
     }
   };
 
-  const startRegisteringUser = async (data: string[]): void => {
+  const startRegisteringUser = async (data: string[]) => {
     const user = { user: data };
     console.log(user);
 

@@ -2,6 +2,7 @@ import { useQuestions } from "../../hooks";
 import { questions } from "../data/questions";
 
 export const Questions = (team_id, token) => {
+  //@ts-expect-error 'efefe'
   const { rangeValues, changesMade, handleChange, handleSubmit } = useQuestions(team_id, token);
   return (
     <div className='flex flex-col'>

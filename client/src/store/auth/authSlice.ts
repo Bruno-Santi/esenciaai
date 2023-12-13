@@ -1,56 +1,60 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "../dashboard";
+import { AuthState } from "./interfaces";
+
+// Definición de la interfaz AuthState
+
+// UserType debería ser reemplazado con el tipo real de tu usuario si es necesario
+
+// Obtén el usuario del almacenamiento local
 const userLogged = localStorage.getItem("userLogged");
-const initialState = {
+
+// Estado inicial basado en la interfaz AuthState
+const initialState: AuthState = {
   status: userLogged ? "authenticated" : "non-authenticated",
-  user: userLogged ? JSON.parse(userLogged) : {},
-  errorMessage: undefined,
-  errorRegisterMessage: undefined,
+  user: userLogged ? JSON.parse(userLogged) : null,
+  errorMessage: null,
+  errorRegisterMessage: null,
   loading: false,
 };
 
+// Crea el slice utilizando el estado y las funciones definidas
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
     onChecking: (state) => {
-      (state.status = "checking"),
-        (state.user = {}),
-        (state.errorMessage = undefined),
-        (state.errorMessage = undefined);
+      state.status = "checking";
+      state.user = null;
+      state.errorMessage = null;
       state.loading = true;
     },
-    onLogin: (state, { payload }) => {
-      (state.status = "authenticated"),
-        (state.user = payload),
-        (state.errorMessage = undefined),
-        (state.errorMessage = undefined);
+    onLogin: (state, action: PayloadAction<User>) => {
+      state.status = "authenticated";
+      state.user = action.payload;
+      state.errorMessage = null;
       state.loading = false;
     },
-    onLogOut: (state, { payload }) => {
+    onLogOut: (state, action: PayloadAction<string | null>) => {
       state.status = "non-authenticated";
-      state.user = {};
-      state.errorMessage = payload;
+      state.user = null;
+      state.errorMessage = action.payload;
       state.loading = false;
     },
-    onLogOutRegister: (state, { payload }) => {
+    onLogOutRegister: (state, action: PayloadAction<string | null>) => {
       state.status = "not-authenticated";
-      state.user = {};
-      state.errorMessage = undefined;
-      state.errorRegisterMessage = payload || undefined;
+      state.user = null;
+      state.errorMessage = null;
+      state.errorRegisterMessage = action.payload || null;
     },
     clearErrorMessage: (state) => {
-      state.errorMessage = undefined;
-      state.errorRegisterMessage = undefined;
+      state.errorMessage = null;
+      state.errorRegisterMessage = null;
     },
   },
 });
 
-export const {
-  onChecking,
-  onLogin,
-  onLogOut,
-  clearErrorMessage,
-  onLogOutRegister,
-} = authSlice.actions;
+// Exporta las acciones y el reducer
+export const { onChecking, onLogin, onLogOut, clearErrorMessage, onLogOutRegister } = authSlice.actions;
 
 export default authSlice.reducer;

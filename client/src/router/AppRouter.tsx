@@ -5,8 +5,7 @@ import { DashboardRoutes } from "../dashboard/routes/DashboardRoutes";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { OnBoardingRoutes } from "../onboarding/routes/OnBoardingRoutes";
 import { MembersRoutes } from "../members/routes/";
-import ROUTES from "../constants/routes";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 export const AppRouter = () => {
   const { status, firstLog } = useAuthSlice();
@@ -25,22 +24,22 @@ export const AppRouter = () => {
           <>
             {/* Rutas para usuarios autenticados */}
             <Route element={<LandingPage />} path={"/"} />
-            <Route element={<OnBoardingRoutes />} path={`${ROUTES.onboarding}/*`} />
-            <Route element={<DashboardRoutes />} path={`${ROUTES.dashboard}/*`} />
-            <Route element={<MembersRoutes />} path={`${ROUTES.members}/*`} />
+            <Route element={<OnBoardingRoutes />} path={`/onboarding/*`} />
+            <Route element={<DashboardRoutes />} path={`/dashboard/*`} />
+            <Route element={<MembersRoutes />} path={`/members/*`} />
             {firstLog === "0" ? (
-              <Route element={<Navigate to={ROUTES.onboarding} />} path={`${ROUTES.auth}/*`} />
+              <Route element={<Navigate to={"/onboarding"} />} path={`/auth/*`} />
             ) : (
-              <Route element={<Navigate to={ROUTES.dashboard} />} path={`${ROUTES.auth}/*`} />
+              <Route element={<Navigate to={"/dashboard"} />} path={`/auth/*`} />
             )}
           </>
         ) : (
           <>
             {/* Rutas para usuarios no autenticados */}
             <Route element={<LandingPage />} path={"/"} />
-            <Route element={<AuthRoutes />} path={`${ROUTES.auth}/*`} />
-            <Route element={<Navigate to='/' />} path={`${ROUTES.dashboard}/*`} />
-            <Route element={<Navigate to='/' />} path={`${ROUTES.onboarding}/*`} />
+            <Route element={<AuthRoutes />} path={`/auth/*`} />
+            <Route element={<Navigate to='/' />} path={`/dashboard/*`} />
+            <Route element={<Navigate to='/' />} path={`/onboarding/*`} />
           </>
         )}
       </Routes>

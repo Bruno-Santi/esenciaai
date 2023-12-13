@@ -20,7 +20,7 @@ export const ActiveTeam = () => {
               <div role='status'>
                 <svg
                   aria-hidden='true'
-                  class='inline w-24 h-24 text-gray-200 animate-spin mt-20 dark:text-gray-600 fill-green-500'
+                  className='inline w-24 h-24 text-gray-200 animate-spin mt-20 dark:text-gray-600 fill-green-500'
                   viewBox='0 0 100 101'
                   fill='none'
                   xmlns='http://www.w3.org/2000/svg'
@@ -34,7 +34,7 @@ export const ActiveTeam = () => {
                     fill='currentFill'
                   />
                 </svg>
-                <span class='sr-only'>Loading...</span>
+                <span className='sr-only'>Loading...</span>
               </div>
             )}
           </div>

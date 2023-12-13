@@ -1,4 +1,4 @@
-export const getMetricsForToday = (data) => {
+export const getMetricsForToday = (data, currentDate: string) => {
   return data
     .map((item) => {
       const dailySurvey = item.daily_survey;

@@ -1,14 +1,13 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000",
+  baseURL: "https://esencia-api-1b5d609d081b.herokuapp.com",
 });
 
 api.interceptors.request.use(
   (config) => {
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
-      // Remove potential surrounding quotes from the token
       const cleanedToken = storedToken.replace(/^"(.*)"$/, "$1");
       config.headers.Authorization = `Bearer ${cleanedToken}`;
     }
