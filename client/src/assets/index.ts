@@ -1,4 +1,4 @@
-import logo from "./Logo.png";
+import logo from "./logo.png";
 import authbg from "./auth-bg.png";
 import video from "./video.png";
 import teamLogo from "./team-logo.png";
