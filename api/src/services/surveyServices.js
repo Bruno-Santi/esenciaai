@@ -2,12 +2,28 @@ const { addServices, getServices } = require(".");
 const { User, Team } = require("../app/db");
 const { UserTeam } = require("../app/dbRelations");
 const throwError = require("../helpers/customError");
-const { daily_survey_post, daily_survey_get } = require("../microServices/api_mongo");
+const { daily_survey_post, daily_survey_get, daily_survey_comment_put } = require("../microServices/api_mongo");
 const { DailySurvey } = require("../microServices/api_mongo/classes");
 const { sendExternalEmail } = require("../microServices/email/nodeMailer");
 
 surveyService = {};
 addServices("survey", surveyService);
+
+surveyService.putCommentDailySurvey = async (teamId, userId, comment) => {
+  const teamExist = await UserTeam.findOne({
+    where: { teamId, userId },
+  });
+
+  if (!teamExist)
+    throwError(
+      "access_denied",
+      403,
+      "You not belong to this team or your team not exist."
+    );
+
+  return await daily_survey_comment_put(teamId, userId, comment)
+
+};
 
 surveyService.getSurveyByTeam = async (teamId, scrumMasterId) => {
 

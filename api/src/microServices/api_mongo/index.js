@@ -7,18 +7,12 @@ const name = "mongo_api";
 const mongoApi = {};
 
 mongoApi.example_to_endpoint = async () => {
-  //* tipo de petición.
   const type = "post";
-  //* direción, la bases NO! esto "http://localhost:3000" no, lo siguiente.
   const endpoint = "/";
-  //* solo string, si se requiere una id (o lo que sea) que es igual a 30219.
   const params = "";
-  //* si se requieren querys de user_id=m2i32 team_id=we12ef.
   const query = { user_id: "m2i32", team_id: "we12ef" };
-  //* si se requiere un body así { user_id, email }.
   const body = { user_id: "23", email: "asd@gmail.com " };
 
-  //* se envía la petición y en "response" se guardara la data.
   const response = await sendReq(name, type, endpoint, params, query, body);
   //! en caso de error se lanza un error con throwError.
   console.log(response);
@@ -36,6 +30,7 @@ mongoApi.daily_survey_get = async (team_id) => {
   // console.log(JSON.stringify(response));
   return response;
 };
+
 
 
 mongoApi.welcome_get = async () => {
@@ -63,4 +58,18 @@ mongoApi.daily_survey_post = async (body = new DailySurvey()) => {
   return response;
 };
 
+mongoApi.daily_survey_comment_put = async (team_id, user_id, comment) => {
+  const type = "get";
+  const endpoint = "/daily_survey_comment";
+  const params = "";
+  const query = { team_id, user_id, comment };
+  const body = {};
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+   //console.log(JSON.stringify(response));
+  return response;
+};
+
+// e3a0f147-5cdb-43fb-9117-3692f8e71010  team
+// 7a60cfb8-1ab5-4f00-bcbd-a8cbcba75067   user
 module.exports = mongoApi;

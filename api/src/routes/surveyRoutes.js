@@ -5,6 +5,7 @@ const {
   dailySurveyPost,
   sendAllMembersPost,
   surveyGet,
+  commentPut,
 } = require("../controllers/surveyController");
 
 // router.post("/retro", checkUserToken, () => {});
@@ -12,6 +13,8 @@ const {
 router.get("/daily_survey", checkUserToken, surveyGet);
 
 router.post("/daily_survey", checkUserToken, dailySurveyPost);
+
+router.put("/daily_survey_comment", checkUserToken, commentPut)
 
 router.post("/send_all_members/:team_id", checkUserToken, sendAllMembersPost);
 
