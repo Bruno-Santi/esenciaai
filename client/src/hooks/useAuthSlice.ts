@@ -38,26 +38,27 @@ export const useAuthSlice = () => {
       dispatch(onLogOut(""));
     }
   };
-  const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
-    console.log(email, password);
+const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
+  console.log(email, password);
 
-    try {
-      const resp = await api.post(`/auth/login`, { user: { email, password } });
-      console.log(resp);
+  try {
+    const resp = await api.post(`/auth/login`, { user: { email, password } });
+    console.log(resp);
 
-      dispatch(clearErrorMessage());
-      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
+    dispatch(clearErrorMessage());
+    localStorage.setItem("authToken", JSON.stringify(resp.data.token));
 
-      const checkUser = await startCheckingUser();
-      //@ts-expect-error 'efefe'
-      checkUser().then(() => {
-        handleNavigate("/dashboard");
-      });
-    } catch (error) {
-      console.log(error)
-      dispatch(onLogOut(error));
-    }
-  };
+    await startCheckingUser();
+    handleNavigate("/dashboard");
+  } catch (error) {
+    console.error(error);
+
+
+    const errorMessage = error.response?.data?.message || error.message;
+
+    dispatch(onLogOut(errorMessage));
+  }
+};
 
   const startRegisteringUser = async ({first_name, email, password}) => {
     
