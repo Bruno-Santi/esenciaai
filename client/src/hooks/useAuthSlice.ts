@@ -54,8 +54,8 @@ export const useAuthSlice = () => {
         handleNavigate("/dashboard");
       });
     } catch (error) {
-      const { payload } = error.response.data;
-      dispatch(onLogOut(payload));
+      console.log(error)
+      dispatch(onLogOut(error));
     }
   };
 
