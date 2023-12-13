@@ -39,10 +39,10 @@ export const useAuthSlice = () => {
     }
   };
   const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
-    console.log(user);
+    console.log(email, password);
 
     try {
-      const resp = await axios.post(`/auth/login`, { user: { email, password } });
+      const resp = await api.post(`/auth/login`, { user: { email, password } });
       console.log(resp);
 
       dispatch(clearErrorMessage());
@@ -64,7 +64,7 @@ export const useAuthSlice = () => {
     console.log(user);
 
     try {
-      const resp = await axios.post(`/auth/register`, {user: {first_name, email, password}});
+      const resp = await api.post(`/auth/register`, {user: {first_name, email, password}});
       toastSuccess(`Successfully registered. Redirecting to login. 👍`);
       handleNavigate("/auth/login");
       console.log(resp);
