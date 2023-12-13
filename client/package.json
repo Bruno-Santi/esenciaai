@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-<<<<<<< HEAD
+
     "build": "tsc --p tsconfig.build.json && vite build",
-=======
-    "build": "vite build",
->>>>>>> 04c28f96456aa1a1e8a7c99240ddbb3616f8f87a
+
+
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
