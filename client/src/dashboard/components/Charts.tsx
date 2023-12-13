@@ -1,19 +1,17 @@
 import { useState, useEffect, useRef } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import Chart from "chart.js/auto";
 import { useDashboard } from "../../hooks/useDashboard";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
-
-// ... (código anterior)
 
 export const Charts = () => {
   const { metricsForToday } = useDashboard();
   const surveyData = localStorage.getItem("surveyData");
   const [chartData, setChartData] = useState(null);
   const [hasData, setHasData] = useState(false);
+  const [defaultChartData, setDefaultChartData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
-  // Usar un arreglo de referencias para manejar múltiples gráficos
   const doughnutRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null)]);
 
   const isEmptyObject = (obj) => {
@@ -32,25 +30,29 @@ export const Charts = () => {
   }, [surveyData]);
 
   useEffect(() => {
-    if (surveyData) {
+    if (metricsForToday) {
       const todayMetrics = metricsForToday;
       const colors = [
         ["rgba(255, 99, 132, 0.5)", "rgba(255, 255, 255, 0)"],
         ["rgba(54, 162, 235, 0.5)", "rgba(255, 255, 255, 0)"],
         ["rgba(255, 206, 86, 0.5)", "rgba(255, 255, 255, 0)"],
         ["rgba(75, 192, 192, 0.5)", "rgba(255, 255, 255, 0)"],
-        // Añade más colores según el número de gráficos
       ];
 
       const backgroundColorSum = "rgba(255, 99, 132, 0.5)";
       const backgroundColorNotSum = "rgba(255, 255, 255, 0)";
       const backgroundColorGray = "rgba(169, 169, 169, 0.5)";
 
+      const selfSatisfactionValue = todayMetrics?.self_satisfaction || 0;
+      const teamCollaborationValue = todayMetrics?.team_collaboration || 0;
+      const workEngagementValue = todayMetrics?.work_engagement || 0;
+      const workspaceValue = todayMetrics?.workspace || 0;
+
       const dataSelf = {
-        labels: ["Self Satisfaction"],
+        labels: ["self_satisfaction"],
         datasets: [
           {
-            data: [todayMetrics?.self_satisfaction, 100 - todayMetrics?.self_satisfaction],
+            data: [selfSatisfactionValue, 100 - selfSatisfactionValue],
             backgroundColor: [colors[0][0], backgroundColorGray],
             borderColor: [backgroundColorSum, backgroundColorNotSum],
             borderWidth: 1,
@@ -59,10 +61,10 @@ export const Charts = () => {
       };
 
       const dataCollab = {
-        labels: ["Team Collaboration"],
+        labels: ["team_collaboration"],
         datasets: [
           {
-            data: [todayMetrics?.team_collaboration, 100 - todayMetrics?.team_collaboration],
+            data: [teamCollaborationValue, 100 - teamCollaborationValue],
             backgroundColor: [colors[1][0], backgroundColorGray],
             borderColor: [backgroundColorSum, backgroundColorNotSum],
             borderWidth: 1,
@@ -71,10 +73,10 @@ export const Charts = () => {
       };
 
       const dataWork = {
-        labels: ["Work Engagement"],
+        labels: ["work_engagement"],
         datasets: [
           {
-            data: [todayMetrics?.work_engagement, 100 - todayMetrics?.work_engagement],
+            data: [workEngagementValue, 100 - workEngagementValue],
             backgroundColor: [colors[2][0], backgroundColorGray],
             borderColor: [backgroundColorSum, backgroundColorNotSum],
             borderWidth: 1,
@@ -83,10 +85,10 @@ export const Charts = () => {
       };
 
       const dataWorkSpace = {
-        labels: ["Workspace Well-being Metric"],
+        labels: ["workspace"],
         datasets: [
           {
-            data: [todayMetrics?.workspace, 100 - todayMetrics.workspace],
+            data: [workspaceValue, 100 - workspaceValue],
             backgroundColor: [colors[3][0], backgroundColorGray],
             borderColor: [backgroundColorSum, backgroundColorNotSum],
             borderWidth: 1,
@@ -96,47 +98,68 @@ export const Charts = () => {
 
       setChartData({ dataSelf, dataCollab, dataWork, dataWorkSpace, hasData: true });
     } else {
-      setChartData({ hasData: false });
-      // Destruir instancias de gráficos al desmontar el componente
+      setChartData(defaultChartData);
+
       doughnutRefs.current.forEach((ref) => {
         if (ref.current && ref.current.chartInstance) {
           ref.current.chartInstance.destroy();
         }
       });
     }
-  }, [metricsForToday]);
+  }, [metricsForToday, defaultChartData]);
 
-  // ...
-  const doughnutOptions = {
-    maintainAspectRatio: false,
-    responsive: true,
-    type: "tick",
-    plugins: {
-      legend: {
-        display: true,
-      },
-      tooltip: {
-        enabled: true,
-      },
-    },
-  };
-  if (metricsForToday.length === 0) {
+  useEffect(() => {
+    if (metricsForToday) {
+      const colors = [
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+      ];
+
+      const chartKeys = Object.keys(metricsForToday);
+
+      chartKeys.forEach((key, index) => {
+        const data = chartData[key];
+        const ctx = doughnutRefs.current[index].getContext("2d");
+        doughnutRefs.current[index].chartInstance = new Chart(ctx, {
+          type: "doughnut",
+          data: data,
+          options: {
+            maintainAspectRatio: false,
+            responsive: true,
+            plugins: {
+              legend: {
+                display: true,
+              },
+              tooltip: {
+                enabled: true,
+              },
+            },
+          },
+        });
+      });
+    }
+  }, [metricsForToday, chartData]);
+
+  if (!hasData) {
     return <p>NO DATA YET, TRY MAKING ACTIONS</p>;
   }
+
   return (
     <div className='flex -space-x-28 justify-center'>
       <>
         <div className=''>
-          <Doughnut ref={doughnutRefs.current[0]} data={chartData.dataSelf} options={doughnutOptions} />
+          <canvas ref={doughnutRefs.current[0]} width='400' height='400' />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRefs.current[1]} data={chartData.dataCollab} options={doughnutOptions} />
+          <canvas ref={doughnutRefs.current[1]} width='400' height='400' />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRefs.current[2]} data={chartData.dataWork} options={doughnutOptions} />
+          <canvas ref={doughnutRefs.current[2]} width='400' height='400' />
         </div>
         <div className=''>
-          <Doughnut ref={doughnutRefs.current[3]} data={chartData.dataWorkSpace} options={doughnutOptions} />
+          <canvas ref={doughnutRefs.current[3]} width='400' height='400' />
         </div>
       </>
     </div>

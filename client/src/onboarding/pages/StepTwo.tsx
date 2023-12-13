@@ -8,8 +8,7 @@ export const StepTwo = () => {
   useDocumentTitle("Onboard | Esencia.ai");
   const [teamName, setTeamName] = useState("");
   const fileInputRef = useRef(null);
-  const { imageSelected, handleImageClick, handleFileChange, isLoading } =
-    useImageUpload(fileInputRef);
+  const { imageSelected, handleImageClick, handleFileChange, isLoading } = useImageUpload(fileInputRef);
   const { handleNavigate } = useNavigateTo();
   const { startCreatingTeam } = useDashboard();
   const handleChange = (e) => {
@@ -23,6 +22,7 @@ export const StepTwo = () => {
         "https://res.cloudinary.com/di92lsbym/image/upload/c_thumb,w_200,g_face/v1701895638/team-logo_2_fq5yev.png",
       name: teamName,
     };
+    //@ts-expect-error 'fafaf'
     startCreatingTeam(team);
     handleNavigate("/dashboard");
   };

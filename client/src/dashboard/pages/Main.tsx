@@ -5,8 +5,7 @@ import { ActiveTeam, NoTeams } from "../components";
 import { useAuthSlice } from "../../hooks/useAuthSlice";
 
 export const Main = () => {
-  const { startSettingUser, startSettingTeams } = useDashboard();
-  const { userTeams } = useAuthSlice();
+  const { startSettingUser, startSettingTeams, userTeams } = useDashboard();
 
   useEffect(() => {
     const fetchData = async () => {

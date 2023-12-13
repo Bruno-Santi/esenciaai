@@ -31,12 +31,18 @@ export const useDashboard = () => {
   };
 
   const startSettingTeams = async () => {
-    const { data } = await api.get(`/users`);
-    const { team_list } = data;
-    console.log(team_list);
+    try {
+      const { data } = await api.get(`/users`);
+      const { team_list } = data;
+      console.log(team_list);
 
-    dispatch(onSetUserTeams({ userTeams: team_list }));
-    setLoading(false);
+      dispatch(onSetUserTeams({ userTeams: team_list }));
+      localStorage.setItem("userTeams", JSON.stringify(team_list));
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
   };
 
   const starGettingData = async (id: string) => {
@@ -93,33 +99,26 @@ export const useDashboard = () => {
   };
 
   const startCreatingTeam = async (newTeam: UserTeams) => {
-    const team = { team: newTeam };
-    //@ts-expect-error 'efefe'
-    team.logo =
+    newTeam.logo =
       newTeam.logo ||
       "https://res.cloudinary.com/di92lsbym/image/upload/c_thumb,w_200,g_face/v1701895638/team-logo_2_fq5yev.png";
+    const team = { team: newTeam };
 
     try {
       const resp = await api.post("/teams/", team);
-      return resp;
+      const createdTeam = resp.data; // Obtener información del nuevo equipo desde la respuesta
+
+      // Actualizar el estado después de que la solicitud API se complete
+      dispatch(onCreateTeam(createdTeam.team));
+
+      const updatedUserTeams = userTeams ? [...userTeams, createdTeam.team] : [createdTeam.team];
+
+      localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
+      dispatch(onSetUserTeams({ userTeams: updatedUserTeams }));
+      closeModal();
     } catch (error) {
       console.log(error);
     }
-    dispatch(
-      onCreateTeam({
-        newTeam,
-      })
-    );
-
-    const updatedUserTeams = userTeams ? [...userTeams, newTeam] : [newTeam];
-
-    localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
-    dispatch(
-      onSetUserTeams({
-        userTeams: updatedUserTeams,
-      })
-    );
-    closeModal();
   };
   const startAddingMember = async (userData, teamId) => {
     console.log(userData, teamId);

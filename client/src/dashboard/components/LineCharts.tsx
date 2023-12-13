@@ -14,7 +14,6 @@ export const LineCharts = () => {
     if (chartContainer.current && linesMetrics && linesMetrics.label_x) {
       const ctx = chartContainer.current.getContext("2d");
 
-      // Limpiar el gráfico anterior si existe
       if (chartContainer.current.chart) {
         chartContainer.current.chart.destroy();
       }
