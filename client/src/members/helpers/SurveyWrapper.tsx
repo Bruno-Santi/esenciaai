@@ -10,7 +10,7 @@ const SurveyWrapper = () => {
   const { token, team_id } = queryString.parse(location.search);
   
   if (token && team_id) {
-    localStorage.setItem("authToken", "token")
+    localStorage.setItem("authToken", token)
     return <Survey team_id={team_id} token={token} />;
   }
 
