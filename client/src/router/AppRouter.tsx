@@ -13,7 +13,7 @@ export const AppRouter = () => {
   const { startCheckingUser } = useAuthSlice();
   useEffect(() => {
     startCheckingUser();
-    if (status === "authenticated") localStorage.setItem("isAuthenticated", "true");
+    if (status === "authenticated") localStorage.setItem("isAuthenticated", true);
   }, []);
   const isAuthenticated1 = localStorage.getItem("isAuthenticated");
 
