@@ -5,22 +5,32 @@ import { DashboardRoutes } from "../dashboard/routes/DashboardRoutes";
 import { useAuthSlice } from "../hooks/useAuthSlice";
 import { OnBoardingRoutes } from "../onboarding/routes/OnBoardingRoutes";
 import { MembersRoutes } from "../members/routes/";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const AppRouter = () => {
   const { status, firstLog } = useAuthSlice();
+  const searchParams = new URLSearchParams(location.search);
+  const [tokenParams, setTokenParams] = useState("");
+
   const isAuthenticated = status === "authenticated";
   const { startCheckingUser } = useAuthSlice();
   useEffect(() => {
+    setTokenParams(searchParams.get("token"));
     startCheckingUser();
-    if (status === "authenticated") localStorage.setItem("isAuthenticated", 'true');
+    if (status === "authenticated")
+      localStorage.setItem("isAuthenticated", "true");
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("authToken", tokenParams);
+  }, [tokenParams]);
+
   const isAuthenticated1 = localStorage.getItem("isAuthenticated");
 
   return (
     <div>
       <Routes>
-        {isAuthenticated1 ? (
+        {isAuthenticated1 || tokenParams ? (
           <>
             {/* Rutas para usuarios autenticados */}
             <Route element={<LandingPage />} path={"/"} />
@@ -28,9 +38,15 @@ export const AppRouter = () => {
             <Route element={<DashboardRoutes />} path={`/dashboard/*`} />
             <Route element={<MembersRoutes />} path={`/members/*`} />
             {firstLog === "0" ? (
-              <Route element={<Navigate to={"/onboarding"} />} path={`/auth/*`} />
+              <Route
+                element={<Navigate to={"/onboarding"} />}
+                path={`/auth/*`}
+              />
             ) : (
-              <Route element={<Navigate to={"/dashboard"} />} path={`/auth/*`} />
+              <Route
+                element={<Navigate to={"/dashboard"} />}
+                path={`/auth/*`}
+              />
             )}
           </>
         ) : (
@@ -38,8 +54,8 @@ export const AppRouter = () => {
             {/* Rutas para usuarios no autenticados */}
             <Route element={<LandingPage />} path={"/"} />
             <Route element={<AuthRoutes />} path={`/auth/*`} />
-            <Route element={<Navigate to='/' />} path={`/dashboard/*`} />
-            <Route element={<Navigate to='/' />} path={`/onboarding/*`} />
+            <Route element={<Navigate to="/" />} path={`/dashboard/*`} />
+            <Route element={<Navigate to="/" />} path={`/onboarding/*`} />
           </>
         )}
       </Routes>
