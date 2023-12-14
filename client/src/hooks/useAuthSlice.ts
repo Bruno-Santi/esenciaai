@@ -45,12 +45,10 @@ export const useAuthSlice = () => {
     } catch (error) {
       console.error(error);
 
-<<<<<<< HEAD
-      const errorMessage = error.response?.data?.payload || error.message;
-=======
+
+
            const errorMessage = error.response?.data?.payload || error.message;
 
->>>>>>> 2da507a2b7fd633a84727fb1699dee35d6d6220d
 
       dispatch(onLogOut(errorMessage));
     }
