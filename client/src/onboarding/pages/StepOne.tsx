@@ -4,15 +4,15 @@ import { useDocumentTitle, useNavigateTo } from "../../hooks";
 import { OnBoardingLayout } from "../../layaout";
 
 export const StepOne = () => {
-  useDocumentTitle("Onboard | Esencia.ai");
+  useDocumentTitle("Onboard | Esencia.app");
   const { handleNavigate } = useNavigateTo();
 
   return (
     <OnBoardingLayout>
       <div className='flex flex-col animate__animated animate__fadeIn animate__slower'>
         <span className='w-2/6 font-light text-center font-manrope text-4xl text-tertiary mx-auto'>
-          Watch this short video to understand the magic of{" "}
-          <span className='font-bold text-secondary'>Esencia.ai</span>:
+          Watch this short video to understand the magic of <span className='font-bold text-secondary'>Esencia.ai</span>
+          :
         </span>
         <div className='m-auto flex mt-20 bg-gray-400 w-3/6 h-60 rounded-xl'>
           <img src={video} className='m-auto ' alt='esencia onboarding video' />

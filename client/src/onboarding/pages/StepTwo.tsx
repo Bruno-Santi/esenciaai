@@ -5,7 +5,7 @@ import { useDocumentTitle, useImageUpload, useNavigateTo } from "../../hooks";
 import { useDashboard } from "../../hooks/useDashboard";
 
 export const StepTwo = () => {
-  useDocumentTitle("Onboard | Esencia.ai");
+  useDocumentTitle("Onboard | Esencia.app");
   const [teamName, setTeamName] = useState("");
   const fileInputRef = useRef(null);
   const { imageSelected, handleImageClick, handleFileChange, isLoading } = useImageUpload(fileInputRef);

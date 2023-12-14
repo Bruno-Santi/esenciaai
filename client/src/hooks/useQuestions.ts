@@ -47,8 +47,8 @@ export const useQuestions = ({ team_id, token }) => {
     }, {});
 
     const dailySurvey = {
-      user_id: token,
-      team_id: team_id,
+      user_id: team_id,
+      team_id: token,
       sprint: 1,
       comment: "",
       ...requestBody,
@@ -59,7 +59,7 @@ export const useQuestions = ({ team_id, token }) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(dailySurvey);
+
     setIsSendend(true);
     navigate("/members/comments", { state: { dailySurvey } });
   };
