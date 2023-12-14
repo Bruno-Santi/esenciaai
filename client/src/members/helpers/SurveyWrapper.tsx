@@ -20,7 +20,7 @@ const SurveyWrapper = () => {
     setTokenInLocalStorage();
   useEffect(() => {
    if (token && team_id) {
-    navigate(`/survey?token=${token}&team_id=${team_id}`);
+    <Survey team_id={team_id} token={token}/>
   }
   }, []);
 
