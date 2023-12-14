@@ -7,7 +7,9 @@ import { useState, useEffect } from "react";
 const SurveyWrapper = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { token, team_id } = queryString.parse(location.search);
+ const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get("token");
+  const team_id = searchParams.get("team_id");
   console.log(token)
    const setTokenInLocalStorage = () => {
       if (token) {
