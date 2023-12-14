@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://esencia-api-1b5d609d081b.herokuapp.com",
+  baseURL: "https://esencia-api-vercel-production.up.railway.app",
 });
 
 api.interceptors.request.use(
