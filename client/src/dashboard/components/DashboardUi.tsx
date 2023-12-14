@@ -17,9 +17,9 @@ export const DashboardUi = () => {
         <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Key team indicator</span>
         <span className='font-poppins font-extralight ml-4 text-lg'>For the last 15 days</span>
         <div className='flex items-center justify-center h-3/6'>
-          <span className='text-center font-poppins w-2/6 mt-20 text-primary/50 font-bold text-4xl'>
+          <span className='text-center font-poppins w-3/12 mt-20 text-primary/50 font-bold text-4xl'>
             <div className='flex justify-center -space-x-20 text-center'></div>
-            {/* <Charts /> */}
+            <Charts />
           </span>
         </div>
       </div>
