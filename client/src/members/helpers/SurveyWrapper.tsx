@@ -9,21 +9,22 @@ const SurveyWrapper = () => {
   const location = useLocation();
   const { token, team_id } = queryString.parse(location.search);
 
+  useEffect(() => {
+    const setTokenInLocalStorage = () => {
+      if (token) {
+        localStorage.setItem("authToken", token);
+      }
+    };
 
-    useEffect(() => {
-  if (token) {
-    localStorage.setItem("authToken", token);
-    console.log("Token set:", token);
-  }
-}, [token]);
+    setTokenInLocalStorage();
+  }, [token]);
 
-
-useEffect(() => {
   if (token && team_id) {
-    navigate(`/survey?token=${token}&team_id=${team_id}`);
+    return <Survey team_id={team_id} token={token} />;
   }
-}, [token, team_id, navigate]);
+
   return null;
 };
 
 export default SurveyWrapper;
+
