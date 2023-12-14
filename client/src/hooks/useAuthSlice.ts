@@ -53,7 +53,8 @@ export const useAuthSlice = () => {
     } catch (error) {
       console.error(error);
 
-      const errorMessage = error.response?.data?.message || error.message;
+           const errorMessage = error.response?.data?.payload || error.message;
+
 
       dispatch(onLogOut(errorMessage));
     }
