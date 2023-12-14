@@ -20,7 +20,7 @@ const SurveyWrapper = () => {
     setTokenInLocalStorage();
   useEffect(() => {
    if (token && team_id) {
-    return <Survey team_id={team_id} token={token} />;
+     <Survey team_id={team_id} token={token} />;
   }
   }, []);
 
