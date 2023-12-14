@@ -14,7 +14,7 @@ export interface DashBoardState {
   user: User[];
   userTeams: UserTeams[];
   activeTeam: UserTeams | null;
-  metricsForToday: string[] | null;
+  metricsForToday: string | null;
   linesMetrics: string[] | null;
   dataAmount: string[] | null;
   isLoading: boolean;

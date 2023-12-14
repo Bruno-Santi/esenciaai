@@ -47,6 +47,7 @@ export const StepTwo = () => {
             </label>
             <input
               type='file'
+              accept='.png, .jpg, .jpeg'
               name='teamLogo'
               ref={fileInputRef}
               style={{

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 import { useSelector } from "react-redux";
 import { useDashboard } from "../../hooks/useDashboard";
+import { useAuthSlice } from "../../hooks/useAuthSlice";
 
 export const AddMemberModal: React.FC<{
   closeAddMember(): void;
@@ -14,29 +15,18 @@ export const AddMemberModal: React.FC<{
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { creatingLoading } = useAuthSlice();
   const { activeTeam, startAddingMember, membersActiveTeam } = useDashboard();
   const [forceRender, setForceRender] = useState(false);
-  const [modalKey, setModalKey] = useState(Date.now()); // Estado para manejar el key del modal
+  const [modalKey, setModalKey] = useState(Date.now());
   useEffect(() => {
-    setForceRender((prev) => !prev); // Invierte el valor actual para forzar un nuevo renderizado
+    setForceRender((prev) => !prev);
   }, [membersActiveTeam]);
 
   const onSubmit = (data) => {
-    // Puedes acceder a activeTeam.id aquí
     setModalKey(Date.now());
     const teamId = activeTeam.id;
     startAddingMember(data, teamId);
-    // Resto de tu lógica de onSubmit
-    toast.success(`${data.first_name} added to the team `, {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
 
     closeAddMember();
   };

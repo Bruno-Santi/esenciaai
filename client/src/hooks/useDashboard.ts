@@ -16,9 +16,11 @@ import api from "../helpers/apiToken";
 import { getTeamData } from "../helpers/getTeamData";
 
 import { toastSuccess, toastWarning } from "../helpers";
+import { toast } from "react-toastify";
 
 export const useDashboard = () => {
   const [surveyLoading, setSurveyLoading] = useState(false);
+  const [creatingLoading, setCreatingLoading] = useState(false);
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [loading, setLoading] = useState(true);
@@ -53,24 +55,24 @@ export const useDashboard = () => {
       if (surveyData.error) {
         dispatch(
           onSaveMetricsForToday({
-            metricsForToday: [],
-            linesMetrics: [],
+            metricsForToday: {},
+            linesMetrics: {},
             dataAmount: [],
           })
         );
       } else {
         dispatch(
           onSaveMetricsForToday({
-            metricsForToday: surveyData.data.pie_chart || [], // Verificar si existe y es un array
-            linesMetrics: surveyData.data.lines_graph || [], // Verificar si existe y es un array
+            metricsForToday: surveyData.data.pie_chart || {}, // Verificar si existe y es un array
+            linesMetrics: surveyData.data.lines_graph || {}, // Verificar si existe y es un array
             dataAmount: surveyData.data.data_amounts || [], // Verificar si existe y es un array
           })
         );
       }
 
       const dataToSave = {
-        metricsForToday: surveyData.data.pie_chart || [], // Verificar si existe y es un array
-        linesMetrics: surveyData.data.lines_graph || [], // Verificar si existe y es un array
+        metricsForToday: surveyData.data.pie_chart || {}, // Verificar si existe y es un array
+        linesMetrics: surveyData.data.lines_graph || {}, // Verificar si existe y es un array
         dataAmount: surveyData.data.data_amounts || [], // Verificar si existe y es un array
       };
       localStorage.setItem("surveyData", JSON.stringify(dataToSave));
@@ -122,7 +124,7 @@ export const useDashboard = () => {
   };
   const startAddingMember = async (userData, teamId) => {
     console.log(userData, teamId);
-
+    setCreatingLoading(true);
     try {
       const formData = {
         team_id: teamId,
@@ -132,14 +134,23 @@ export const useDashboard = () => {
           email: userData.email,
         },
       };
-
+      toast.success(`${formData.user.first_name} added to the team `, {
+        position: "bottom-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
       const response = await api.post(`/teams/members/`, formData);
       startGettingMembers(teamId);
-      console.log(formData);
-
-      console.log(response.data);
+      setCreatingLoading(false);
     } catch (error) {
+      toastWarning("Error while creating members");
       console.error("Error adding member:", error);
+      setCreatingLoading(false);
     }
   };
   const startGettingMembers = async (id) => {
@@ -160,13 +171,16 @@ export const useDashboard = () => {
       const users = await startGettingMembers(teamId);
 
       console.log(users);
-
-      const response = await api.post(`/survey/send_all_members/${teamId}`);
-      console.log(response);
-      setSurveyLoading(false);
-      return toastSuccess(`Survey sended to the team: ${teamName}`);
+      if (users.length === 0) {
+        toastWarning(`The team ${teamName} doesnt have any member`);
+      } else {
+        const response = await api.post(`/survey/send_all_members/${teamId}`);
+        console.log(response);
+        setSurveyLoading(false);
+        return toastSuccess(`Survey sended to the team: ${teamName}`);
+      }
     } catch (error) {
-      toastWarning(`The team ${teamName} doesnt have any member`);
+      toastWarning(`${error.message}`);
       setSurveyLoading(false);
       console.log(error);
     }
@@ -191,5 +205,6 @@ export const useDashboard = () => {
     metricsForToday,
     startCreatingSurvey,
     surveyLoading,
+    creatingLoading,
   };
 };

@@ -5,10 +5,12 @@ import React, { useEffect, useState } from "react";
 import { MembersTable } from "./MembersTable";
 import { useDashboard } from "../../hooks/useDashboard";
 import { AddMemberModal } from "./AddMemberModal";
+import { useAuthSlice } from "../../hooks/useAuthSlice";
 
 export const ModalMembers: React.FC<{
   closeModal: () => void;
 }> = ({ closeModal }) => {
+  const { creatingLoading } = useAuthSlice();
   const { membersActiveTeam, activeTeam } = useDashboard();
   const [addMember, setAddMember] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(false); // Estado adicional
@@ -33,7 +35,11 @@ export const ModalMembers: React.FC<{
         <div className='text-lg font-poppins '>{activeTeam.name} Members</div>
         <div
           onClick={toggleAddMember}
-          className='btn-primary flex w-fit text-xl  mt-4 p-2 rounded-md cursor-pointer duration-700 font-poppins hover:bg-tertiary hover:text-primary'
+          className={
+            creatingLoading
+              ? "btn-primary flex w-fit text-xl  mt-4 p-2 rounded-md cursor-pointer duration-700 font-poppins hover:bg-tertiary hover:text-primary"
+              : "btn-secondary flex w-fit text-xl  mt-4 p-2 rounded-md cursor-pointer duration-700 font-poppins"
+          }
         >
           Add{" "}
           <i className='text-3xl ml-2 my-auto'>

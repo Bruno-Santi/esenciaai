@@ -7,8 +7,8 @@ const initialState: DashBoardState = {
   userTeams: [],
   activeTeam: null,
   membersActiveTeam: [],
-  metricsForToday: [],
-  linesMetrics: [],
+  metricsForToday: {},
+  linesMetrics: {},
   dataAmount: [],
   isLoading: false,
 };

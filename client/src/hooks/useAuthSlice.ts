@@ -20,9 +20,6 @@ export const useAuthSlice = () => {
   const dispatch = useDispatch();
   const { handleNavigate } = useNavigateTo();
 
-  const firstLog = localStorage.getItem("firstLoggin");
-  if (!firstLog) localStorage.setItem("firstLoggin", "0");
-
   useEffect(() => {}, [loading]);
   const startCheckingUser = async () => {
     dispatch(onChecking());
@@ -34,41 +31,42 @@ export const useAuthSlice = () => {
       dispatch(onLogin(user.data.user));
     } catch (error) {
       console.log(error);
-      localStorage.removeItem("authToken");
+
       dispatch(onLogOut(""));
     }
   };
-const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
-  console.log(email, password);
+  const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
+    console.log(email, password);
 
-  try {
-    const resp = await api.post(`/auth/login`, { user: { email, password } });
-    console.log(resp);
+    try {
+      const resp = await api.post(`/auth/login`, { user: { email, password } });
+      console.log(resp);
 
-    dispatch(clearErrorMessage());
-    localStorage.setItem("authToken", JSON.stringify(resp.data.token));
+      dispatch(clearErrorMessage());
+      localStorage.setItem("authToken", JSON.stringify(resp.data.token));
 
-    await startCheckingUser();
-    localStorage.setItem("isAuthenticated", true)
-    handleNavigate("/dashboard");
-  } catch (error) {
-    console.error(error);
+      await startCheckingUser();
+      localStorage.setItem("isAuthenticated", true);
+      const firstLog = localStorage.getItem("firstLoggin");
+      if (!firstLog) localStorage.setItem("firstLoggin", "0");
+      firstLog == "1" ? handleNavigate("/dashboard") : handleNavigate("/onboarding");
+    } catch (error) {
+      console.error(error);
 
+      const errorMessage = error.response?.data?.message || error.message;
 
-    const errorMessage = error.response?.data?.message || error.message;
+      dispatch(onLogOut(errorMessage));
+    }
+  };
 
-    dispatch(onLogOut(errorMessage));
-  }
-};
-
-  const startRegisteringUser = async ({first_name, email, password}) => {
-    
+  const startRegisteringUser = async ({ first_name, email, password }) => {
     console.log(user);
 
     try {
-      const resp = await api.post(`/auth/register`, {user: {first_name, email, password}});
+      const resp = await api.post(`/auth/register`, { user: { first_name, email, password } });
       toastSuccess(`Successfully registered. Redirecting to login. 👍`);
       handleNavigate("/auth/login");
+      dispatch(clearErrorMessage());
       console.log(resp);
     } catch (error) {
       const { payload } = error.response.data;
@@ -94,7 +92,7 @@ const startLoginUser = async ({ email, password }: { email: string; password: st
     status,
     startRegisteringUser,
     startLogingOut,
-    firstLog,
+
     startLoginUser,
     userTeams,
     user,
