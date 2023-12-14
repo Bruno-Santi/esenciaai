@@ -8,6 +8,7 @@ const SurveyWrapper = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { token, team_id } = queryString.parse(location.search);
+  console.log(token)
    const setTokenInLocalStorage = () => {
       if (token) {
         localStorage.setItem("authToken", token);
