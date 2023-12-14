@@ -1,4 +1,5 @@
 import React from "react";
+import { createPortal } from "react-dom";
 import { VictoryPie, VictoryTooltip } from "victory";
 import { useDashboard } from "../../hooks/useDashboard";
 
@@ -8,32 +9,36 @@ const MetricChart = ({ metricName, value, color }) => {
     { x: "", y: 100 - value },
   ];
 
+  const tooltipContainer = document.getElementById("tooltip-container");
+
+  const tooltipComponent = (
+    <VictoryTooltip
+      style={{ fontSize: 14, zIndex: 0 }}
+      flyoutStyle={{ fill: "white", stroke: "gray", strokeWidth: 1 }}
+      cornerRadius={5}
+      flyoutPadding={10}
+      orientation='top'
+      renderInPortal={false}
+      text={({ datum }) => `${datum.y}`}
+    />
+  );
+
   return (
-    <div className='col' style={{ width: 150, height: 100, margin: 16 }}>
+    <div className='-z-0' style={{ width: 150, height: 100, margin: 16 }}>
       <VictoryPie
         data={data}
         width={150}
         height={100}
         colorScale={[color, "#D3D3D3"]}
         innerRadius={20}
-        labels={() => null} // Para ocultar las etiquetas
-        padding={7} // Ajuste de padding
-        labelComponent={
-          <VictoryTooltip
-            style={{ fontSize: 14 }}
-            flyoutStyle={{ fill: "white", stroke: "gray", strokeWidth: 1 }}
-            cornerRadius={5}
-            flyoutPadding={10}
-            orientation='top'
-            renderInPortal={false}
-            text={({ datum }) => `${datum.y}`}
-          />
-        }
-        animate={{ duration: 500, easing: "bounce" }} // Agregar animación de rotación
+        labels={() => null}
+        padding={7}
+        labelComponent={tooltipComponent}
       />
       <div>
         <p className='text-center text-xl pt-2'>{metricName}</p>
       </div>
+      {tooltipContainer && createPortal(tooltipComponent, tooltipContainer)}
     </div>
   );
 };
@@ -42,11 +47,12 @@ export const Charts = () => {
   const { metricsForToday } = useDashboard();
 
   return (
-    <div className='flex mx-auto justify-center space-x-6'>
+    <div className='flex mx-auto -z-10 justify-center space-x-6'>
       <MetricChart metricName='Self Satisfaction' value={metricsForToday.self_satisfaction} color='#FF6384' />
       <MetricChart metricName='Team Collaboration' value={metricsForToday.team_collaboration} color='#36A2EB' />
       <MetricChart metricName='Work Engagement' value={metricsForToday.work_engagement} color='#FFCE56' />
       <MetricChart metricName='Workspace Well-being Metric' value={metricsForToday.workspace} color='#4CAF50' />
+      <div id='tooltip-container' className='-z-10' style={{ position: "fixed", top: 0, left: 0 }} />
     </div>
   );
 };

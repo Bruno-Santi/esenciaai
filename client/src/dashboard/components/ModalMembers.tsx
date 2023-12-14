@@ -26,7 +26,7 @@ export const ModalMembers: React.FC<{
   return (
     <Modal>
       <div
-        className='text-5xl text-primary/60 cursor-pointer absolute right-4 top-4 duration-700 hover:text-secondary '
+        className='text-5xl text-primary/60 z-50 cursor-pointer absolute right-4 top-4 duration-700 hover:text-secondary '
         onClick={closeModal}
       >
         <IoMdClose />

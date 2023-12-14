@@ -11,7 +11,7 @@ import {
 } from "../store/dashboard/dashboardSlice";
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useModal } from ".";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import api from "../helpers/apiToken";
 import { getTeamData } from "../helpers/getTeamData";
 
@@ -36,7 +36,6 @@ export const useDashboard = () => {
     try {
       const { data } = await api.get(`/users`);
       const { team_list } = data;
-      console.log(team_list);
 
       dispatch(onSetUserTeams({ userTeams: team_list }));
       localStorage.setItem("userTeams", JSON.stringify(team_list));
@@ -108,9 +107,8 @@ export const useDashboard = () => {
 
     try {
       const resp = await api.post("/teams/", team);
-      const createdTeam = resp.data; // Obtener información del nuevo equipo desde la respuesta
+      const createdTeam = resp.data;
 
-      // Actualizar el estado después de que la solicitud API se complete
       dispatch(onCreateTeam(createdTeam.team));
 
       const updatedUserTeams = userTeams ? [...userTeams, createdTeam.team] : [createdTeam.team];
@@ -156,7 +154,6 @@ export const useDashboard = () => {
   const startGettingMembers = async (id) => {
     try {
       const { data } = await api.get(`/teams/members/${id}`);
-      console.log(data);
 
       dispatch(onSetActiveTeamMembers({ members: data.user_list }));
       return data;

@@ -54,7 +54,6 @@ export const authSlice = createSlice({
   },
 });
 
-// Exporta las acciones y el reducer
 export const { onChecking, onLogin, onLogOut, clearErrorMessage, onLogOutRegister } = authSlice.actions;
 
 export default authSlice.reducer;

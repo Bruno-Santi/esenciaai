@@ -3,14 +3,10 @@ import { LineCharts } from "./LineCharts";
 import { useDashboard } from "../../hooks/useDashboard";
 import { DataCollectionReport } from "./DataCollectionReport";
 import { useNavigateTo } from "../../hooks";
-import { useEffect } from "react";
 
 export const DashboardUi = () => {
   const { startCreatingSurvey, linesMetrics, surveyLoading, activeTeam, metricsForToday } = useDashboard();
   const { handleNavigate } = useNavigateTo();
-  useEffect(() => {
-    console.log(linesMetrics);
-  }, [linesMetrics]);
 
   return (
     <div className=' w-full grid px-6 ml-16  py-4 grid-cols-12 grid-rows-2 gap-6'>
@@ -92,8 +88,8 @@ export const DashboardUi = () => {
       >
         <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Data collection report</span>
 
-        <div className='flex items-center justify-center h-3/6'>
-          <span className='text-center mt-28 font-poppins w-3/6 text-primary/50 font-bold text-4xl'>
+        <div className='flex ml-10 items-center font-extralight justify-start h-3/6'>
+          <span className='text-center mt-28 font-normal font-poppins w-5/6 text-primary/50 text-4xl'>
             <DataCollectionReport />
           </span>
         </div>

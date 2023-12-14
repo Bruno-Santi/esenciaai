@@ -9,9 +9,7 @@ export const SideBar = () => {
     <div className='static'>
       <section className='fixed top-0 left-0 w-16 bg-quaternary h-full '>
         <div className='flex flex-col h-full'>
-          <span className='text-tertiary font-poppins text-md mx-auto mt-4'>
-            Teams
-          </span>
+          <span className='text-tertiary font-poppins  text-md mx-auto mt-4'>Teams</span>
           <div className='w-40 justify-center '>
             <Teams />
           </div>

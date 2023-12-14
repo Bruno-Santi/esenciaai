@@ -1,16 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrorMessage, onChecking, onLogOut, onLogin } from "../store/auth/authSlice";
 import "react-toastify/dist/ReactToastify.css";
-
 import { useNavigateTo } from ".";
 import { useEffect } from "react";
-
 import { onLogOutUser, onSetUser } from "../store/dashboard/dashboardSlice";
-import axios from "axios";
 import api from "../helpers/apiToken";
-
 import { toastSuccess } from "../helpers";
-import { AuthState } from "../store/auth/interfaces";
 
 export const useAuthSlice = () => {
   //@ts-expect-error 'efefe'
@@ -36,11 +31,8 @@ export const useAuthSlice = () => {
     }
   };
   const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
-    console.log(email, password);
-
     try {
       const resp = await api.post(`/auth/login`, { user: { email, password } });
-      console.log(resp);
 
       dispatch(clearErrorMessage());
       localStorage.setItem("authToken", JSON.stringify(resp.data.token));
@@ -53,7 +45,7 @@ export const useAuthSlice = () => {
     } catch (error) {
       console.error(error);
 
-      const errorMessage = error.response?.data?.message || error.message;
+      const errorMessage = error.response?.data?.payload || error.message;
 
       dispatch(onLogOut(errorMessage));
     }
@@ -92,7 +84,6 @@ export const useAuthSlice = () => {
     status,
     startRegisteringUser,
     startLogingOut,
-
     startLoginUser,
     userTeams,
     user,

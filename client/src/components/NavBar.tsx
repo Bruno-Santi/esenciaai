@@ -12,9 +12,9 @@ export const NavBar = () => {
   return (
     <nav className='flex w-full  sticky bg-primary h-16  justify-around '>
       <div className='w-full flex justify-between items-center  '>
-        <div className='flex ml-20'>
+        <div className='flex ml-24'>
           <FaRegUserCircle className='text-tertiary h-12 w-12 -mx-2 mr-1' />
-          <span className='text-tertiary my-auto  font-poppins text-lg'>
+          <span className='text-tertiary my-auto  ml-2 font-poppins text-lg'>
             {user?.first_name} {user?.last_name}
           </span>
         </div>

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 export const BackButton = () => {
   const navigate = useNavigate();
   const goBack = () => {
-    navigate(-1); // Retrocede una página en el historial de navegación
+    navigate(-1);
   };
   return (
     <div className='fixed left-28 top-16 pt-2'>
