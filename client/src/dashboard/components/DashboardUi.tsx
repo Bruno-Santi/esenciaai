@@ -3,10 +3,12 @@ import { LineCharts } from "./LineCharts";
 import { useDashboard } from "../../hooks/useDashboard";
 import { DataCollectionReport } from "./DataCollectionReport";
 import { useNavigateTo } from "../../hooks";
+import { toastSuccess, toastWarning } from "../../helpers";
 
 export const DashboardUi = () => {
   const {
     startCreatingSurvey,
+    startCreatingRetro,
     linesMetrics,
     surveyLoading,
     activeTeam,
@@ -15,7 +17,19 @@ export const DashboardUi = () => {
     modalOpen,
   } = useDashboard();
   const { handleNavigate } = useNavigateTo();
+  const handleSendRetro = async (teamId) => {
+    try {
+      const resp = await startCreatingRetro(teamId);
+      toastSuccess("Retro created successfully. Redirecting");
 
+      setTimeout(() => {
+        const url = `https://finstory.github.io/esencia_retro/?team_id=${teamId}&access=23e23fd32F`;
+        window.open(url, "_blank");
+      }, 3000);
+    } catch (error) {
+      toastWarning("Error creating retro");
+    }
+  };
   return (
     <div className=' w-full md:grid lg:grid px-6 ml-16 sm:flex sm:flex-col  py-4 grid-cols-12 grid-rows-2 gap-6'>
       <div
@@ -76,7 +90,7 @@ export const DashboardUi = () => {
             Pulse Survey
           </button>
           <button
-            onClick={() => handleNavigate("/dashboard/retro")}
+            onClick={() => handleSendRetro(activeTeam.id)}
             className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'
           >
             Retrospectives

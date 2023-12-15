@@ -18,6 +18,7 @@ import { getTeamData } from "../helpers/getTeamData";
 
 import { toastSuccess, toastWarning } from "../helpers";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 export const useDashboard = () => {
   const [surveyLoading, setSurveyLoading] = useState(false);
@@ -199,12 +200,24 @@ export const useDashboard = () => {
   const startToggleModal = () => {
     dispatch(onToggleModal());
   };
+
+  const startCreatingRetro = async (teamId) => {
+    console.log(teamId);
+
+    try {
+      const resp = await axios.post(`https://9qhvw5j9-3000.brs.devtunnels.ms/retro/${teamId} `);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     startSettingActiveTeam,
     starGettingData,
     startGettingMembers,
     startCreatingTeam,
     userTeams,
+    startCreatingRetro,
     activeTeam,
     linesMetrics,
     dataAmount,
