@@ -1,6 +1,6 @@
 const { sendReq } = require("../../helpers/axios.js");
 const throwError = require("../../helpers/customError.js");
-const { DailySurvey } = require("./classes.js");
+const { DailySurvey, Retro } = require("./classes.js");
 
 const name = "mongo_api";
 
@@ -41,7 +41,7 @@ mongoApi.welcome_get = async () => {
   const body = {};
 
   const response = await sendReq(name, type, endpoint, params, query, body);
-  console.log(response);
+  //console.log(response);
   return response;
 };
 
@@ -70,6 +70,18 @@ mongoApi.daily_survey_comment_put = async (team_id, user_id, comment) => {
   return response;
 };
 
-// e3a0f147-5cdb-43fb-9117-3692f8e71010  team
-// 7a60cfb8-1ab5-4f00-bcbd-a8cbcba75067   user
+mongoApi.retro_post = async(body = new Retro()) => {
+  const type = "post";
+  const endpoint = "/retro";
+  const params = "";
+  const query = {};
+  body.sprint = 0
+
+  const response = await sendReq(name, type, endpoint, params, query, body);
+   //console.log(JSON.stringify(response));
+  return response;
+};
+
+
+
 module.exports = mongoApi;

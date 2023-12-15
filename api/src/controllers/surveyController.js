@@ -38,7 +38,7 @@ controller.dailySurveyPost = async (req, res) => {
     daily_survey.user_id = req.user_id_token;
     const result = await createSurvey(daily_survey);
 
-    sendResponse(res, 200, result);
+  res.status(200).json(result)
   } catch (error) {
     sendError(res, error);
   }
