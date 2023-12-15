@@ -17,7 +17,9 @@ export interface DashBoardState {
   metricsForToday: string | null;
   linesMetrics: string[] | null;
   dataAmount: string[] | null;
+  shortRecomendation: string | null;
   isLoading: boolean;
   //@ts-expect-error 'fafaf'
   membersActiveTeam: Members | [];
+  modalOpen: boolean;
 }

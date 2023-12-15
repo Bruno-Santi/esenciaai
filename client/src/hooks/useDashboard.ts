@@ -8,6 +8,7 @@ import {
   onSetActiveTeamMembers,
   cleanActiveTeam,
   onSaveMetricsForToday,
+  onToggleModal,
 } from "../store/dashboard/dashboardSlice";
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useModal } from ".";
@@ -25,8 +26,17 @@ export const useDashboard = () => {
   const { closeModal } = useModal();
   const [loading, setLoading] = useState(true);
   const { user } = useSelector(({ auth }) => auth);
-  const { userTeams, activeTeam, membersActiveTeam, metricsForToday, linesMetrics, dataAmount, isLoading } =
-    useSelector(({ dashboard }) => dashboard);
+  const {
+    userTeams,
+    activeTeam,
+    membersActiveTeam,
+    metricsForToday,
+    linesMetrics,
+    shortRecomendation,
+    dataAmount,
+    isLoading,
+    modalOpen,
+  } = useSelector(({ dashboard }) => dashboard);
 
   const startSettingUser = () => {
     dispatch(onSetUser(user));
@@ -50,29 +60,33 @@ export const useDashboard = () => {
     try {
       const surveyData = await getTeamData(id);
       console.log(surveyData.data);
-
+      const datalocal = localStorage.getItem("surveyData");
+      if (datalocal) localStorage.removeItem("surveyData");
       if (surveyData.error) {
         dispatch(
           onSaveMetricsForToday({
             metricsForToday: {},
             linesMetrics: {},
             dataAmount: [],
+            shortRecomendation: "",
           })
         );
       } else {
         dispatch(
           onSaveMetricsForToday({
-            metricsForToday: surveyData.data.pie_chart || {}, // Verificar si existe y es un array
-            linesMetrics: surveyData.data.lines_graph || {}, // Verificar si existe y es un array
-            dataAmount: surveyData.data.data_amounts || [], // Verificar si existe y es un array
+            metricsForToday: surveyData.data.pie_chart || {},
+            linesMetrics: surveyData.data.lines_graph || {},
+            dataAmount: surveyData.data.data_amounts || [],
+            shortRecomendation: surveyData.data.short_recommendation || "",
           })
         );
       }
 
       const dataToSave = {
-        metricsForToday: surveyData.data.pie_chart || {}, // Verificar si existe y es un array
-        linesMetrics: surveyData.data.lines_graph || {}, // Verificar si existe y es un array
-        dataAmount: surveyData.data.data_amounts || [], // Verificar si existe y es un array
+        metricsForToday: surveyData.data.pie_chart || {},
+        linesMetrics: surveyData.data.lines_graph || {},
+        dataAmount: surveyData.data.data_amounts || [],
+        shortRecomendation: surveyData.data.short_recommendation || "",
       };
       localStorage.setItem("surveyData", JSON.stringify(dataToSave));
     } catch (error) {
@@ -182,7 +196,9 @@ export const useDashboard = () => {
       console.log(error);
     }
   };
-
+  const startToggleModal = () => {
+    dispatch(onToggleModal());
+  };
   return {
     startSettingActiveTeam,
     starGettingData,
@@ -199,9 +215,12 @@ export const useDashboard = () => {
     membersActiveTeam,
     startSettingTeams,
     loading,
+    shortRecomendation,
     metricsForToday,
     startCreatingSurvey,
     surveyLoading,
     creatingLoading,
+    startToggleModal,
+    modalOpen,
   };
 };

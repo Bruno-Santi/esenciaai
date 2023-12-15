@@ -9,8 +9,10 @@ const initialState: DashBoardState = {
   membersActiveTeam: [],
   metricsForToday: {},
   linesMetrics: {},
+  shortRecomendation: "",
   dataAmount: [],
   isLoading: false,
+  modalOpen: false,
 };
 
 export const dashboardSlice = createSlice({
@@ -27,6 +29,7 @@ export const dashboardSlice = createSlice({
       state.userTeams = [];
       state.linesMetrics = [];
       state.dataAmount = [];
+      state.shortRecomendation = "";
       state.metricsForToday = [];
       state.membersActiveTeam = [];
     },
@@ -39,6 +42,7 @@ export const dashboardSlice = createSlice({
       state.metricsForToday = [];
       state.linesMetrics = [];
       state.dataAmount = [];
+      state.shortRecomendation = "";
     },
     onSetUserTeams: (
       state,
@@ -72,6 +76,7 @@ export const dashboardSlice = createSlice({
       state.metricsForToday = payload.metricsForToday;
       state.linesMetrics = payload.linesMetrics;
       state.dataAmount = payload.dataAmount;
+      state.shortRecomendation = payload.shortRecomendation;
       state.isLoading = false;
     },
 
@@ -83,6 +88,9 @@ export const dashboardSlice = createSlice({
     ) => {
       state.userTeams.push(action.payload.team);
       state.isLoading = false;
+    },
+    onToggleModal: (state) => {
+      state.modalOpen = !state.modalOpen;
     },
   },
 });
@@ -97,6 +105,7 @@ export const {
   onSetActiveTeamMembers,
   cleanActiveTeam,
   onSaveMetricsForToday,
+  onToggleModal,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

@@ -1,7 +1,9 @@
+import { useDocumentTitle } from "../../hooks";
 import { DashboardLayout } from "../../layaout/DashboardLayout";
 import { BackButton, NoRetro } from "../components";
 
 export const Retrospectives = () => {
+  useDocumentTitle("Retrospectives | Esencia.app");
   return (
     <DashboardLayout>
       <BackButton />

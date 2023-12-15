@@ -10,3 +10,4 @@ export * from "./TeamList";
 export * from "./Teams";
 export * from "./NoRetro";
 export * from "./BackButton";
+export * from "./FeedBack";

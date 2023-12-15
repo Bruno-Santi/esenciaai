@@ -1,10 +1,7 @@
 import React from "react";
+import { useDocumentTitle } from "../../hooks";
 
-export const FeedbackRecognition =
-  () => {
-    return (
-      <div>
-        FeedbackRecognition
-      </div>
-    );
-  };
+export const FeedbackRecognition = () => {
+  useDocumentTitle("Feed Back | Esencia.app");
+  return <div>FeedbackRecognition</div>;
+};

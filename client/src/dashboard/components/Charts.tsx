@@ -24,7 +24,7 @@ const MetricChart = ({ metricName, value, color }) => {
   );
 
   return (
-    <div className='-z-0' style={{ width: 150, height: 100, margin: 16 }}>
+    <div className='-z-0 w-[150px]' style={{ width: 150, height: 100, margin: 16 }}>
       <VictoryPie
         data={data}
         width={150}
@@ -50,6 +50,7 @@ export const Charts = () => {
     <div className='flex mx-auto -z-10 justify-center space-x-6'>
       <MetricChart metricName='Self Satisfaction' value={metricsForToday.self_satisfaction} color='#FF6384' />
       <MetricChart metricName='Team Collaboration' value={metricsForToday.team_collaboration} color='#36A2EB' />
+
       <MetricChart metricName='Work Engagement' value={metricsForToday.work_engagement} color='#FFCE56' />
       <MetricChart metricName='Workspace Well-being Metric' value={metricsForToday.workspace} color='#4CAF50' />
       <div id='tooltip-container' className='-z-10' style={{ position: "fixed", top: 0, left: 0 }} />

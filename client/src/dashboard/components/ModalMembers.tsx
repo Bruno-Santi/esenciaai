@@ -11,7 +11,7 @@ export const ModalMembers: React.FC<{
   closeModal: () => void;
 }> = ({ closeModal }) => {
   const { creatingLoading } = useAuthSlice();
-  const { membersActiveTeam, activeTeam } = useDashboard();
+  const { membersActiveTeam, activeTeam, startToggleModal } = useDashboard();
   const [addMember, setAddMember] = useState(false);
   const [forceUpdate, setForceUpdate] = useState(false); // Estado adicional
 
@@ -27,7 +27,10 @@ export const ModalMembers: React.FC<{
     <Modal>
       <div
         className='text-5xl text-primary/60 z-50 cursor-pointer absolute right-4 top-4 duration-700 hover:text-secondary '
-        onClick={closeModal}
+        onClick={() => {
+          closeModal();
+          startToggleModal();
+        }}
       >
         <IoMdClose />
       </div>
