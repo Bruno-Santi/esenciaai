@@ -56,8 +56,8 @@ export const useDashboard = () => {
       setLoading(false);
     }
   };
-
-  const starGettingData = async (id: string) => {
+  const buttonGetData = async (id, triggered) => await starGettingData(id, triggered);
+  const starGettingData = async (id: string, triggered?: boolean) => {
     try {
       const surveyData = await getTeamData(id);
       console.log(surveyData.data);
@@ -89,9 +89,12 @@ export const useDashboard = () => {
         dataAmount: surveyData.data.data_amounts || [],
         shortRecomendation: surveyData.data.short_recommendation || "",
       };
+      if (triggered)
+        !surveyData.data.error ? toast.success("Data received successfully") : toast.warning("No data yet");
       localStorage.setItem("surveyData", JSON.stringify(dataToSave));
     } catch (error) {
       console.log(error);
+      toastWarning("Error while getting data");
     }
   };
   const startSettingActiveTeam = async (id: number) => {
@@ -234,6 +237,7 @@ export const useDashboard = () => {
     surveyLoading,
     creatingLoading,
     startToggleModal,
+    buttonGetData,
     modalOpen,
   };
 };
