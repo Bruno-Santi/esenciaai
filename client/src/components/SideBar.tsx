@@ -17,7 +17,7 @@ export const SideBar = () => {
           </div>
           <CiCirclePlus
             onClick={() => {
-              openModal("createTeam");
+              openModal();
               startToggleModal();
             }}
             className='text-tertiary w-12 h-12 mx-auto fixed left-2 bottom-5 cursor-pointer hover:text-secondary duration-700'

@@ -60,7 +60,7 @@ export const useDashboard = () => {
     }
   };
   const startToggleModal = () => {
-    dispatch(onToggleModal());
+    dispatch(onToggleModal(!modalOpen));
   };
   const buttonGetData = async (id, triggered) => {
     try {
@@ -72,7 +72,6 @@ export const useDashboard = () => {
     }
   };
   const starGettingData = async (id: string, triggered?: boolean) => {
-    modalOpen ? startToggleModal() : "";
     dispatch(onSetDataLoading(true));
 
     setTimeout(async () => {
@@ -126,11 +125,11 @@ export const useDashboard = () => {
         toastWarning("Error while getting data");
       } finally {
         dispatch(onSetDataLoading(false));
-        modalOpen ? startToggleModal() : "";
       }
     }, 1500);
   };
   const startSettingActiveTeam = async (id: number) => {
+    modalOpen && startToggleModal();
     const dataToSave = {
       metricsForToday: [],
       linesMetrics: [],

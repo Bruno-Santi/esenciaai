@@ -53,6 +53,7 @@ export const dashboardSlice = createSlice({
     ) => {
       state.userTeams = action.payload.userTeams;
       state.isLoading = false;
+      state.modalOpen = false;
     },
     onSetActiveTeam: (
       state,
@@ -63,6 +64,7 @@ export const dashboardSlice = createSlice({
       const userTeam = state.userTeams.find((team) => team.id === action.payload.id);
       state.activeTeam = userTeam;
       state.isLoading = false;
+      state.modalOpen = false;
     },
     onSetActiveTeamMembers: (
       state,
@@ -90,8 +92,8 @@ export const dashboardSlice = createSlice({
       state.userTeams.push(action.payload.team);
       state.isLoading = false;
     },
-    onToggleModal: (state) => {
-      state.modalOpen = !state.modalOpen;
+    onToggleModal: (state, { payload }) => {
+      state.modalOpen = payload;
     },
     onSetDataLoading: (state, { payload }) => {
       state.dataLoading = payload;

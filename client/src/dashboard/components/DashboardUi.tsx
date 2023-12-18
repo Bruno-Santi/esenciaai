@@ -38,9 +38,6 @@ export const DashboardUi = () => {
       toastWarning("Error creating retro");
     }
   };
-  useEffect(() => {
-    startToggleModal();
-  }, [dataLoading]);
 
   return (
     <>
