@@ -1,39 +1,24 @@
 import { useState } from "react";
 
-interface ModalState {
+interface ModalHook {
   isOpen: boolean;
-  modalType: string | null;
-}
-
-interface ModalActions {
-  openModal: (modalType: string) => void;
+  openModal: () => void;
   closeModal: () => void;
 }
 
-interface ModalHook extends ModalState, ModalActions {}
-
 export const useModal = (): ModalHook => {
-  const [modalState, setModalState] = useState<ModalState>({
-    isOpen: false,
-    modalType: null,
-  });
+  const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = (modalType: string) => {
-    setModalState({
-      isOpen: true,
-      modalType: modalType,
-    });
+  const openModal = () => {
+    setIsOpen(true);
   };
 
   const closeModal = () => {
-    setModalState({
-      isOpen: false,
-      modalType: null,
-    });
+    setIsOpen(false);
   };
 
   return {
-    ...modalState,
+    isOpen,
     openModal,
     closeModal,
   };

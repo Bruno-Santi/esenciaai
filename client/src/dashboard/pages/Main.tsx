@@ -6,7 +6,7 @@ import { useDocumentTitle } from "../../hooks";
 import css from "@emotion/styled";
 import { ClipLoader } from "react-spinners";
 export const Main = () => {
-  const { startSettingUser, startSettingTeams, userTeams, dataLoading } = useDashboard();
+  const { startSettingUser, startSettingTeams, userTeams, dataLoading, startToggleModal, modalOpen } = useDashboard();
   useDocumentTitle("Dashboard | Esencia.app");
   useEffect(() => {
     const fetchData = async () => {
@@ -17,8 +17,12 @@ export const Main = () => {
     fetchData();
   }, []);
   useEffect(() => {
-    console.log(dataLoading);
+    if (modalOpen) startToggleModal();
+    return () => {
+      if (modalOpen) startToggleModal();
+    };
   }, [dataLoading]);
+
   return (
     <DashboardLayout>
       {dataLoading === false ? (

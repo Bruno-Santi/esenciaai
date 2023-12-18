@@ -26,7 +26,7 @@ export const useDashboard = () => {
   const [creatingLoading, setCreatingLoading] = useState(false);
 
   const dispatch = useDispatch();
-  const { closeModal } = useModal();
+  const { closeModal, isOpen } = useModal();
   const [loading, setLoading] = useState(true);
   const { user } = useSelector(({ auth }) => auth);
   const {
@@ -121,6 +121,7 @@ export const useDashboard = () => {
         toastWarning("Error while getting data");
       } finally {
         dispatch(onSetDataLoading(false));
+        closeModal();
       }
     }, 1500);
   };
@@ -136,7 +137,7 @@ export const useDashboard = () => {
     //@ts-expect-error 'efefe'
     starGettingData(id);
     console.log(id);
-
+    closeModal();
     dispatch(
       onSetActiveTeam({
         id: id,
@@ -267,5 +268,7 @@ export const useDashboard = () => {
     buttonGetData,
     modalOpen,
     dataLoading,
+    closeModal,
+    isOpen,
   };
 };

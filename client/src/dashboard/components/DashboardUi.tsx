@@ -6,7 +6,7 @@ import { useNavigateTo } from "../../hooks";
 import { toastSuccess, toastWarning } from "../../helpers";
 import { IoRefreshCircleOutline } from "react-icons/io5";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { UsePagination } from "../../helpers/UsePagination";
 
 export const DashboardUi = () => {
@@ -20,6 +20,7 @@ export const DashboardUi = () => {
     shortRecomendation,
     modalOpen,
     buttonGetData,
+    startToggleModal,
     dataLoading,
   } = useDashboard();
   const { handleNavigate } = useNavigateTo();
@@ -37,8 +38,10 @@ export const DashboardUi = () => {
       toastWarning("Error creating retro");
     }
   };
+  useEffect(() => {
+    startToggleModal();
+  }, [dataLoading]);
 
-  if (dataLoading) return <h2>cargando</h2>;
   return (
     <>
       <div className=' w-full md:grid lg:grid px-6 ml-16 sm:flex sm:flex-col  lg:py-6 md:py-20 grid-cols-12 grid-rows-2 gap-6'>
@@ -53,7 +56,7 @@ export const DashboardUi = () => {
             <span className='text-center font-poppins w-4/12 mt-20 text-primary/50 font-bold text-4xl'>
               <div className='flex justify-center -space-x-20 m-auto text-center'></div>
               {Object.keys(metricsForToday).length > 0 ? (
-                <div className={!modalOpen ? "hidden" : ""}>
+                <div className={modalOpen ? "hidden" : ""}>
                   <Charts />
                 </div>
               ) : (
