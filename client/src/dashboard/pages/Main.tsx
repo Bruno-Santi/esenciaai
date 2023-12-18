@@ -13,6 +13,7 @@ export const Main = () => {
       await startSettingUser();
       await startSettingTeams();
     };
+    if (modalOpen) startToggleModal();
 
     fetchData();
   }, []);
