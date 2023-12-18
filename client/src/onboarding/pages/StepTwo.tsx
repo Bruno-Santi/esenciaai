@@ -72,7 +72,7 @@ export const StepTwo = () => {
             )}
           </div>
         </span>
-        <div className='flex w-2/6 m-auto'>
+        <div className='flex w-2/6 m-auto '>
           <button
             onClick={() => {
               localStorage.setItem("firstLoggin", "1");
@@ -81,8 +81,8 @@ export const StepTwo = () => {
             disabled={isLoading}
             className={
               isLoading
-                ? "btn-disabled p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg "
-                : "btn-secondary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
+                ? "btn-disabled p-2 w-[200px] mr-2 mx-auto mt-20 rounded-lg font-poppins text-lg "
+                : "btn-secondary p-2 w-[200px] mr-2 mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
             }
           >
             Skip for now
@@ -92,8 +92,8 @@ export const StepTwo = () => {
             disabled={isLoading || !teamName.length}
             className={
               isLoading
-                ? "btn-disabled p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg "
-                : "btn-primary p-2 w-[200px] mx-auto mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
+                ? "btn-disabled p-2 w-[200px] mx-auto ml-2 mt-20 rounded-lg font-poppins text-lg "
+                : "btn-primary p-2 w-[200px] mx-auto ml-2 mt-20 rounded-lg font-poppins text-lg duration-700 hover:bg-tertiary hover:text-primary"
             }
           >
             Continue

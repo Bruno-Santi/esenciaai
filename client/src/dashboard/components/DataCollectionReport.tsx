@@ -13,7 +13,7 @@ export const DataCollectionReport = () => {
 
   return (
     <div>
-      <ul className='text-primary text-xl md:text-lg text-left border-2 border-primary/30 rounded-lg space-y-4 m-auto justify-start '>
+      <ul className='text-primary text-xl md:text-sm text-left border-2 border-primary/30 rounded-lg space-y-2 m-auto justify-start '>
         {Object.entries(dataAmount).map(([key, value]) => (
           <li key={key} className='p-4 odd:bg-gray-400/40 rounded-lg'>
             {key.replace(/_/g, " ").replace(/\b\w/g, (match) => match.toUpperCase())}: {renderValue(value)}

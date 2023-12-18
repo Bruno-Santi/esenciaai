@@ -50,7 +50,7 @@ export const DashboardUi = () => {
           <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Key team indicator</span>
           <span className='font-poppins font-extralight ml-4 text-lg'>For the last 15 days</span>
           <div className='flex items-center justify-center h-3/6'>
-            <span className='text-center font-poppins w-4/12 mt-10 text-primary/50 font-bold text-4xl'>
+            <span className='text-center font-poppins w-4/12 mt-10 my-auto text-primary/50 font-bold text-4xl'>
               <div className='flex justify-center -space-x-20 m-auto text-center'></div>
               {Object.keys(metricsForToday).length > 0 ? (
                 <div className={modalOpen ? "hidden" : ""}>
@@ -66,13 +66,18 @@ export const DashboardUi = () => {
         <div
           className='bg-quaternary shadow-lg
          shadow-primary/50  h-[400px]
-      w-full lg:col-span-3 md:col-span-4  rounded-md'
+      w-full lg:col-span-4 md:col-span-4  rounded-md'
         >
-          <span className='font-poppins text-tertiary w-full text-2xl ml-4 mt-4 flex'>Actionable Insights</span>
-          <div ref={containerRef} className='bg-tertiary w-5/6 mt-4 h-4/6 mx-auto rounded-lg overflow-y-scroll'>
+          <span className='font-poppins text-tertiary w-full my-auto place-items-center  text-2xl ml-4 mt-4 flex'>
+            Actionable Insights
+          </span>
+          <div
+            ref={containerRef}
+            className='bg-tertiary w-5/6 mt-4 place-items-center  align-middle h-4/6 mx-auto  rounded-lg overflow-y-scroll'
+          >
             <div
               ref={containerRef}
-              className='font-poppin p-3 w-6/6  scroll-p-12 overflow-x-hidden bg-tertiary  m-auto'
+              className='font-poppin p-3 w-6/6  scroll-p-12 overflow-x-hidden my-auto bg-tertiary  m-auto'
             >
               {Object.keys(shortRecomendation).length > 0 ? (
                 <UsePagination shortRecomendation={shortRecomendation} containerRef={containerRef} />
@@ -99,7 +104,7 @@ export const DashboardUi = () => {
         <div
           className='bg-tertiary shadow-lg
          shadow-primary/50  h-[400px]
-      w-full col-span-4 md:col-span-3 md:row-span-2 lg:row-span-1 rounded-md'
+      w-full col-span-3 md:col-span-2 md:row-span-2 lg:row-span-1 rounded-md'
         >
           <div className='flex flex-col space-y-8 p-2 m-auto md:col-span-3 '>
             <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Avaible Actions</span>
@@ -108,7 +113,7 @@ export const DashboardUi = () => {
               onClick={() => startCreatingSurvey(activeTeam.name, activeTeam.id)}
               className={
                 !surveyLoading
-                  ? "btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary"
+                  ? "btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700 hover:bg-amber-100 hover:text-primary"
                   : "btn-secondary font-poppins text-xl rounded-md p-2 duration-700 "
               }
             >
@@ -116,21 +121,23 @@ export const DashboardUi = () => {
             </button>
             <button
               onClick={() => handleSendRetro(activeTeam.id)}
-              className='btn-primary font-poppins text-xl rounded-md p-2 duration-700 hover:bg-amber-100 hover:text-primary'
+              className='btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md
+              lg:p-2 duration-700 hover:bg-amber-100
+               hover:text-primary'
             >
               Retrospectives
             </button>
             <button
               className='btn-primary 
-          font-poppins text-base rounded-md p-2 duration-700
+          font-poppins text-sm rounded-md p-2 md:p-1 duration-700 lg:p-2 lg:text-lg
            hover:bg-amber-100 hover:text-primary'
               onClick={() => handleNavigate("/dashboard/feedback")}
             >
               Feedback and Recognition
             </button>
             <button
-              className='btn-primary font-poppins text-xl rounded-md
-           p-2 duration-700 hover:bg-amber-100
+              className='btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md
+           lg:p-2 duration-700 hover:bg-amber-100
             hover:text-primary'
             >
               Reports
@@ -141,12 +148,12 @@ export const DashboardUi = () => {
         <div
           className='bg-tertiary shadow-lg
          shadow-primary/50  h-[400px]
-      w-full lg:col-span-4 md:col-span-3 row-span-2 rounded-md'
+      w-full lg:col-span-4 md:col-span-2 row-span-2 rounded-md justify-center m-auto place-content-center'
         >
           <span className='font-poppins text-primary flex mt-4 ml-4 md:text-lg text-2xl'>Data collection report</span>
 
-          <div className='flex ml-10 items-center font-extralight justify-start h-3/6'>
-            <span className='text-center mt-28 font-bold font-poppins w-5/6 text-primary/50 md:text-lg text-4xl'>
+          <div className='flex items-center my-auto  font-extralight mx-auto justify-center h-3/6'>
+            <span className='text-center mt-28 font-bold font-poppins w-5/6  text-primary/50 md:text-lg text-4xl'>
               <DataCollectionReport />
             </span>
           </div>
@@ -155,7 +162,7 @@ export const DashboardUi = () => {
         <div
           className='bg-tertiary shadow-lg
          shadow-primary/50  h-[400px]
-      w-full lg:col-span-8 md:col-span-6 row-span-2  rounded-md'
+      w-full lg:col-span-8 md:col-span-8 row-span-2  rounded-md '
         >
           <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Team global report</span>
           <div className='flex items-center m-auto justify-center h-3/6'>

@@ -24,11 +24,11 @@ export const UsePagination = ({ shortRecomendation, containerRef }) => {
       <p className='font-poppins mx-auto my-auto flex'>Complete more than 1 survey to get short recommendation's</p>
     );
   return (
-    <div>
+    <div className='flex flex-col my-auto justify-center place-content-center items-center'>
       {datosPagina.map(([title, content]) => (
         <div key={title}>
-          <h2 className='font-bold'>{title}:</h2>
-          <p>{content}</p>
+          <h2 className='font-bold font-manrope text-lg'>{title}:</h2>
+          <p className='font-poppins'>{content}</p>
         </div>
       ))}
       <div className='flex mx-auto justify-center mt-2'>
@@ -41,9 +41,7 @@ export const UsePagination = ({ shortRecomendation, containerRef }) => {
         >
           <RxDoubleArrowLeft />
         </button>
-        <div className='px-2 font-poppins my-auto'>
-          {paginaActual}/{paginasTotales}
-        </div>
+
         <button
           className={
             paginaActual !== paginasTotales
