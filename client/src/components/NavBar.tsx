@@ -16,7 +16,7 @@ export const NavBar = () => {
         <NavBarResponsive />
       </div>
       <nav className='sm:hidden md:block lg:block flex w-full  sticky bg-primary h-16  justify-around '>
-        <div className='w-full flex justify-between items-center  '>
+        <div className='w-full flex justify-between items-center'>
           <div className='flex mt-2 ml-24'>
             <FaRegUserCircle className='text-tertiary h-12 w-12 -mx-2 mr-1' />
             <span className='text-tertiary my-auto  ml-2 font-poppins text-lg'>

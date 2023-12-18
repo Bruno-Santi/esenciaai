@@ -73,8 +73,8 @@ export const DashboardUi = () => {
          shadow-primary/50  h-[400px]
       w-full lg:col-span-3 md:col-span-4  rounded-md'
         >
-          <span className='font-poppins text-tertiary w-1/6 text-3xl ml-4 mt-4 flex'>Actionable Insights</span>
-          <div className='bg-tertiary w-2/3 mt-10 h-3/6 mx-auto rounded-lg'>
+          <span className='font-poppins text-tertiary w-full text-3xl ml-4 mt-4 flex'>Actionable Insights</span>
+          <div className='bg-tertiary w-5/6 mt-10 h-2/3 mx-auto rounded-lg'>
             <p className='font-poppins p-2 w-5/6 overflow-y-scroll scroll-p-12 overflow-x-hidden h-full m-auto'>
               {shortRecomendation.length > 0 ? (
                 <p>{shortRecomendation}</p>

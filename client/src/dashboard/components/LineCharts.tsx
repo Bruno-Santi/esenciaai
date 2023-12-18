@@ -8,8 +8,24 @@ const formatDate = (dateString) => moment(dateString).format("MM/DD/YYYY");
 
 export const LineCharts = () => {
   const { linesMetrics } = useDashboard();
-  const chartContainer = useRef(null);
+  const chartContainer = useRef(null)
   const chartInstance = useRef(null);
+  const adjustCanvasSize = () => {
+    const canvas = chartContainer.current;
+
+    canvas.width = window.innerWidth;
+    canvas.height = 200; 
+  };
+  useEffect(() => {
+    adjustCanvasSize();
+
+    window.addEventListener('resize', adjustCanvasSize);
+
+    return () => {
+      window.removeEventListener('resize', adjustCanvasSize);
+    };
+  }, []); 
+
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [
@@ -60,7 +76,6 @@ export const LineCharts = () => {
 
   useEffect(() => {
     if (chartContainer.current && chartData.labels.length > 0) {
-      // Crear una nueva instancia de Chart.js o actualizar la existente
       if (!chartInstance.current) {
         chartInstance.current = new Chart(chartContainer.current.getContext("2d"), {
           type: "line",

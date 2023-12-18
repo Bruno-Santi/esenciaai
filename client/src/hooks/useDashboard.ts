@@ -73,6 +73,16 @@ export const useDashboard = () => {
           })
         );
       } else {
+        if (surveyData.data.short_recommendation === "there are no recommendations") {
+          dispatch(
+            onSaveMetricsForToday({
+              metricsForToday: surveyData.data.pie_chart || {},
+              linesMetrics: surveyData.data.lines_graph || {},
+              dataAmount: surveyData.data.data_amounts || [],
+              shortRecomendation: "Recommendation still in process, try again in a few minutes",
+            })
+          );
+        }
         dispatch(
           onSaveMetricsForToday({
             metricsForToday: surveyData.data.pie_chart || {},
