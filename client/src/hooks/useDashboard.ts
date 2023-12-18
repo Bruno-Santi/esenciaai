@@ -59,6 +59,9 @@ export const useDashboard = () => {
       setLoading(false);
     }
   };
+  const startToggleModal = () => {
+    dispatch(onToggleModal());
+  };
   const buttonGetData = async (id, triggered) => {
     try {
       await starGettingData(id, triggered);
@@ -70,6 +73,7 @@ export const useDashboard = () => {
   };
   const starGettingData = async (id: string, triggered?: boolean) => {
     dispatch(onSetDataLoading(true));
+    if (modalOpen) dispatch(startToggleModal());
     setTimeout(async () => {
       try {
         const surveyData = await getTeamData(id);
@@ -227,9 +231,6 @@ export const useDashboard = () => {
       setSurveyLoading(false);
       console.log(error);
     }
-  };
-  const startToggleModal = () => {
-    dispatch(onToggleModal());
   };
 
   const startCreatingRetro = async (teamId) => {

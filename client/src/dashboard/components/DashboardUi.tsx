@@ -53,7 +53,7 @@ export const DashboardUi = () => {
           <span className='font-poppins text-primary flex mt-4 ml-4 text-2xl'>Key team indicator</span>
           <span className='font-poppins font-extralight ml-4 text-lg'>For the last 15 days</span>
           <div className='flex items-center justify-center h-3/6'>
-            <span className='text-center font-poppins w-4/12 mt-20 text-primary/50 font-bold text-4xl'>
+            <span className='text-center font-poppins w-4/12 mt-10 text-primary/50 font-bold text-4xl'>
               <div className='flex justify-center -space-x-20 m-auto text-center'></div>
               {Object.keys(metricsForToday).length > 0 ? (
                 <div className={modalOpen ? "hidden" : ""}>
