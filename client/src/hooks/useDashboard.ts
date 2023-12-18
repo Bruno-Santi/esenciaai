@@ -72,8 +72,9 @@ export const useDashboard = () => {
     }
   };
   const starGettingData = async (id: string, triggered?: boolean) => {
+    modalOpen ? startToggleModal() : "";
     dispatch(onSetDataLoading(true));
-    if (modalOpen) dispatch(startToggleModal());
+
     setTimeout(async () => {
       try {
         const surveyData = await getTeamData(id);

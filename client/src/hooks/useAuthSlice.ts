@@ -27,7 +27,7 @@ export const useAuthSlice = () => {
     } catch (error) {
       console.log(error);
 
-      dispatch(onLogOut(error.message.payload));
+      dispatch(onLogOut(""));
     }
   };
   const startLoginUser = async ({ email, password }: { email: string; password: string }) => {
