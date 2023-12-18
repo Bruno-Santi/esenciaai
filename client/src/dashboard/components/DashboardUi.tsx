@@ -56,7 +56,7 @@ export const DashboardUi = () => {
             <span className='text-center font-poppins w-4/12 mt-10 text-primary/50 font-bold text-4xl'>
               <div className='flex justify-center -space-x-20 m-auto text-center'></div>
               {Object.keys(metricsForToday).length > 0 ? (
-                <div className={modalOpen ? "hidden" : ""}>
+                <div className={!modalOpen ? "hidden" : ""}>
                   <Charts />
                 </div>
               ) : (
