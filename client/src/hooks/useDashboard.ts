@@ -9,6 +9,7 @@ import {
   cleanActiveTeam,
   onSaveMetricsForToday,
   onToggleModal,
+  onSetDataLoading,
 } from "../store/dashboard/dashboardSlice";
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useModal } from ".";
@@ -23,6 +24,7 @@ import axios from "axios";
 export const useDashboard = () => {
   const [surveyLoading, setSurveyLoading] = useState(false);
   const [creatingLoading, setCreatingLoading] = useState(false);
+
   const dispatch = useDispatch();
   const { closeModal } = useModal();
   const [loading, setLoading] = useState(true);
@@ -37,6 +39,7 @@ export const useDashboard = () => {
     dataAmount,
     isLoading,
     modalOpen,
+    dataLoading,
   } = useSelector(({ dashboard }) => dashboard);
 
   const startSettingUser = () => {
@@ -56,56 +59,70 @@ export const useDashboard = () => {
       setLoading(false);
     }
   };
-  const buttonGetData = async (id, triggered) => await starGettingData(id, triggered);
-  const starGettingData = async (id: string, triggered?: boolean) => {
+  const buttonGetData = async (id, triggered) => {
     try {
-      const surveyData = await getTeamData(id);
-      console.log(surveyData.data);
-      const datalocal = localStorage.getItem("surveyData");
-      if (datalocal) localStorage.removeItem("surveyData");
-      if (surveyData.error) {
-        dispatch(
-          onSaveMetricsForToday({
-            metricsForToday: {},
-            linesMetrics: {},
-            dataAmount: [],
-            shortRecomendation: "",
-          })
-        );
-      } else {
-        if (surveyData.data.short_recommendation === "there are no recommendations") {
+      await starGettingData(id, triggered);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(onSetDataLoading(false));
+    }
+  };
+  const starGettingData = async (id: string, triggered?: boolean) => {
+    dispatch(onSetDataLoading(true));
+    setTimeout(async () => {
+      try {
+        const surveyData = await getTeamData(id);
+
+        const datalocal = localStorage.getItem("surveyData");
+        if (datalocal) localStorage.removeItem("surveyData");
+        if (surveyData.error) {
+          dispatch(
+            onSaveMetricsForToday({
+              metricsForToday: {},
+              linesMetrics: {},
+              dataAmount: [],
+              shortRecomendation: {},
+            })
+          );
+        } else {
+          if (surveyData.data.short_recommendation === "there are no recommendations") {
+            dispatch(
+              onSaveMetricsForToday({
+                metricsForToday: surveyData.data.pie_chart || {},
+                linesMetrics: surveyData.data.lines_graph || {},
+                dataAmount: surveyData.data.data_amounts || [],
+                shortRecomendation: surveyData.data.short_recommendation || {},
+              })
+            );
+          }
           dispatch(
             onSaveMetricsForToday({
               metricsForToday: surveyData.data.pie_chart || {},
               linesMetrics: surveyData.data.lines_graph || {},
               dataAmount: surveyData.data.data_amounts || [],
-              shortRecomendation: "Recommendation still in process, try again in a few minutes",
+              shortRecomendation: surveyData.data.short_recommendation || {},
             })
           );
         }
-        dispatch(
-          onSaveMetricsForToday({
-            metricsForToday: surveyData.data.pie_chart || {},
-            linesMetrics: surveyData.data.lines_graph || {},
-            dataAmount: surveyData.data.data_amounts || [],
-            shortRecomendation: surveyData.data.short_recommendation || "",
-          })
-        );
-      }
 
-      const dataToSave = {
-        metricsForToday: surveyData.data.pie_chart || {},
-        linesMetrics: surveyData.data.lines_graph || {},
-        dataAmount: surveyData.data.data_amounts || [],
-        shortRecomendation: surveyData.data.short_recommendation || "",
-      };
-      if (triggered)
-        !surveyData.data.error ? toast.success("Data received successfully") : toast.warning("No data yet");
-      localStorage.setItem("surveyData", JSON.stringify(dataToSave));
-    } catch (error) {
-      console.log(error);
-      toastWarning("Error while getting data");
-    }
+        const dataToSave = {
+          metricsForToday: surveyData.data.pie_chart || {},
+          linesMetrics: surveyData.data.lines_graph || {},
+          dataAmount: surveyData.data.data_amounts || [],
+          shortRecomendation: surveyData.data.short_recommendation || "",
+        };
+
+        if (triggered)
+          !surveyData.data.error ? toast.success("Data received successfully") : toast.warning("No data yet");
+        localStorage.setItem("surveyData", JSON.stringify(dataToSave));
+      } catch (error) {
+        console.log(error);
+        toastWarning("Error while getting data");
+      } finally {
+        dispatch(onSetDataLoading(false));
+      }
+    }, 1500);
   };
   const startSettingActiveTeam = async (id: number) => {
     const dataToSave = {
@@ -249,5 +266,6 @@ export const useDashboard = () => {
     startToggleModal,
     buttonGetData,
     modalOpen,
+    dataLoading,
   };
 };

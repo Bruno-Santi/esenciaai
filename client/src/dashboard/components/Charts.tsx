@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import { VictoryPie, VictoryTooltip } from "victory";
 import { useDashboard } from "../../hooks/useDashboard";
@@ -45,6 +45,9 @@ const MetricChart = ({ metricName, value, color }) => {
 
 export const Charts = () => {
   const { metricsForToday } = useDashboard();
+  useEffect(() => {
+    console.log(metricsForToday);
+  }, [metricsForToday]);
 
   return (
     <div className='flex mx-auto -z-10 justify-center space-x-6'>
