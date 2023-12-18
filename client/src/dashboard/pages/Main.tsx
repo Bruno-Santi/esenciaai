@@ -13,16 +13,9 @@ export const Main = () => {
       await startSettingUser();
       await startSettingTeams();
     };
-    if (modalOpen) startToggleModal();
 
     fetchData();
   }, []);
-  useEffect(() => {
-    if (modalOpen) startToggleModal();
-    return () => {
-      if (modalOpen) startToggleModal();
-    };
-  }, [dataLoading]);
 
   return (
     <DashboardLayout>

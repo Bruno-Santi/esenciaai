@@ -126,7 +126,7 @@ export const useDashboard = () => {
         toastWarning("Error while getting data");
       } finally {
         dispatch(onSetDataLoading(false));
-        closeModal();
+        modalOpen ? startToggleModal() : "";
       }
     }, 1500);
   };
