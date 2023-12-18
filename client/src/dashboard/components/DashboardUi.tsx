@@ -7,7 +7,7 @@ import { toastSuccess, toastWarning } from "../../helpers";
 import { IoRefreshCircleOutline } from "react-icons/io5";
 
 import { useRef } from "react";
-import { UsePagination } from "../../hooks/usePagination";
+import { UsePagination } from "../../helpers/UsePagination";
 
 export const DashboardUi = () => {
   const {
