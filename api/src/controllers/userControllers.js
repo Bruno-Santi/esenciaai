@@ -7,6 +7,7 @@ const {
   editProfileUser,
   scrumGet,
   getUserAndTheirTeams,
+  updateUser
 } = require("../services/userServices");
 const { sendResponse, sendError } = require("../helpers/managerController");
 const controller = {};
@@ -67,20 +68,20 @@ controller.updatePasswordPut = async (req, res) => {
   }
 };
 
-controller.deletedUser = async (req, res) => {
+controller.userDelete = async (req, res) => {
   try {
-    const id = req.params.id;
-    const result = await deleteUser(id);
+    const { team_id, user_id } = req.body;
+    const result = await deleteUser(team_id, user_id, req.user_id_token);
     res.status(200).json(result);
   } catch (error) {
     throw error;
   }
 };
 
-controller.updateUser = async (req, res) => {
-  const user = req.body;
+controller.userPut = async (req, res) => {
   try {
-    const result = await editProfileUser(user);
+    const { email, user } = req.body;
+    const result = await updateUser(email, user, req.user_id_token);
     res.status(200).json(result);
   } catch (error) {
     throw error;

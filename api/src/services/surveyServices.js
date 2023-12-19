@@ -13,7 +13,42 @@ const { sendExternalEmail } = require("../microServices/email/nodeMailer");
 surveyService = {};
 addServices("survey", surveyService);
 
+
+// surveyService.createRetro = async(retro = new Retro()) => {
+//   const teamExist = await UserTeam.findOne({
+//     where: { teamId: retro.team_id },
+//   });
+
+//   if (!teamExist)
+//     throwError(
+//       "access_denied",
+//       403,
+//       "You not belong to this team or your team not exist."
+//     );
+//       await retro_post(retro)
+// }
+
+
+
+
+surveyService.putCommentDailySurvey = async (teamId, userId, comment) => {
+  const teamExist = await UserTeam.findOne({
+    where: { teamId, userId },
+  });
+
+  if (!teamExist)
+    throwError(
+      "access_denied",
+      403,
+      "You not belong to this team or your team not exist."
+    );
+
+  return await daily_survey_comment_put(teamId, userId, comment)
+
+};
+
 surveyService.getSurveyByTeam = async (teamId, scrumMasterId) => {
+
   const teamExist = await UserTeam.findOne({
     where: { teamId, userId: scrumMasterId },
   });

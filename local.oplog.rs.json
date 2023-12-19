@@ -1,0 +1,4474 @@
+[{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "229Wb2oET+KAlCVi8A9d5Q==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "i",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6578cf6d5d617fafaa6e79fa"
+    },
+    "team_id": "juanma",
+    "daily_survey": {
+      "2023-12-12": {
+        "self_satisfaction": 5,
+        "survey": [
+          {
+            "user_id": "team_dream",
+            "sprint": 1,
+            "question1": 5,
+            "question2": 4,
+            "question3": 2,
+            "question4": 2,
+            "comment": {
+              "content": "wanna eat a moztaza burger"
+            }
+          }
+        ],
+        "team_collaboration": 2,
+        "work_engagement": 4,
+        "workspace": 2
+      }
+    },
+    "daily_survey_count": 1,
+    "self_satisfaction_general": 5,
+    "team_collaboration_general": 2,
+    "work_engagement_general": 4,
+    "workspace_general": 2
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578cf6d5d617fafaa6e79fa"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416237,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:23:57.421Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "229Wb2oET+KAlCVi8A9d5Q==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 11,
+        "self_satisfaction_general": 5,
+        "team_collaboration_general": 2,
+        "work_engagement_general": 4,
+        "workspace_general": 2
+      },
+      "sdaily_survey": {
+        "i": {
+          "2023-12-12": {
+            "self_satisfaction": 5,
+            "survey": [
+              {
+                "user_id": "juanma",
+                "sprint": 1,
+                "question1": 5,
+                "question2": 4,
+                "question3": 2,
+                "question4": 2,
+                "comment": {
+                  "content": "wanna eat a moztaza burger"
+                }
+              }
+            ],
+            "team_collaboration": 2,
+            "work_engagement": 4,
+            "workspace": 2
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6573be015d617fafaae84cc9"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416343,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:25:43.760Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "Q+GGQkKeQgm7yr/MXdRqow==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573be015d617fafaae84cc9"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416461,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:27:41.361Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "rafAu5pzTziN0BXVLfLjOw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573ba675d617fafaae67bdb"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416467,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:27:47.895Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "EPYkhmPIQ/2VqbcbBNOqzA==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573b2865d617fafaae27784"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416478,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:27:58.691Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "rafAu5pzTziN0BXVLfLjOw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573ac5e5d617fafaadf37cb"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702416501,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:28:21.218Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "Q+GGQkKeQgm7yr/MXdRqow==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "65789b6e7a0539565f2b4ed6"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702417527,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:45:27.863Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "EPYkhmPIQ/2VqbcbBNOqzA==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573b7df5d617fafaae53a1f"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702417537,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:45:37.472Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "rafAu5pzTziN0BXVLfLjOw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 3,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "657247505d617fafaa275719"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702417543,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:45:43.399Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "Q+GGQkKeQgm7yr/MXdRqow==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 3,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6578cf6d5d617fafaa6e79fa"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702417681,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:48:01.794Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "lsrh6cSRRMeE2rr9ixxbPQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 3,
+        "self_satisfaction_general": 15,
+        "team_collaboration_general": 6,
+        "work_engagement_general": 12,
+        "workspace_general": 6
+      },
+      "sdaily_survey": {
+        "i": {
+          "2023-12-11": {
+            "self_satisfaction": 5,
+            "survey": [
+              {
+                "user_id": "juan",
+                "sprint": 1,
+                "question1": 5,
+                "question2": 4,
+                "question3": 2,
+                "question4": 2,
+                "comment": {
+                  "content": "I feel no motivation"
+                }
+              }
+            ],
+            "team_collaboration": 2,
+            "work_engagement": 4,
+            "workspace": 2
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702418322,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-12T21:58:42.005Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-08": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.4468749463558197
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6573acad5d617fafaadf6500"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.422Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-08": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.856346607208252
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6573ae315d617fafaae033a4"
+    }
+  },
+  "stmtId": 1,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.422Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 1
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-09": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.6827096939086914
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6573d4cc5d617fafaaf3c9c0"
+    }
+  },
+  "stmtId": 2,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.422Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 2
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-09": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.6406537890434265
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6574e0755d617fafaa7c7d07"
+    }
+  },
+  "stmtId": 3,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 4
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 3
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.8479045629501343
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657511d15d617fafaa960832"
+    }
+  },
+  "stmtId": 4,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 5
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 4
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.5256864428520203
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 5,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 6
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 5
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.4236662685871124
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 6,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 7
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 6
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s2": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.4470757842063904
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 7,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 8
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 7
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s3": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.3962094485759735
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 8,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 9
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 8
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.6749348640441895
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65779e3d5d617fafaae69abc"
+    }
+  },
+  "stmtId": 9,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 10
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.423Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 9
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.581177294254303
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 10,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 11
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.424Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 10
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.5696460008621216
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577b0d75d617fafaaf0acf6"
+    }
+  },
+  "stmtId": 11,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 12
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.424Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 11
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": 0.5004075765609741
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578a3555d617fafaa5d5159"
+    }
+  },
+  "stmtId": 12,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 13
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.424Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 12
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.8479045629501343
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 13,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 14
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.424Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 13
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "L6G3Xp7ZR3i9fu/nihrBrQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "i": {
+                  "sentiment": -0.7515454888343811
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 14,
+  "ts": {
+    "$timestamp": {
+      "t": 1702430785,
+      "i": 15
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T01:26:25.424Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702430785,
+        "i": 14
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-08": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": -0.44687509536743164
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6573acad5d617fafaadf6500"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.028Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.967441976070404
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657511d15d617fafaa960832"
+    }
+  },
+  "stmtId": 4,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.028Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 1
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "u": {
+                  "sentiment": -0.8479047417640686
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657511d15d617fafaa960832"
+    }
+  },
+  "stmtId": 5,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.028Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 2
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 6,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 4
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.028Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 3
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "u": {
+                  "sentiment": -0.4236663579940796
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 7,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 5
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 4
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s2": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.44707557559013367
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65769ce85d617fafaa5cdf8b"
+    }
+  },
+  "stmtId": 8,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 6
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 5
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.6749346852302551
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "65779e3d5d617fafaae69abc"
+    }
+  },
+  "stmtId": 10,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 7
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 6
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.5811773538589478
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 11,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 8
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 7
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": -0.5696461200714111
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577b0d75d617fafaaf0acf6"
+    }
+  },
+  "stmtId": 12,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 9
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 8
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-12": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.5004076361656189
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578a3555d617fafaa5d5159"
+    }
+  },
+  "stmtId": 13,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 10
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.029Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 9
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0.967441976070404
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 14,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 11
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.030Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 10
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-10": {
+          "ssurvey": {
+            "a": true,
+            "s1": {
+              "scomment": {
+                "u": {
+                  "sentiment": -0.8479047417640686
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 15,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 12
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.030Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 11
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "aGEL8CwXTtiWOpuqz2DzMQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-11": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "sentiment": 0
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 16,
+  "ts": {
+    "$timestamp": {
+      "t": 1702433147,
+      "i": 13
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T02:05:47.030Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 1702433147,
+        "i": 12
+      }
+    },
+    "t": 79
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "v+fenvlCSMaHrYO87stMng==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 2
+      },
+      "sdaily_survey": {
+        "i": {
+          "2023-12-13": {
+            "self_satisfaction": 0,
+            "survey": [
+              {
+                "user_id": "7a60cfb8-1ab5-4f00-bcbd-a8cbcba75067",
+                "sprint": 0,
+                "question1": 0,
+                "question2": 0,
+                "question3": 0,
+                "question4": 0,
+                "comment": {
+                  "content": ""
+                }
+              }
+            ],
+            "team_collaboration": 0,
+            "work_engagement": 0,
+            "workspace": 0
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702438998,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T03:43:18.517Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "gDvVEzSbQPGP9+vCJNlG+g==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 6,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-13": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "content": "undefined"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702444902,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T05:21:42.868Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "gDvVEzSbQPGP9+vCJNlG+g==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 7,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-13": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "content": "falopa"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702444907,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T05:21:47.803Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "gDvVEzSbQPGP9+vCJNlG+g==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 12,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sdaily_survey": {
+        "s2023-12-13": {
+          "ssurvey": {
+            "a": true,
+            "s0": {
+              "scomment": {
+                "u": {
+                  "content": "sdfsdfsdf"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577a4415d617fafaae9c638"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702444973,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T05:22:53.293Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "zgWBSCxER9q88LEXcJpHXQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "i",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6579c6415d617fafaace076d"
+    },
+    "team_id": "7e170ce0-fa91-4db5-9114-eb81f5fc4eef",
+    "daily_survey": {
+      "2023-12-13": {
+        "self_satisfaction": 9,
+        "survey": [
+          {
+            "user_id": "b9810167-553d-4127-b559-c3cc155fe5a2",
+            "sprint": 0,
+            "question1": 9,
+            "question2": 3,
+            "question3": 8,
+            "question4": 1,
+            "comment": {
+              "content": ""
+            }
+          }
+        ],
+        "team_collaboration": 8,
+        "work_engagement": 3,
+        "workspace": 1
+      }
+    },
+    "daily_survey_count": 1,
+    "self_satisfaction_general": 9,
+    "team_collaboration_general": 8,
+    "work_engagement_general": 3,
+    "workspace_general": 1
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6579c6415d617fafaace076d"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702479425,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T14:57:05.784Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "suBCT+09RBmWIfm4DOYhyw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6579c6415d617fafaace076d"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702480247,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T15:10:47.439Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "zgWBSCxER9q88LEXcJpHXQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "i",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6579c9ae5d617fafaacf74ed"
+    },
+    "team_id": "7e170ce0-fa91-4db5-9114-eb81f5fc4eef",
+    "daily_survey": {
+      "2023-12-13": {
+        "self_satisfaction": 5,
+        "survey": [
+          {
+            "user_id": "bb6bf9b4-f236-476a-8790-b2d78be89793",
+            "sprint": 0,
+            "question1": 5,
+            "question2": 5,
+            "question3": 5,
+            "question4": 5,
+            "comment": {
+              "content": ""
+            }
+          }
+        ],
+        "team_collaboration": 5,
+        "work_engagement": 5,
+        "workspace": 5
+      }
+    },
+    "daily_survey_count": 1,
+    "self_satisfaction_general": 5,
+    "team_collaboration_general": 5,
+    "work_engagement_general": 5,
+    "workspace_general": 5
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6579c9ae5d617fafaacf74ed"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702480302,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T15:11:42.844Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "zgWBSCxER9q88LEXcJpHXQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 3,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 2,
+        "self_satisfaction_general": 6,
+        "team_collaboration_general": 6,
+        "work_engagement_general": 6,
+        "workspace_general": 10
+      },
+      "sdaily_survey": {
+        "s2023-12-13": {
+          "u": {
+            "self_satisfaction": 6,
+            "team_collaboration": 6,
+            "work_engagement": 6,
+            "workspace": 10
+          },
+          "ssurvey": {
+            "a": true,
+            "u1": {
+              "user_id": "f9769f01-83b5-42f7-b8c5-9a8ec6db41e3",
+              "sprint": 0,
+              "question1": 1,
+              "question2": 1,
+              "question3": 1,
+              "question4": 5,
+              "comment": {
+                "content": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6579c9ae5d617fafaacf74ed"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702480332,
+      "i": 6
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-13T15:12:12.221Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "lOppsIQORdWw3srBsM+aow==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "i",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "657a4b855d617fafaa065aa5"
+    },
+    "team_id": "86d00380-4e14-44f9-a91f-f2fff557c27e",
+    "daily_survey": {
+      "2023-12-14": {
+        "self_satisfaction": 1,
+        "survey": [
+          {
+            "user_id": "038a9720-8e37-4ae6-b6f4-a2ec700d792a",
+            "sprint": 0,
+            "question1": 1,
+            "question2": 1,
+            "question3": 1,
+            "question4": 10,
+            "comment": {
+              "content": ""
+            }
+          }
+        ],
+        "team_collaboration": 1,
+        "work_engagement": 1,
+        "workspace": 10
+      }
+    },
+    "daily_survey_count": 1,
+    "self_satisfaction_general": 1,
+    "team_collaboration_general": 1,
+    "work_engagement_general": 1,
+    "workspace_general": 10
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657a4b855d617fafaa065aa5"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702513541,
+      "i": 4
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T00:25:41.723Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "AemvdWZ+T6SRq5oTOW+L9Q==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "d",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6573acad5d617fafaadf6500"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702561152,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T13:39:12.326Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "WxiAIn41R0myVPN29Mg5sA==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 2,
+        "self_satisfaction_general": 10,
+        "team_collaboration_general": 12,
+        "work_engagement_general": 10,
+        "workspace_general": 11
+      },
+      "sdaily_survey": {
+        "i": {
+          "2023-12-14": {
+            "self_satisfaction": 5,
+            "survey": [
+              {
+                "user_id": "bd71b8ba-8820-4f26-b61f-793a73017fa7",
+                "sprint": 0,
+                "question1": 5,
+                "question2": 5,
+                "question3": 6,
+                "question4": 6,
+                "comment": {
+                  "content": ""
+                }
+              }
+            ],
+            "team_collaboration": 6,
+            "work_engagement": 5,
+            "workspace": 6
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578a3555d617fafaa5d5159"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702564550,
+      "i": 5
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T14:35:50.405Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "wvLD911FSqSirmEoV119tQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 3,
+        "self_satisfaction_general": 20,
+        "team_collaboration_general": 22,
+        "work_engagement_general": 20,
+        "workspace_general": 21
+      },
+      "sdaily_survey": {
+        "s2023-12-14": {
+          "u": {
+            "self_satisfaction": 15,
+            "team_collaboration": 16,
+            "work_engagement": 15,
+            "workspace": 16
+          },
+          "ssurvey": {
+            "a": true,
+            "u1": {
+              "user_id": "61274964-a2d2-47cf-99f3-09e868c1806a",
+              "sprint": 0,
+              "question1": 10,
+              "question2": 10,
+              "question3": 10,
+              "question4": 10,
+              "comment": {
+                "content": ""
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578a3555d617fafaa5d5159"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702565503,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T14:51:43.697Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "53ybaAcbRQC4o+kcORGZXw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "daily_survey_count": 2
+      },
+      "sdaily_survey": {
+        "i": {
+          "2023-12-14": {
+            "self_satisfaction": 0,
+            "survey": [
+              {
+                "user_id": "3f420e7b-7aa7-40e0-9ea4-28faaf07683a",
+                "sprint": 0,
+                "question1": 0,
+                "question2": 0,
+                "question3": 0,
+                "question4": 0,
+                "comment": {
+                  "content": "holandamm"
+                }
+              }
+            ],
+            "team_collaboration": 0,
+            "work_engagement": 0,
+            "workspace": 0
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6577b0d75d617fafaaf0acf6"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702574766,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T17:26:06.095Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "zpMv6g3fRtCaHtNopQrTyQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "i",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "657b47c75d617fafaa6a5e98"
+    },
+    "team_id": "172326a1-3c89-46fd-8036-b9335b2fd8a0",
+    "daily_survey": {
+      "2023-12-14": {
+        "self_satisfaction": 0,
+        "survey": [
+          {
+            "user_id": "dd3b2cae-6f6b-4f91-9b44-9cbe5bfc5401",
+            "sprint": 0,
+            "question1": 0,
+            "question2": 0,
+            "question3": 0,
+            "question4": 0,
+            "comment": {
+              "content": "maslaton 2027"
+            }
+          }
+        ],
+        "team_collaboration": 0,
+        "work_engagement": 0,
+        "workspace": 0
+      }
+    },
+    "daily_survey_count": 1,
+    "self_satisfaction_general": 0,
+    "team_collaboration_general": 0,
+    "work_engagement_general": 0,
+    "workspace_general": 0
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657b47c75d617fafaa6a5e98"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702578119,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T18:21:59.242Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "ynTbVBHiT7qBwPtpuwZx0A==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 3,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "i": {
+        "short_recommendation": {
+          "content": {
+            "recomendacion1": "La satisfacción general del equipo ha disminuido en comparación con el día anterior. Es importante analizar qué factores han contribuido a esta disminución y tomar medidas para mejorarlos. Podrían realizarse encuestas de satisfacción para recopilar el feedback de los miembros del equipo y abordar los problemas identificados. También se podrían buscar formas de fomentar la colaboración y el bienestar en el entorno de trabajo, mediante actividades de team building, espacios de descanso adecuados, entre otros.",
+            "recomendacion2": "Los cuatro cuadrantes han experimentado una disminución en comparación con el día anterior, pero el cuadrante de Self Satisfaction ha tenido la mayor caída con un coeficiente de -0.5. Para mejorar este aspecto específico, sería recomendable realizar sesiones de retroalimentación y autoevaluación individual, fomentar el reconocimiento de logros personales y brindar oportunidades de crecimiento y desarrollo. Además, promover un ambiente de trabajo positivo y respetuoso, donde las opiniones de los miembros del equipo sean escuchadas y valoradas, podría contribuir a elevar el nivel de satisfacción personal."
+          },
+          "date": {
+            "$date": "2023-12-11T00:00:00.000Z"
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702580712,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T19:05:12.182Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "TLwVwyXLRk6F2gweGb0bfw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    },
+    "team_id": "argentina2",
+    "daily_survey": {
+      "2023-12-10": {
+        "self_satisfaction": 10,
+        "survey": [
+          {
+            "user_id": "messi",
+            "sprint": 1,
+            "question1": 5,
+            "question2": 4,
+            "question3": 2,
+            "question4": 2,
+            "comment": {
+              "content": "La empresa valora la retroalimentación de los empleados y busca constantemente mejoras.",
+              "sentiment": 0.967441976070404,
+              "topic": "Valoración de la retroalimentación y búsqueda de mejoras"
+            }
+          },
+          {
+            "user_id": "dibu",
+            "sprint": 1,
+            "question1": 5,
+            "question2": 4,
+            "question3": 2,
+            "question4": 2,
+            "comment": {
+              "content": "La falta de reconocimiento a veces desmotiva a los empleados a esforzarse más.",
+              "topic": "Falta de reconocimiento a veces desmotiva a los empleados",
+              "sentiment": -0.8479047417640686
+            }
+          }
+        ],
+        "team_collaboration": 4,
+        "work_engagement": 8,
+        "workspace": 4
+      },
+      "2023-12-11": {
+        "self_satisfaction": 5,
+        "survey": [
+          {
+            "user_id": "juan",
+            "sprint": 1,
+            "question1": 5,
+            "question2": 4,
+            "question3": 2,
+            "question4": 2,
+            "comment": {
+              "content": "I feel no motivation",
+              "sentiment": 0
+            }
+          }
+        ],
+        "team_collaboration": 2,
+        "work_engagement": 4,
+        "workspace": 2
+      }
+    },
+    "daily_survey_count": 3,
+    "self_satisfaction_general": 15,
+    "team_collaboration_general": 6,
+    "work_engagement_general": 12,
+    "workspace_general": 6,
+    "retro": [
+      {
+        "sprint": 0,
+        "date": {
+          "$date": "2023-12-07T19:35:26.604Z"
+        },
+        "c1": [
+          {
+            "note": "perolito",
+            "thumb_up": 2,
+            "thumb_down": 1
+          }
+        ],
+        "c2": [
+          {
+            "note": "La coordinación del equipo",
+            "thumb_up": 4,
+            "thumb_down": 2
+          }
+        ],
+        "c3": [
+          {
+            "note": "Dar más descansos entre horas",
+            "thumb_up": 2,
+            "thumb_down": 3
+          },
+          {
+            "note": "Hablar más de manera presencial",
+            "thumb_up": 5,
+            "thumb_down": 1
+          }
+        ],
+        "c4": [
+          {
+            "note": "Mejorar la integridad del equipo",
+            "thumb_up": 5,
+            "thumb_down": 2
+          },
+          {
+            "note": "Mejorar el trato con otras áreas",
+            "thumb_up": 5,
+            "thumb_down": 2
+          }
+        ]
+      },
+      {
+        "sprint": 1,
+        "date": {
+          "$date": "2023-12-07T19:35:26.604Z"
+        },
+        "c1": [
+          {
+            "note": "perolito",
+            "thumb_up": 2,
+            "thumb_down": 1
+          }
+        ],
+        "c2": [
+          {
+            "note": "La coordinación del equipo",
+            "thumb_up": 4,
+            "thumb_down": 2
+          }
+        ],
+        "c3": [
+          {
+            "note": "Dar más descansos entre horas",
+            "thumb_up": 2,
+            "thumb_down": 3
+          },
+          {
+            "note": "Hablar más de manera presencial",
+            "thumb_up": 5,
+            "thumb_down": 1
+          }
+        ],
+        "c4": [
+          {
+            "note": "Mejorar la integridad del equipo",
+            "thumb_up": 5,
+            "thumb_down": 2
+          },
+          {
+            "note": "Mejorar el trato con otras áreas",
+            "thumb_up": 5,
+            "thumb_down": 2
+          }
+        ]
+      }
+    ]
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "needsRetryImage": "postImage",
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702580830,
+      "i": 4
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T19:07:10.469Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "ynTbVBHiT7qBwPtpuwZx0A==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 4,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "i": {
+        "short_recommendation": {
+          "content": {
+            "recommendation1": "La satisfacción general del equipo ha disminuido, es importante identificar las razones detrás de esta caída y trabajar en solucionarlas. Realizar una encuesta anónima para recolectar feedback de los miembros del equipo puede ser una buena forma de entender las preocupaciones y áreas de mejora. A partir de los resultados de la encuesta, se pueden implementar acciones concretas para abordar los problemas identificados y mejorar la satisfacción general del equipo.",
+            "recommendation2": "La mayor caída se ha producido en el cuadrante de 'Self Satisfaction', lo cual indica que los miembros del equipo no se sienten satisfechos con su propio rendimiento y bienestar. Es importante fomentar un ambiente de apoyo donde los empleados se sientan valorados y reconocidos. Podría organizar sesiones de coaching individual para ayudar a los miembros del equipo a identificar áreas de mejora y establecer metas personales. También se pueden ofrecer oportunidades de capacitación y desarrollo para impulsar el crecimiento y aumentar la satisfacción personal en el trabajo."
+          },
+          "date": {
+            "$date": "2023-12-11T00:00:00.000Z"
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702580989,
+      "i": 5
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T19:09:49.822Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "ynTbVBHiT7qBwPtpuwZx0A==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 5,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sshort_recommendation": {
+        "u": {
+          "content": {
+            "recommendation1": "La diferencia de Satisfacción General entre ayer y hoy es negativa (-0.325). Es importante tomar medidas para mejorar el nivel de satisfacción general del equipo. Se sugiere revisar los comentarios de las personas y analizar las posibles áreas de mejora identificadas, para luego implementar acciones concretas que promuevan el aumento de la satisfacción general. Esto puede incluir asignar responsabilidades de manera más equitativa, fomentar la colaboración y el trabajo en equipo, y crear un ambiente de trabajo positivo y saludable.",
+            "recommendation2": "En base a la comparación de los cuadrantes, se observa que el Self Satisfaction, Work Engagement, Team Collaboration y Workspace Well-Being han experimentado una disminución. Es importante priorizar la mejora del Self Satisfaction, que presenta una caída más significativa (-0.5). Para ello, se recomienda implementar estrategias que fomenten la motivación y el bienestar personal de los miembros del equipo. Esto puede incluir ofrecer oportunidades de desarrollo profesional, promover la retroalimentación constructiva y crear un ambiente de trabajo que valore el equilibrio entre vida personal y laboral."
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702581117,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T19:11:57.519Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "CQvVbnz0SDu2CDqwKkniZg==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "sshort_recommendation": {
+        "u": {
+          "content": {
+            "recommendation1": "La diferencia de satisfacción general entre ayer y hoy ha sido negativa (-0.325). Es importante abordar las razones detrás de esta disminución y tomar acciones para mejorar la satisfacción en general. Se recomienda realizar una evaluación de los comentarios de las personas y tomar en cuenta sus opiniones para identificar las áreas de mejora y trabajar en ellas en conjunto con todo el equipo.",
+            "recommendation2": "Tras comparar los 4 cuadrantes, se observa que el cuadrante de 'Self Satisfaction' ha tenido la mayor caída (-0.5) entre ayer y hoy. Es fundamental que el equipo preste atención a este aspecto específico y tome medidas para mejorar la satisfacción personal. Se sugiere fomentar actividades de bienestar y autocuidado, así como promover la comunicación abierta sobre las necesidades y expectativas individuales de cada miembro del equipo."
+          }
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "6578c21e7a0539565f2b4ed8"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702581545,
+      "i": 3
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-14T19:19:05.874Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "op": "c",
+  "ns": "test.$cmd",
+  "ui": {
+    "$binary": {
+      "base64": "c9Gf8yjRRAmZtQhc2tz4HA==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "create": "data_consultada",
+    "idIndex": {
+      "v": 2,
+      "key": {
+        "_id": 1
+      },
+      "name": "_id_"
+    }
+  },
+  "ts": {
+    "$timestamp": {
+      "t": 1702610833,
+      "i": 2
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-15T03:27:13.316Z"
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "X/2+E4pXTcy36n/iTC7VCw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "i": {
+        "retro": [
+          {
+            "sprint": 0,
+            "date": "2023-12-15",
+            "c1": [
+              {
+                "note": "i like this",
+                "thumb_down": 0,
+                "thumb_up": 0
+              },
+              {
+                "note": "i don't like this",
+                "thumb_down": 0,
+                "thumb_up": 0
+              }
+            ],
+            "c2": [
+              {
+                "note": "asd asd as d",
+                "thumb_down": 0,
+                "thumb_up": 0
+              }
+            ],
+            "c3": [
+              {
+                "note": "asdad asd asd as d",
+                "thumb_down": 0,
+                "thumb_up": 0
+              }
+            ],
+            "c4": [
+              {
+                "note": "stras d 2 da 2ing",
+                "thumb_down": 0,
+                "thumb_up": 0
+              }
+            ]
+          }
+        ],
+        "retro_count": 1
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657b47c75d617fafaa6a5e98"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702610866,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-15T03:27:46.196Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "B2soATyQQkKK4czP1ojJbQ==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 1,
+  "op": "i",
+  "ns": "test.data_consultada",
+  "ui": {
+    "$binary": {
+      "base64": "c9Gf8yjRRAmZtQhc2tz4HA==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "_id": {
+      "$oid": "657bc8e44a8e8c74c582f179"
+    },
+    "user_id": 123,
+    "team": "argentina",
+    "daily_survey": [
+      {
+        "sprint": 0,
+        "created_date": "2023-12-15T14:10:30.000Z",
+        "days": [
+          {
+            "date": "2020-12-15T14:10:30.000Z",
+            "data": [
+              {
+                "user_id": "messi",
+                "sprint": 1,
+                "question1": 5,
+                "question2": 4,
+                "question3": 2,
+                "question4": 2,
+                "comment": {
+                  "content": "La empresa valora la retroalimentación de los empleados y busca constantemente mejoras.",
+                  "sentiment": 0.967441976070404,
+                  "topic": "Valoración de la retroalimentación y búsqueda de mejoras"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657bc8e44a8e8c74c582f179"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702611237,
+      "i": 5
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-15T03:33:57.650Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+},
+{
+  "lsid": {
+    "id": {
+      "$binary": {
+        "base64": "X/2+E4pXTcy36n/iTC7VCw==",
+        "subType": "04"
+      }
+    },
+    "uid": {
+      "$binary": {
+        "base64": "ddqot68vLpBUPnOuqFj2cdClv/dv/vF9ZVSwknYHEsE=",
+        "subType": "00"
+      }
+    }
+  },
+  "txnNumber": 2,
+  "op": "u",
+  "ns": "essenciaIA_app.survey_data",
+  "ui": {
+    "$binary": {
+      "base64": "SsFDQGvyTPeY5AFrtbghcw==",
+      "subType": "04"
+    }
+  },
+  "o": {
+    "$v": 2,
+    "diff": {
+      "u": {
+        "retro_count": 2
+      },
+      "sretro": {
+        "a": true,
+        "u1": {
+          "sprint": 0,
+          "date": "2023-12-15",
+          "c1": [
+            {
+              "note": "i like this",
+              "thumb_down": 0,
+              "thumb_up": 0
+            },
+            {
+              "note": "i don't like this",
+              "thumb_down": 0,
+              "thumb_up": 0
+            }
+          ],
+          "c2": [
+            {
+              "note": "asd asd as d",
+              "thumb_down": 0,
+              "thumb_up": 0
+            }
+          ],
+          "c3": [
+            {
+              "note": "asdad asd asd as d",
+              "thumb_down": 0,
+              "thumb_up": 0
+            }
+          ],
+          "c4": [
+            {
+              "note": "stras d 2 da 2ing",
+              "thumb_down": 0,
+              "thumb_up": 0
+            }
+          ]
+        }
+      }
+    }
+  },
+  "o2": {
+    "_id": {
+      "$oid": "657b47c75d617fafaa6a5e98"
+    }
+  },
+  "stmtId": 0,
+  "ts": {
+    "$timestamp": {
+      "t": 1702611294,
+      "i": 1
+    }
+  },
+  "t": 79,
+  "v": 2,
+  "wall": {
+    "$date": "2023-12-15T03:34:54.588Z"
+  },
+  "prevOpTime": {
+    "ts": {
+      "$timestamp": {
+        "t": 0,
+        "i": 0
+      }
+    },
+    "t": -1
+  }
+}]

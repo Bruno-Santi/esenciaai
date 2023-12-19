@@ -39,20 +39,19 @@ userService.getUserAndTheirTeams = async (userId) => {
     include: [
       {
         model: Team,
-        attributes: ["id", "name", "logo"]
-      }
-    ]
+        attributes: ["id", "name", "logo"],
+      },
+    ],
   });
 
   const team_list = getTeamList.map((item) => ({
     id: item.Team.id,
     name: item.Team.name,
-    logo: item.Team.logo
+    logo: item.Team.logo,
   }));
 
   return { user: { id, first_name, last_name, email }, team_list };
 };
-
 
 userService.inviteUser = async () => {};
 
@@ -110,22 +109,25 @@ userService.getByEmail = async (email) => {
   return userEmail;
 };
 
-userService.deleteUser = async (id) => {
-  if (!id) {
-    throw new Error("el ID del usuario no proporcionado");
-  } else {
-    const user = await User.findByPk(id);
+userService.updateUser = async (email, user) => {
+  if (!user) throw new Error("No existe el usuario");
 
-    if (!user) {
-      throw new Error("El usuario no existe");
-    }
-    const deleteUser = await User.destroy({ where: { id } });
+  const existUser = await User.findOne({ where: { email } });
 
-    if (deleteUser === 0) {
-      throw new Error("El usuario no se pudo eliminar");
-    }
-    return `El usuario ${user.name} ${user.last_name} ha sido eliminado`;
-  }
+  if (!existUser)
+    throw new Error("No existe el usuario con el correo proporcionado");
+
+  // Ahora debes proporcionar un objeto con las propiedades a actualizar y un objeto 'where' para identificar el usuario específico.
+  const updatedUser = await User.update(user, { where: { email } });
+
+  return updatedUser;
 };
+
+userService.deleteUser = async (teamId, userId) => {
+const existTeamUser = await UserTeam.findOne({where: { teamId, userId }})
+if(!existTeamUser) throw new Error(`no se encontro ${teamId} con ${userId}`)
+return await UserTeam.destroy({ where: { teamId, userId } });
+};
+
 
 module.exports = userService;

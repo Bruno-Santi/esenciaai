@@ -13,7 +13,7 @@ const router = Router();
 router.use("/auth", Auth);
 router.use("/users", checkUserToken, Users);
 router.use("/teams", checkUserToken, Team);
-router.use("/analytics", checkUserToken, Analytics);
+router.use("/analytics", Analytics);
 router.use("/survey", Survey);
 router.use("/retro", Retro);
 
