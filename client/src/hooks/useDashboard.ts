@@ -130,6 +130,7 @@ export const useDashboard = () => {
       }
     }, 1500);
   };
+
   const startGettingLongRecommendation = async (teamId) => {
     try {
       const resp = await api.get(`/analytics/${teamId}`);
@@ -139,8 +140,9 @@ export const useDashboard = () => {
       console.log(error);
     }
   };
+
   const startSettingActiveTeam = async (id: number) => {
-    startGettingLongRecommendation(id);
+    await startGettingLongRecommendation(id);
     modalOpen && startToggleModal();
     const dataToSave = {
       metricsForToday: [],
