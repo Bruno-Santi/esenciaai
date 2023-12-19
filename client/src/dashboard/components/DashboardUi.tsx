@@ -147,7 +147,7 @@ export const DashboardUi = () => {
 
         <div
           className='bg-tertiary shadow-lg
-         shadow-primary/50  h-[400px]
+         shadow-primary/50  h-[400px] mb-6
       w-full lg:col-span-4 md:col-span-2 row-span-2 rounded-md justify-center m-auto place-content-center'
         >
           <span className='font-poppins text-primary flex mt-4 ml-4 md:text-lg text-2xl'>Data collection report</span>
