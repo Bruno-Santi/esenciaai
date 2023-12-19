@@ -19,12 +19,14 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app/app.js");
 const { conn } = require("./src/app/db.js");
+const addSocket = require("./src/sockets/index.js");
 
 // Syncing all the models at once.s
 
 conn.sync({ force: false }).then(() => {
-  const port = process.env.PORT || 3000;
-  server.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+  const PORT = process.env.PORT || 3000;
+  const app = addSocket(server);
+  app.listen(PORT, () => {
+    console.log(`Servidor escuchando en el puerto ${PORT}`);
   });
 });

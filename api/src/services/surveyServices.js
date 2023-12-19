@@ -2,12 +2,67 @@ const { addServices, getServices } = require(".");
 const { User, Team } = require("../app/db");
 const { UserTeam } = require("../app/dbRelations");
 const throwError = require("../helpers/customError");
-const { daily_survey_post } = require("../microServices/api_mongo");
+const {
+  daily_survey_post,
+  daily_survey_get,
+  recommendation_get,
+  daily_survey_comment_put,
+} = require("../microServices/api_mongo");
 const { DailySurvey } = require("../microServices/api_mongo/classes");
 const { sendExternalEmail } = require("../microServices/email/nodeMailer");
 
 surveyService = {};
 addServices("survey", surveyService);
+
+
+// surveyService.createRetro = async(retro = new Retro()) => {
+//   const teamExist = await UserTeam.findOne({
+//     where: { teamId: retro.team_id },
+//   });
+
+//   if (!teamExist)
+//     throwError(
+//       "access_denied",
+//       403,
+//       "You not belong to this team or your team not exist."
+//     );
+//       await retro_post(retro)
+// }
+
+
+
+
+surveyService.putCommentDailySurvey = async (teamId, userId, comment) => {
+  const teamExist = await UserTeam.findOne({
+    where: { teamId, userId },
+  });
+
+  if (!teamExist)
+    throwError(
+      "access_denied",
+      403,
+      "You not belong to this team or your team not exist."
+    );
+
+  return await daily_survey_comment_put(teamId, userId, comment)
+
+};
+
+surveyService.getSurveyByTeam = async (teamId, scrumMasterId) => {
+
+  const teamExist = await UserTeam.findOne({
+    where: { teamId, userId: scrumMasterId },
+  });
+
+  if (!teamExist)
+    throwError(
+      "access_denied",
+      403,
+      "You not belong to this team or your team not exist."
+    );
+
+  return await daily_survey_get(teamId);
+};
 
 surveyService.sendRequestOfDailySurvey = async (teamId, scrumMasterId) => {
   const getUserList = await UserTeam.findAll({
@@ -42,25 +97,27 @@ surveyService.sendRequestOfDailySurvey = async (teamId, scrumMasterId) => {
         password: item.User.password,
       });
   });
-
+  console.log(checkScrumMasterId, scrumMasterId);
   if (checkScrumMasterId !== scrumMasterId)
     throwError(
       "access_denied",
       403,
       "You not belong to this team or your team not exist."
     );
+
   await sendSurveyByEmail(teamId, teamName, user_list);
+  console.log("sendSurveyByEmail");
+  recommendation_get(teamId);
 
   return "Daily Survey Request sent to all team members successfully.";
 };
 
-sendSurveyByEmail = async (teamId, teamName, userList) => {
+const sendSurveyByEmail = async (teamId, teamName, userList) => {
   for (let i = 0; i < userList.length; i++) {
     const { token } = await getServices("auth").userLogin(
       userList[i].email,
       userList[i].password
     );
-
     function capitalizeFirstLetter(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
     }

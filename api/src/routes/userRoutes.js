@@ -2,6 +2,8 @@ const { Router } = require("express");
 const router = Router();
 const {
   usersGet,
+  userPut,
+  userDelete,
   userById,
   userByEmail,
   updatePasswordPut,
@@ -17,9 +19,9 @@ const { checkUserToken } = require("../middleware/authMiddlewares");
 //* params: {id}
 router.get("/", usersGet);
 //! return {user,teamsJoined:["teamId1","teamId2"]}
-
+router.put("/", userPut)
 //? not sure:
-
+router.delete("/", userDelete)
 // router.get("/scrum/:id", userScrumGet);
 // router.put("/update_password", updatePasswordPut);
 // router.get("/id/:id", userById);

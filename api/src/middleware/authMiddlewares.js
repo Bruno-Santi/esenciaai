@@ -62,6 +62,7 @@ middleware.checkUserValid = async (req, res, next) => {
 
 middleware.checkUserToken = async (req, res, next) => {
   try {
+    // console.log(req.body)
     const getToken = req.headers["authorization"];
 
     const tokenDecoded = validateAndGetTokenDecoded(getToken, USER_TOKEN_KEY);

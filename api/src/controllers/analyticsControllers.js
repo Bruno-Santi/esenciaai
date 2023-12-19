@@ -1,5 +1,5 @@
-const { log } = require("console");
 const { sendResponse, sendError } = require("../helpers/managerController");
+const { createRetro } = require("../services/analyticServices");
 
 const controller = {};
 
@@ -13,7 +13,7 @@ const controller = {};
 //     sendError(res, error);
 //   }
 // };
-controller.getData = async (req, res, team_id) => {
+controller.getData = async (req, res) => {
   try {
     const { team_id } = req.params;
     console.log(team_id);
@@ -26,4 +26,18 @@ controller.getData = async (req, res, team_id) => {
     throw new Error(error.message);
   }
 };
+
+controller.retroPost = async (req, res) => {
+  try {
+    console.log("controller retro :" + req.body.team_id);
+    const { team_id, retroList } = req.body;
+    console.log(team_id);
+    const user_id = req.user_id_token;
+    const result = await createRetro(team_id, user_id, retroList);
+    sendResponse(res, 200, result);
+  } catch (error) {
+    sendError(res, error);
+  }
+};
+
 module.exports = controller;

@@ -30,10 +30,14 @@ const createBody = async (taskName, link, firsName, team_name) => {
   let body = "";
   switch (taskName) {
     case "dailySurvey":
-      return (body = getDailySurvey(link, firsName, team_name));
+      console.log("dailySurvey");
+      return getDailySurvey(link, firsName, team_name);
+    case "retro":
+      return ` <div>
+          <h1>Welcome ${firsName} to Sprint 1 Retro!</h1>
+          <a href=${link}>Join the Retro of ${team_name} Here.</a>
+        </div>`;
 
-    case "password_changed":
-      // body = await getDocument(taskName);
       break;
   }
   return body;
@@ -49,4 +53,19 @@ const sendEmail = async (recipientEmail, subject = "Holidays", body) => {
   });
 };
 
-module.exports = { sendExternalEmail };
+const sendRetro = async (
+  recipientEmail,
+  subject,
+  { team_id, first_name, team_name }
+) => {
+  const body = await createBody(
+    "retro",
+    `${process.env.CLIENT_RETRO}?team_id=${team_id}`,
+    first_name,
+    team_name
+  );
+
+  return await sendEmail(recipientEmail, subject, body);
+};
+
+module.exports = { sendExternalEmail, sendRetro };

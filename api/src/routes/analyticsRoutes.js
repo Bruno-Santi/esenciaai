@@ -1,8 +1,9 @@
 const { Router } = require("express");
 const router = Router();
-const controllers = require("../controllers/authControllers");
 const { checkUserToken } = require("../middleware/authMiddlewares");
-const { getData } = require("../controllers/analyticsControllers");
+const { retroPost, getData } = require("../controllers/analyticsControllers");
+
+router.post("/retro", checkUserToken, retroPost);
 
 //? params:{teamId};
 router.get("/:team_id", checkUserToken, async (req, res) => {
@@ -14,4 +15,5 @@ router.get("/:team_id", checkUserToken, async (req, res) => {
     res.status(404).json({ error: error.message });
   }
 });
+
 module.exports = router;
