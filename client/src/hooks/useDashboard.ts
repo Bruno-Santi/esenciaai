@@ -197,17 +197,24 @@ export const useDashboard = () => {
           email: userData.email,
         },
       };
-      toast.success(`${formData.user.first_name} added to the team `, {
-        position: "bottom-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
       const response = await api.post(`/teams/members/`, formData);
+      if (response.data.user) {
+        toast.success(`${formData.user.first_name} added to the team `, {
+          position: "bottom-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        return startGettingMembers(teamId);
+      }
+
+      toast.warning(`${formData.user.email} has already been added to the some team`);
+      console.log(response.data.user);
+
       startGettingMembers(teamId);
       setCreatingLoading(false);
     } catch (error) {
@@ -259,6 +266,20 @@ export const useDashboard = () => {
     }
   };
 
+  const startDeletingMember = async (memberId, teamId, memberName) => {
+    try {
+      const data = { user_id: memberId, team_id: teamId };
+
+      const resp = await api.delete("/teams/members", { data });
+      toast.success(`${memberName} deleted successfully`);
+      await startGettingMembers(teamId);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+      toast.warning("Error deleting member");
+    }
+  };
+
   return {
     startSettingActiveTeam,
     starGettingData,
@@ -289,5 +310,6 @@ export const useDashboard = () => {
     isOpen,
     startGettingLongRecommendation,
     longRecommendation,
+    startDeletingMember,
   };
 };

@@ -1,10 +1,10 @@
 import axios from "axios";
 
-  //% FACU_EDIT
+//% FACU_EDIT
 
-export const baseURL = "https://9qhvw5j9-3000.brs.devtunnels.ms";
-
-  //% END
+export const baseURL = "http://localhost:3000";
+// https://9qhvw5j9-3000.brs.devtunnels.ms
+//% END
 
 const api = axios.create({
   baseURL,

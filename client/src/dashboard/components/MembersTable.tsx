@@ -2,10 +2,33 @@ import { useTable } from "react-table";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDashboard } from "../../hooks/useDashboard";
 import React, { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export const MembersTable = () => {
-  const { activeTeam, membersActiveTeam, startGettingMembers, startSettingActiveTeam } = useDashboard();
+  const { activeTeam, membersActiveTeam, startGettingMembers, startDeletingMember } = useDashboard();
+  const handleAccept = (userId, memberName) => {
+    startDeletingMember(userId, activeTeam.id, memberName);
+  };
 
+  const handleCancel = () => toast.error("Cancelled");
+
+  const startDeletingMemberInComponent = (id, name) => {
+    console.log(id);
+    toast.info(
+      <div className='flex flex-col'>
+        <p className='font-poppins mb-2'>Are you sure deleting {name} from this team?</p>
+        <div className='flex space-x-2'>
+          <button onClick={handleCancel} className='btn-secondary w-2/3 space-x-2 p-1 font-poppins rounded-md'>
+            ❌
+          </button>
+
+          <button onClick={() => handleAccept(id, name)} className='btn-primary w-2/3 p-1 font-poppins rounded-md'>
+            ✅
+          </button>
+        </div>
+      </div>
+    );
+  };
   const columns = React.useMemo(
     () => [
       {
@@ -16,27 +39,20 @@ export const MembersTable = () => {
         Header: "Email",
         accessor: "email",
       },
-      {
-        Header: "Modify",
-        accessor: "modify",
-        Cell: () => (
-          <span className='text-primary cursor-pointer text-lg lg:text-2xl'>
-            <FiEdit />
-          </span>
-        ),
-      },
+
       {
         Header: "Delete",
         accessor: "delete",
-        Cell: () => (
+        Cell: ({ row }) => (
           <span className='text-red-600 cursor-pointer  text-lg lg:text-2xl'>
-            <FiTrash2 />
+            <FiTrash2 onClick={() => startDeletingMemberInComponent(row.original.id, row.original.first_name)} />
           </span>
         ),
       },
     ],
     []
   );
+
   useEffect(() => {
     startGettingMembers(activeTeam.id);
   }, [membersActiveTeam.length]);
