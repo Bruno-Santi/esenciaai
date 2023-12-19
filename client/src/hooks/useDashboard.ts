@@ -73,13 +73,24 @@ export const useDashboard = () => {
       dispatch(onSetDataLoading(false));
     }
   };
+  const startGettingLongRecommendation = async (teamId) => {
+    try {
+      const resp = await api.get(`/get_long_recommendation?team_id=${teamId}`);
+      console.log(resp.data);
+
+      dispatch(onSetLongRecommendation(resp.data));
+    } catch (error) {
+      console.log(error);
+      toast.warning("Error while getting data");
+    }
+  };
   const starGettingData = async (id: string, triggered?: boolean) => {
     dispatch(onSetDataLoading(true));
-
     setTimeout(async () => {
       try {
         const surveyData = await getTeamData(id);
 
+        startGettingLongRecommendation(id);
         const datalocal = localStorage.getItem("surveyData");
         if (datalocal) localStorage.removeItem("surveyData");
         if (surveyData.error) {
@@ -129,16 +140,6 @@ export const useDashboard = () => {
         dispatch(onSetDataLoading(false));
       }
     }, 1500);
-  };
-
-  const startGettingLongRecommendation = async (teamId) => {
-    try {
-      const resp = await api.get(`/analytics/${teamId}`);
-      onSetLongRecommendation(resp);
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   const startSettingActiveTeam = async (id: number) => {

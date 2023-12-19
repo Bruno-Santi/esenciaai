@@ -8,6 +8,7 @@ import { IoRefreshCircleOutline } from "react-icons/io5";
 
 import { useEffect, useRef } from "react";
 import { UsePagination } from "../../helpers/UsePagination";
+import { useNavigate } from "react-router-dom";
 
 export const DashboardUi = () => {
   const {
@@ -25,6 +26,7 @@ export const DashboardUi = () => {
     dataLoading,
     longRecommendation,
   } = useDashboard();
+  const navigate = useNavigate();
   const { handleNavigate } = useNavigateTo();
   const containerRef = useRef();
   const handleSendRetro = async (teamId) => {
@@ -40,11 +42,12 @@ export const DashboardUi = () => {
       toastWarning("Error creating retro");
     }
   };
-
-  useEffect(() => {
-    startGettingLongRecommendation(activeTeam.id);
-    console.log(Object.entries(longRecommendation).length);
-  }, []);
+  const handleNavigateToFeedBack = () => {
+    console.log(Object.entries(longRecommendation).length > 0);
+    handleNavigate("/dashboard/feedback");
+    if (Object.entries(longRecommendation).length > 0 === false) return;
+  };
+  useEffect(() => {}, [longRecommendation]);
 
   return (
     <>
@@ -140,10 +143,7 @@ export const DashboardUi = () => {
                   ? "btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700 hover:bg-amber-100 hover:text-primary"
                   : "bg-gray-500 text-tertiary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700"
               }
-              onClick={() => {
-                handleNavigate("/dashboard/feedback");
-              }}
-              disabled={!Object.entries(longRecommendation).length}
+              onClick={handleNavigateToFeedBack}
             >
               Feedback and Recognition
             </button>
