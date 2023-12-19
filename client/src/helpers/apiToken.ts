@@ -1,7 +1,13 @@
 import axios from "axios";
 
+  //% FACU_EDIT
+
+export const baseURL = "https://9qhvw5j9-3000.brs.devtunnels.ms";
+
+  //% END
+
 const api = axios.create({
-  baseURL: "https://9qhvw5j9-3000.brs.devtunnels.ms",
+  baseURL,
 });
 
 api.interceptors.request.use(

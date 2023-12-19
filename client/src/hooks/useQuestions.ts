@@ -29,7 +29,9 @@ export const useQuestions = ({ team_id, token }) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setRangeValues((prevValues) => [
-      ...prevValues.map((item) => (item.id === name ? { ...item, value: parseInt(value, 10) } : item)),
+      ...prevValues.map((item) =>
+        item.id === name ? { ...item, value: parseInt(value, 10) } : item
+      ),
     ]);
     setChangesMade(true);
   };
@@ -53,16 +55,28 @@ export const useQuestions = ({ team_id, token }) => {
       comment: "",
       ...requestBody,
     };
+
     try {
-      const resp = await api.post(`/survey/daily_survey`, { daily_survey: dailySurvey });
+      const resp = await api.post(`/survey/daily_survey`, {
+        daily_survey: dailySurvey,
+      });
       console.log("todo bien " + resp);
     } catch (error) {
       console.log(error);
     }
 
     setIsSendend(true);
-    navigate("/members/comments", { state: { dailySurvey } });
+
+    // navigate("/members/comments", { state: { dailySurvey } });
+
+    //% FACU_EDIT
+    //! Estás cambiando el "team_id" por "token"?
+
+    navigate(`/members/comments?token=${team_id}&team_id=${token}`, {
+      state: { dailySurvey },
+    });
   };
+  //% END
 
   return {
     rangeValues,
