@@ -30,15 +30,8 @@ class Comment {
   }
 }
 
-class RetroItem {
-  constructor(
-    team_id = "",
-    sprint = "",
-    c1 = [new Comment()],
-    c2 = [new Comment()],
-    c3 = [new Comment()],
-    c4 = [new Comment()]
-  ) {
+class Retro {
+  constructor(team_id = "", sprint = 0, c1 = [], c2 = [], c3 = [], c4 = []) {
     this.team_id = team_id;
     this.sprint = sprint;
     this.c1 = c1;
@@ -50,4 +43,4 @@ class RetroItem {
 
 // * END Classes.
 
-module.exports = { DailySurvey, RetroItem, Comment };
+module.exports = { DailySurvey, Retro, Comment };
