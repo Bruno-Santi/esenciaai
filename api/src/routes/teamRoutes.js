@@ -5,6 +5,7 @@ const {
   teamMembersGet,
   userInvitedPost,
   teamByScrumGet,
+  removeUserFromTeam,
 } = require("../controllers/teamControllers");
 const express = require("express");
 
@@ -20,7 +21,7 @@ router.post("/", teamPost);
 
 //? params:{teamId};
 router.get("/members/:id", teamMembersGet);
- //$T1 obtener los miembros de un team.
+//$T1 obtener los miembros de un team.
 //! return: {members:[users]};
 
 //? body:{teamId,user};
@@ -32,9 +33,7 @@ router.patch("/members", () => {
 });
 
 //? body:{teamId,userId};
-router.delete("/members", () => {
-  //$T1 eliminar un usuario y devolver un msg satifactorio.
-});
+router.delete("/members", removeUserFromTeam);
 
 //? not sure: nothings some here.
 

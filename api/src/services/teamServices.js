@@ -28,8 +28,6 @@ teamServices.createTeamTest = async (userId, team) => {
 };
 
 teamServices.viewMembers = async (teamId) => {
-
-
   const adminUser = await UserTeam.findAll({
     where: { teamId, role: "user" },
     include: [
@@ -89,6 +87,34 @@ teamServices.addUserToTeam = async (teamId, user) => {
   }
 };
 
+teamServices.removeUserFromTeam = async (teamId, userId) => {
+  console.log(userId);
+  const existingUser = await User.findOne({
+    where: { id: userId },
+  });
+
+  if (!existingUser) {
+    console.log("El usuario no existe.");
+    return "El usuario no existe.";
+  }
+
+  const getTeam = await Team.findOne({ where: { id: teamId } });
+
+  if (!getTeam) {
+    console.log("No se encontró el equipo con el ID proporcionado.");
+    return "No se encontró el equipo con el ID proporcionado.";
+  }
+
+  await UserTeam.destroy({
+    where: {
+      userId: existingUser.id,
+      teamId: getTeam.id,
+    },
+  });
+
+  console.log("Usuario eliminado del equipo.");
+  return "Usuario eliminado del equipo.";
+};
 teamServices.inviteUserByEmail = async (
   userId,
   job_role = "scrum master",

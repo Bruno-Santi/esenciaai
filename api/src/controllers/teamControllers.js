@@ -4,6 +4,7 @@ const {
   viewMembers,
   addUserToTeam,
   scrumGetTeam,
+  removeUserFromTeam,
 } = require("../services/teamServices");
 
 const controller = {};
@@ -45,10 +46,21 @@ controller.userInvitedPost = async (req, res) => {
 
 controller.teamMembersGet = async (req, res) => {
   try {
-    
     const { id } = req.params;
 
     const result = await viewMembers(id);
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+controller.removeUserFromTeam = async (req, res) => {
+  try {
+    const { team_id, user_id } = req.body;
+
+    const result = await removeUserFromTeam(team_id, user_id);
+
     res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: error.message });
