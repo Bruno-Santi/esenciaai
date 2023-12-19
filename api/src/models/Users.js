@@ -38,11 +38,11 @@ module.exports = (sequelize) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-        validate: {
-          notEmpty: true,
-          isEmail: true,
-        },
+     //   unique: true,
+        // validate: {
+        //   notEmpty: true,
+        //   isEmail: true,
+        // },
       },
 
       password: {

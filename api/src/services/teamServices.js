@@ -51,18 +51,8 @@ teamServices.viewMembers = async (teamId) => {
 };
 
 teamServices.addUserToTeam = async (teamId, user) => {
-  console.log(user.email);
-  const existingUser = await User.findOne({
-    where: { email: user.email },
-  });
 
-  if (existingUser) {
-    // El usuario ya existe, no es necesario crear uno nuevo.
-    console.log("El usuario ya existe.");
-  } else {
-    // Crea un nuevo usuario solo si no existe.
-
-    const getTeam = await Team.findOne({ where: { id: teamId } });
+  const getTeam = await Team.findOne({ where: { id: teamId } });
 
     if (!getTeam) {
       return "No se encontró el equipo con el ID proporcionado.";
@@ -86,8 +76,7 @@ teamServices.addUserToTeam = async (teamId, user) => {
         email: newUser.email,
       },
     };
-  }
-};
+  };
 
 teamServices.inviteUserByEmail = async (
   userId,
