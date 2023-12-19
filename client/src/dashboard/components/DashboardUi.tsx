@@ -43,7 +43,7 @@ export const DashboardUi = () => {
     }
   };
   const handleNavigateToFeedBack = () => {
-    console.log(Object.entries(longRecommendation).length > 0);
+    console.log(!Object.entries(longRecommendation.recommendation));
     handleNavigate("/dashboard/feedback");
     if (Object.entries(longRecommendation).length > 0 === false) return;
   };
@@ -138,6 +138,7 @@ export const DashboardUi = () => {
               Retrospectives
             </button>
             <button
+              disabled={!Object.entries(longRecommendation)}
               className={
                 Object.entries(longRecommendation).length > 0
                   ? "btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700 hover:bg-amber-100 hover:text-primary"
