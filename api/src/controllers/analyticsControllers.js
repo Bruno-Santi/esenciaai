@@ -13,19 +13,19 @@ const controller = {};
 //     sendError(res, error);
 //   }
 // };
-// controller.getData = async (req, res, team_id) => {
-//   try {
-//     const { team_id } = req.params;
-//     console.log(team_id);
-//     const response = await fetch(
-//       `https://us-central1-esencia-app.cloudfunctions.net/dashboard_data?team_id=${team_id}`
-//     ).then((response) => response.json());
+controller.getData = async (req, res) => {
+  try {
+    const { team_id } = req.params;
+    console.log(team_id);
+    const response = await fetch(
+      `https://us-central1-esencia-app.cloudfunctions.net/dashboard_data?team_id=${team_id}`
+    ).then((response) => response.json());
 
-//     return { data: response };
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
+    return { data: response };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
 
 controller.retroPost = async (req, res) => {
   try {

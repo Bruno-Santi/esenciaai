@@ -6,6 +6,7 @@ const {
   daily_survey_post,
   daily_survey_get,
   recommendation_get,
+  daily_survey_comment_put,
 } = require("../microServices/api_mongo");
 const { DailySurvey } = require("../microServices/api_mongo/classes");
 const { sendExternalEmail } = require("../microServices/email/nodeMailer");

@@ -3,10 +3,10 @@ const { User, Team } = require("../app/db");
 const { UserTeam } = require("../app/dbRelations");
 const throwError = require("../helpers/customError");
 const {
-  daily_survey_post,
-  daily_survey_get,
-  retro_trigger_get,
   trending_topics_get,
+  recommendation_get,
+  boucle_recommendation_full_get,
+  topic_get,
 } = require("../microServices/api_mongo");
 const { DailySurvey } = require("../microServices/api_mongo/classes");
 const {
@@ -16,7 +16,6 @@ const {
 
 retroService = {};
 addServices("retro", retroService);
-
 
 retroService.sendRequestOfRetro = async (teamId) => {
   const getUserList = await UserTeam.findAll({
@@ -52,9 +51,10 @@ retroService.sendRequestOfRetro = async (teamId) => {
       });
   });
 
-  retro_trigger_get(teamId);
-
+  recommendation_get(teamId);
+  trending_topics_get(teamId);
   boucle_recommendation_full_get(teamId);
+  topic_get(teamId);
 
   await sendSurveyByEmail(teamId, "teamName", user_list);
 

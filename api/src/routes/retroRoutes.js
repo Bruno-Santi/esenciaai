@@ -31,9 +31,11 @@ router.get("/sdsdsd", async (req, res) => {
 router.post("/:teamId", async (req, res) => {
   try {
     const { teamId } = req.params;
+    console.log(teamId);
     const result = await sendRequestOfRetro(teamId);
     sendResponse(res, 200, result);
   } catch (error) {
+    console.log(error);
     sendError(res, error);
   }
 });

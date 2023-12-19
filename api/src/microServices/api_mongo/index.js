@@ -31,8 +31,6 @@ mongoApi.daily_survey_get = async (team_id) => {
   return response;
 };
 
-
-
 mongoApi.welcome_get = async () => {
   const type = "get";
   const endpoint = "/";
@@ -66,11 +64,11 @@ mongoApi.daily_survey_comment_put = async (team_id, user_id, comment) => {
   const body = {};
 
   const response = await sendReq(name, type, endpoint, params, query, body);
-   //console.log(JSON.stringify(response));
+  //console.log(JSON.stringify(response));
   return response;
 };
 
-mongoApi.retro_post = async(body = new Retro()) => {
+mongoApi.retro_post = async (body = new Retro()) => {
   const type = "post";
   const endpoint = "/retro";
   const params = "";
@@ -81,6 +79,8 @@ mongoApi.retro_post = async(body = new Retro()) => {
   console.log(JSON.stringify(response));
   return response;
 };
+
+//* trigger
 
 mongoApi.recommendation_get = async (team_id) => {
   try {
@@ -118,6 +118,22 @@ mongoApi.recommendation_full_get = async (team_id) => {
   try {
     const type = "get";
     const endpoint = "/recommendation";
+    const params = "";
+    const query = { team_id };
+    const body = {};
+
+    const response = await sendReq(name, type, endpoint, params, query, body);
+    console.log(JSON.stringify(response));
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+mongoApi.topic_get = async (team_id) => {
+  try {
+    const type = "get";
+    const endpoint = "/get_topics";
     const params = "";
     const query = { team_id };
     const body = {};
