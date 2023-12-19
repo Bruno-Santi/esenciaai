@@ -10,6 +10,7 @@ import {
   onSaveMetricsForToday,
   onToggleModal,
   onSetDataLoading,
+  onSetLongRecommendation,
 } from "../store/dashboard/dashboardSlice";
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useModal } from ".";
@@ -40,6 +41,7 @@ export const useDashboard = () => {
     isLoading,
     modalOpen,
     dataLoading,
+    longRecommendation,
   } = useSelector(({ dashboard }) => dashboard);
 
   const startSettingUser = () => {
@@ -243,6 +245,18 @@ export const useDashboard = () => {
       console.log(error);
     }
   };
+
+  const startGettingLongRecommendation = async (teamId) => {
+    try {
+      const resp = await axios.get(
+        `https://us-central1-esencia-app.cloudfunctions.net/get_long_recommendation?team_id=${teamId}`
+      );
+      onSetLongRecommendation(resp);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     startSettingActiveTeam,
     starGettingData,
@@ -271,5 +285,7 @@ export const useDashboard = () => {
     dataLoading,
     closeModal,
     isOpen,
+    startGettingLongRecommendation,
+    longRecommendation,
   };
 };

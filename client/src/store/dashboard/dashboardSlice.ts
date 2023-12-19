@@ -10,6 +10,7 @@ const initialState: DashBoardState = {
   metricsForToday: {},
   linesMetrics: {},
   shortRecomendation: {},
+  longRecommendation: {},
   dataAmount: [],
   isLoading: false,
   modalOpen: false,
@@ -44,6 +45,7 @@ export const dashboardSlice = createSlice({
       state.linesMetrics = [];
       state.dataAmount = [];
       state.shortRecomendation = {};
+      state.longRecommendation = {};
     },
     onSetUserTeams: (
       state,
@@ -98,6 +100,9 @@ export const dashboardSlice = createSlice({
     onSetDataLoading: (state, { payload }) => {
       state.dataLoading = payload;
     },
+    onSetLongRecommendation: (state, { payload }) => {
+      state.longRecommendation = payload;
+    },
   },
 });
 
@@ -113,6 +118,7 @@ export const {
   onSaveMetricsForToday,
   onToggleModal,
   onSetDataLoading,
+  onSetLongRecommendation,
 } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

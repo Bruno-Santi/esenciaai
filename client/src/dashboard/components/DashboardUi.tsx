@@ -20,8 +20,10 @@ export const DashboardUi = () => {
     shortRecomendation,
     modalOpen,
     buttonGetData,
+    startGettingLongRecommendation,
     startToggleModal,
     dataLoading,
+    longRecommendation,
   } = useDashboard();
   const { handleNavigate } = useNavigateTo();
   const containerRef = useRef();
@@ -38,6 +40,10 @@ export const DashboardUi = () => {
       toastWarning("Error creating retro");
     }
   };
+
+  useEffect(() => {
+    startGettingLongRecommendation(activeTeam.id);
+  }, []);
 
   return (
     <>
@@ -131,7 +137,10 @@ export const DashboardUi = () => {
               className='btn-primary 
           font-poppins text-sm rounded-md p-2 md:p-1 duration-700 lg:p-2 lg:text-lg
            hover:bg-amber-100 hover:text-primary'
-              onClick={() => handleNavigate("/dashboard/feedback")}
+              onClick={() => {
+                handleNavigate("/dashboard/feedback");
+              }}
+              disabled={!longRecommendation}
             >
               Feedback and Recognition
             </button>
