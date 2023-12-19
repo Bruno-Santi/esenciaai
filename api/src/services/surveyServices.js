@@ -106,7 +106,7 @@ surveyService.sendRequestOfDailySurvey = async (teamId, scrumMasterId) => {
     );
 
   await sendSurveyByEmail(teamId, teamName, user_list);
-  console.log("sendSurveyByEmail");
+
   recommendation_get(teamId);
 
   return "Daily Survey Request sent to all team members successfully.";
@@ -144,6 +144,8 @@ surveyService.createSurvey = async (daily_survey = new DailySurvey()) => {
       403,
       "You not belong to this team or your team not exist."
     );
+
+    recommendation_get(daily_survey.team_id);
 
   const daily = await daily_survey_post(daily_survey);
 

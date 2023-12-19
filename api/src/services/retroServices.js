@@ -51,7 +51,6 @@ retroService.sendRequestOfRetro = async (teamId) => {
       });
   });
 
-  recommendation_get(teamId);
   trending_topics_get(teamId);
   boucle_recommendation_full_get(teamId);
   topic_get(teamId);

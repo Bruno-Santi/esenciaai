@@ -17,7 +17,6 @@ controller.commentPut = async (req, res) => {
   try {
     const { team_id, comment } = req.query;
 
-    console.log(team_id, comment);
     const user_id = req.user_id_token;
     const result = await putCommentDailySurvey(team_id, user_id, comment);
     sendResponse(res, 200, result);
@@ -41,6 +40,7 @@ controller.dailySurveyPost = async (req, res) => {
   try {
     const { daily_survey } = req.body;
     daily_survey.user_id = req.user_id_token;
+
     const result = await createSurvey(daily_survey);
 
     res.status(200).json(result);
@@ -52,7 +52,7 @@ controller.dailySurveyPost = async (req, res) => {
 controller.sendAllMembersPost = async (req, res) => {
   try {
     const { team_id } = req.params;
-
+    console.log(req.user_id_token, "este");
     const result = await sendRequestOfDailySurvey(team_id, req.user_id_token);
 
     sendResponse(res, 200, result);
