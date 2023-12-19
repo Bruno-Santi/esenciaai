@@ -43,6 +43,7 @@ export const DashboardUi = () => {
 
   useEffect(() => {
     startGettingLongRecommendation(activeTeam.id);
+    console.log(Object.entries(longRecommendation).length);
   }, []);
 
   return (
@@ -134,20 +135,22 @@ export const DashboardUi = () => {
               Retrospectives
             </button>
             <button
-              className='btn-primary 
-          font-poppins text-sm rounded-md p-2 md:p-1 duration-700 lg:p-2 lg:text-lg
-           hover:bg-amber-100 hover:text-primary'
+              className={
+                Object.entries(longRecommendation).length > 0
+                  ? "btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700 hover:bg-amber-100 hover:text-primary"
+                  : "bg-gray-500 text-tertiary font-poppins md:text-base md:p-1 lg:text-xl rounded-md lg:p-2 duration-700"
+              }
               onClick={() => {
                 handleNavigate("/dashboard/feedback");
               }}
-              disabled={!longRecommendation}
+              disabled={!Object.entries(longRecommendation).length}
             >
               Feedback and Recognition
             </button>
             <button
-              className='btn-primary font-poppins md:text-base md:p-1 lg:text-xl rounded-md
-           lg:p-2 duration-700 hover:bg-amber-100
-            hover:text-primary'
+              className='btn-primary 
+                     font-poppins text-sm rounded-md p-2 md:p-1 duration-700 lg:p-2 lg:text-lg
+                      hover:bg-amber-100 hover:text-primary'
             >
               Reports
             </button>

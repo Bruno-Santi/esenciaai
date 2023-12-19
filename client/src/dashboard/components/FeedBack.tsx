@@ -2,33 +2,6 @@ import { BackButton } from ".";
 import { arrowdown, graph } from "../../assets";
 import { useDocumentTitle } from "../../hooks";
 import { DashboardLayout } from "../../layaout/DashboardLayout";
-const data = {
-  recommendation: {
-    content: {
-      item1:
-        "Durante esta semana, hemos observado un aumento significativo en la satisfacción general de nuestro equipo de trabajo, con un incremento del 18.75% con respecto a la semana anterior. Los cuadrantes que registraron mayores mejoras fueron Work Engagement y Self Satisfaction, con un aumento del 22% y 20% respectivamente. Sin embargo, todavía encontramos oportunidades de mejora en el cuadrante de Team Collaboration, donde se registró un incremento del 17%. Por último, el cuadrante de Workspace Well-Being también mostró un aumento del 16%. En general, podemos percibir un ambiente más positivo y comprometido en el equipo.",
-      item2: {
-        "Estar al tanto de las necesidades de los empleados":
-          "Un tema recurrente en los comentarios fue el salario y las preocupaciones financieras. Es importante ofrecer espacios donde los empleados puedan expresar sus inquietudes y brindarles acompañamiento y apoyo, ya sea mediante asesoramiento financiero o incentivos adicionales.",
-        "Mejorar la Comunicación":
-          "Dado que el cuadrante de Team Collaboration registró un menor crecimiento en comparación con los demás, es importante no descuidar la comunicación entre los miembros del equipo. Podemos fomentar espacios de reunión regulares, tanto presenciales como virtuales, donde se promueva el intercambio de ideas y se resuelvan dudas o conflictos.",
-        "Promover el Compañerismo":
-          "Uno de los aspectos mencionados por el equipo fue el valor del compañerismo. Para abordar esta necesidad, podemos organizar actividades sociales, como almuerzos o salidas en grupo, que fortalezcan la relación entre los miembros del equipo y fomenten la camaradería.",
-        "Promover la participación y el aporte de ideas":
-          "Se sugirió mejorar la transparencia y la participación en el equipo. Podemos implementar un sistema de sugerencias o un buzón de ideas, donde los empleados puedan expresar sus propuestas de mejora y sentirse escuchados. Además, podemos realizar reuniones periódicas para revisar estas ideas y ponerlas en práctica cuando sea posible.",
-      },
-    },
-    date: {
-      $date: "2023-12-19T00:00:00Z",
-    },
-    general_satisfaction: 18.75,
-    quadrant: {
-      "Workspace Well-Being": 16,
-    },
-  },
-};
-
-console.log(data.recommendation.content.item1);
 
 export const FeedBack = () => {
   useDocumentTitle("Feedback | Esencia.app");

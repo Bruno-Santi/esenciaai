@@ -130,7 +130,17 @@ export const useDashboard = () => {
       }
     }, 1500);
   };
+  const startGettingLongRecommendation = async (teamId) => {
+    try {
+      const resp = await api.get(`/analytics/${teamId}`);
+      onSetLongRecommendation(resp);
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const startSettingActiveTeam = async (id: number) => {
+    startGettingLongRecommendation(id);
     modalOpen && startToggleModal();
     const dataToSave = {
       metricsForToday: [],
@@ -246,17 +256,6 @@ export const useDashboard = () => {
     }
   };
 
-  const startGettingLongRecommendation = async (teamId) => {
-    try {
-      const resp = await axios.get(
-        `https://us-central1-esencia-app.cloudfunctions.net/get_long_recommendation?team_id=${teamId}`
-      );
-      onSetLongRecommendation(resp);
-      console.log(resp);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return {
     startSettingActiveTeam,
     starGettingData,
