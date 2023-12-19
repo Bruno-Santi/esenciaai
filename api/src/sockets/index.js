@@ -19,7 +19,7 @@ const addSocket = (server) => {
   };
 
   io.on("connection", (socket) => {
-    console.log("Client connected.");
+    // console.log("Client connected.");
 
     retroSocket.load(socket, io);
     // retroSocket.message();

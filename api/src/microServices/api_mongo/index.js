@@ -80,12 +80,32 @@ mongoApi.retro_post = async (body = new Retro()) => {
   return response;
 };
 
-//* trigger
+mongoApi.long_recommendation_get = async (team_id) => {
+  console.log("sdsdsdsd")
+  try {
+    const type = "get";
+    const endpoint = "/get_long_recommendation";
+    const params = "";
+    const query = { team_id };
+    const body = {};
+    const response = await sendReq(name, type, endpoint, params, query, body);
+    console.log(JSON.stringify(response));
+    return response;
+  } catch (error) {
+    if (error.status && error.status === 400)
+      mongoApi.recommendation_full_get(team_id);
 
+    console.log(error.status, error.payload);
+  }
+};
+
+//* trigger
+// mongoApi.long_recommendation_get("273be230-47c1-45b0-bcbc-61731dd71477");
 mongoApi.recommendation_get = async (team_id) => {
   try {
     const type = "get";
     const endpoint = "/short_recommendation";
+    console.log("execute", endpoint);
     const params = "";
     const query = { team_id };
     const body = {};
@@ -94,7 +114,7 @@ mongoApi.recommendation_get = async (team_id) => {
     console.log(JSON.stringify(response));
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.status, error.payload);
   }
 };
 
@@ -102,6 +122,7 @@ mongoApi.trending_topics_get = async (team_id) => {
   try {
     const type = "get";
     const endpoint = "/trending_topics";
+    console.log("execute", endpoint);
     const params = "";
     const query = { team_id };
     const body = {};
@@ -110,7 +131,7 @@ mongoApi.trending_topics_get = async (team_id) => {
     console.log(JSON.stringify(response));
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.status, error.payload);
   }
 };
 
@@ -118,6 +139,7 @@ mongoApi.recommendation_full_get = async (team_id) => {
   try {
     const type = "get";
     const endpoint = "/recommendation";
+    console.log("execute", endpoint);
     const params = "";
     const query = { team_id };
     const body = {};
@@ -126,7 +148,7 @@ mongoApi.recommendation_full_get = async (team_id) => {
     console.log(JSON.stringify(response));
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.status, error.payload);
   }
 };
 
@@ -134,6 +156,7 @@ mongoApi.topic_get = async (team_id) => {
   try {
     const type = "get";
     const endpoint = "/get_topics";
+    console.log("execute", endpoint);
     const params = "";
     const query = { team_id };
     const body = {};
@@ -142,7 +165,7 @@ mongoApi.topic_get = async (team_id) => {
     console.log(JSON.stringify(response));
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error.status, error.payload);
   }
 };
 
