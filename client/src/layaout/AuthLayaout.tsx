@@ -26,7 +26,7 @@ export const AuthLayout: React.FC<LayoutProps> = ({ children }) => {
           </section>
         </div>
         <div className='w-full lg:w-2/3 h-screen flex justify-center lg:relative'>
-          <div className='fixed top-1/2 transform -translate-y-1/2 lg:right-64 w-5/6 lg:w-fit px-32 pb-10 bg-primary/60 h-fit  z-50 rounded-xl'>
+          <div className='fixed top-1/2 transform -translate-y-1/2 lg:right-64 sm:w-5/6 md:w-2/6 lg:w-fit px-32 pb-10 bg-primary/60 h-fit  z-50 rounded-xl'>
             <img src={logo} alt='esencia logo' className='animate-pulse w-24 mt-14 m-auto' />
             <div className='flex m-auto justify-center'>{children}</div>
           </div>
