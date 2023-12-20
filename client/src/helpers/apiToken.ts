@@ -2,7 +2,7 @@ import axios from "axios";
 
 //% FACU_EDIT
 
-export const baseURL = "http://localhost:3000";
+export const baseURL = "https://9qhvw5j9-3000.brs.devtunnels.ms";
 // https://9qhvw5j9-3000.brs.devtunnels.ms
 //% END
 
