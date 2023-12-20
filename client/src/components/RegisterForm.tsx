@@ -56,8 +56,8 @@ export const RegisterForm = () => {
             required: "This field is required",
 
             pattern: {
-              value: /^.{8}$/,
-              message: "The password must be at least 8 characters long",
+              value: /.{8,}$/,
+              message: "The pass,word must be at least 8 characters long",
             },
           })}
         />
