@@ -45,7 +45,8 @@ export const MembersTable = () => {
         accessor: "delete",
         Cell: ({ row }) => (
           <span className='text-red-600 cursor-pointer  text-lg lg:text-2xl'>
-            <FiTrash2 onClick={() => startDeletingMemberInComponent(row.original.id, row.original.first_name)} />
+            {/* <FiTrash2 onClick={() => startDeletingMemberInComponent(row.original.id, row.original.first_name)} /> */}
+            <FiTrash2 />
           </span>
         ),
       },
