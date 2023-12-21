@@ -7,7 +7,7 @@ export const BackButton = () => {
     navigate(-1);
   };
   return (
-    <div className='fixed left-28 top-16 pt-2'>
+    <div className='absolute left-28 top-16 pt-2'>
       <IoArrowBackCircleOutline
         onClick={goBack}
         className='cursor-pointer text-6xl text-secondary duration-700 hover:text-primary'
