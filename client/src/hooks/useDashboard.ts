@@ -241,8 +241,8 @@ export const useDashboard = () => {
       const users = await startGettingMembers(teamId);
 
       console.log(users);
-      if (users.length === 0) {
-        toastWarning(`The team ${teamName} doesnt have any member`);
+      if (!users) {
+        toastWarning(`The team ${teamName} doesn't have any member.`);
       } else {
         const response = await api.post(`/survey/send_all_members/${teamId}`);
         console.log(response);
