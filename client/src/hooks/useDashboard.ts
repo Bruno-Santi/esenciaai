@@ -15,7 +15,7 @@ import {
 import { UserTeams } from "../store/dashboard/interfaces";
 import { useModal } from ".";
 import { useState } from "react";
-import api from "../helpers/apiToken";
+import api, { baseURL } from "../helpers/apiToken";
 import { getTeamData } from "../helpers/getTeamData";
 
 import { toastSuccess, toastWarning } from "../helpers";
@@ -103,7 +103,10 @@ export const useDashboard = () => {
             })
           );
         } else {
-          if (surveyData.data.short_recommendation === "there are no recommendations") {
+          if (
+            surveyData.data.short_recommendation ===
+            "there are no recommendations"
+          ) {
             dispatch(
               onSaveMetricsForToday({
                 metricsForToday: surveyData.data.pie_chart || {},
@@ -131,7 +134,9 @@ export const useDashboard = () => {
         };
 
         if (triggered)
-          !surveyData.data.error ? toast.success("Data received successfully") : toast.warning("No data yet");
+          !surveyData.data.error
+            ? toast.success("Data received successfully")
+            : toast.warning("No data yet");
         localStorage.setItem("surveyData", JSON.stringify(dataToSave));
       } catch (error) {
         console.log(error);
@@ -176,7 +181,9 @@ export const useDashboard = () => {
 
       dispatch(onCreateTeam(createdTeam.team));
 
-      const updatedUserTeams = userTeams ? [...userTeams, createdTeam.team] : [createdTeam.team];
+      const updatedUserTeams = userTeams
+        ? [...userTeams, createdTeam.team]
+        : [createdTeam.team];
 
       localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
       dispatch(onSetUserTeams({ userTeams: updatedUserTeams }));
@@ -212,7 +219,9 @@ export const useDashboard = () => {
         return startGettingMembers(teamId);
       }
 
-      toast.warning(`${formData.user.email} has already been added to the some team`);
+      toast.warning(
+        `${formData.user.email} has already been added to the some team`
+      );
       console.log(response.data.user);
 
       startGettingMembers(teamId);
@@ -259,7 +268,7 @@ export const useDashboard = () => {
     console.log(teamId);
 
     try {
-      const resp = await axios.post(`https://9qhvw5j9-3000.brs.devtunnels.ms/retro/${teamId} `);
+      const resp = await axios.post(`${baseURL}/retro/${teamId} `);
       console.log(resp);
     } catch (error) {
       console.log(error);
