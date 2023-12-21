@@ -13,7 +13,6 @@ export const ModalMembers: React.FC<{
   const { creatingLoading } = useAuthSlice();
   const { membersActiveTeam, activeTeam, startToggleModal } = useDashboard();
   const [addMember, setAddMember] = useState(false);
-  const [forceUpdate, setForceUpdate] = useState(false); // Estado adicional
 
   const toggleAddMember = () => {
     setAddMember((prevState) => {

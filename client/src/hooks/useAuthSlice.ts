@@ -77,6 +77,10 @@ export const useAuthSlice = () => {
     dispatch(onLogOutUser());
     handleNavigate("/auth/login");
   };
+
+  const cleanErrorMessage = () => dispatch(clearErrorMessage())
+
+  
   return {
     startCheckingUser,
     loading,
@@ -84,6 +88,7 @@ export const useAuthSlice = () => {
     status,
     startRegisteringUser,
     startLogingOut,
+    cleanErrorMessage,
     startLoginUser,
     userTeams,
     user,

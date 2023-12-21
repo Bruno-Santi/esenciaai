@@ -60,7 +60,7 @@ export const AdditionalComments = () => {
 
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
-    let config = {
+    const config = {
       method: "put",
       maxBodyLength: Infinity,
       url: `${baseURL}/survey/daily_survey_comment?comment=${comment}&team_id=${params.team_id}`,
@@ -81,19 +81,19 @@ export const AdditionalComments = () => {
 
   return (
     <SurveyLayout>
-      <div className="w-4/6 m-auto flex flex-col mt-12 h-3/6 bg-gray-600 rounded-md text-tertiary font-poppins">
-        <span className="m-auto mt-16 text-2xl">
+      <div className='w-4/6 m-auto flex flex-col mt-12 h-3/6 bg-gray-600 rounded-md text-tertiary font-poppins'>
+        <span className='m-auto md:mt-8 lg:mt-16 md:text-lg lg:text-2xl'>
           Would you like to leave any additional comments?
         </span>
         <textarea
           onChange={handleCommentChange}
-          placeholder="Put any comment here..."
-          className="bg-white rounded-md w-5/6 h-1/3 p-4 flex m-auto text-primary"
+          placeholder='Put any comment here...'
+          className='bg-white rounded-md w-5/6 h-1/3 p-4 flex m-auto text-primary'
         ></textarea>
-        <div className="flex w-1/3 space-x-6 m-auto">
+        <div className='flex w-1/3 space-x-6 m-auto'>
           <button
             onClick={() => handleNavigate("/members/finished")}
-            className="btn-secondary mb-12 p-2 w-[150px] rounded-md m-auto"
+            className='btn-secondary mb-12 p-2 w-[150px] rounded-md m-auto'
           >
             Skip
           </button>

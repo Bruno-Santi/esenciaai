@@ -89,6 +89,7 @@ export const useDashboard = () => {
     setTimeout(async () => {
       try {
         const surveyData = await getTeamData(id);
+        console.log(surveyData);
 
         startGettingLongRecommendation(id);
         const datalocal = localStorage.getItem("surveyData");
@@ -103,10 +104,7 @@ export const useDashboard = () => {
             })
           );
         } else {
-          if (
-            surveyData.data.short_recommendation ===
-            "there are no recommendations"
-          ) {
+          if (surveyData.data.short_recommendation === "there are no recommendations") {
             dispatch(
               onSaveMetricsForToday({
                 metricsForToday: surveyData.data.pie_chart || {},
@@ -134,9 +132,7 @@ export const useDashboard = () => {
         };
 
         if (triggered)
-          !surveyData.data.error
-            ? toast.success("Data received successfully")
-            : toast.warning("No data yet");
+          !surveyData.data.error ? toast.success("Data received successfully") : toast.warning("No data yet");
         localStorage.setItem("surveyData", JSON.stringify(dataToSave));
       } catch (error) {
         console.log(error);
@@ -181,9 +177,7 @@ export const useDashboard = () => {
 
       dispatch(onCreateTeam(createdTeam.team));
 
-      const updatedUserTeams = userTeams
-        ? [...userTeams, createdTeam.team]
-        : [createdTeam.team];
+      const updatedUserTeams = userTeams ? [...userTeams, createdTeam.team] : [createdTeam.team];
 
       localStorage.setItem("userTeams", JSON.stringify(updatedUserTeams));
       dispatch(onSetUserTeams({ userTeams: updatedUserTeams }));
@@ -219,9 +213,7 @@ export const useDashboard = () => {
         return startGettingMembers(teamId);
       }
 
-      toast.warning(
-        `${formData.user.email} has already been added to the some team`
-      );
+      toast.warning(`${formData.user.email} has already been added to the some team`);
       console.log(response.data.user);
 
       startGettingMembers(teamId);

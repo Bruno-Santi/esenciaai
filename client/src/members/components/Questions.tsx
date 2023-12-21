@@ -10,11 +10,11 @@ export const Questions = (team_id, token) => {
         {questions.map(({ id, question }) => (
           <div
             key={id}
-            className='flex flex-col p-6 space-y-4 text-xl text-center text-tertiary font-poppins justify-center'
+            className='flex flex-col lg:p-6 md:p-2 lg:space-y-4 md:space-y-2 text-xl text-center text-tertiary font-poppins justify-center'
           >
             {question}
             <div className='flex items-center justify-between'>
-              <span role='img' className='text-3xl' aria-label='Sad Emoji'>
+              <span role='img' className='lg:text-3xl md:text-lg' aria-label='Sad Emoji'>
                 😟
               </span>
               <label

@@ -5,13 +5,14 @@ import { useNavigateTo } from "../hooks";
 import { renderErrorMessage } from "../helpers/renderErrorMessage";
 
 export const LoginForm = () => {
-  const { startLoginUser, loading, errorMessage } = useAuthSlice();
+  const { startLoginUser, loading, errorMessage, cleanErrorMessage } = useAuthSlice();
   const { handleNavigate } = useNavigateTo();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const onSubmit = (data) => {
     const { email, password } = data;
     startLoginUser({ email, password });
@@ -78,7 +79,10 @@ export const LoginForm = () => {
         <Divider width={"w-[400px]"} />
       </div>
       <span
-        onClick={() => handleNavigate("/auth/register")}
+        onClick={() => {
+          cleanErrorMessage();
+          handleNavigate("/auth/register");
+        }}
         className='text-tertiary font-normal mt-10 font-poppins cursor-pointer text-lg m-auto  duration-500 hover:text-secondary '
       >
         New at esencia? <span>Register</span>
