@@ -268,7 +268,7 @@ export const useDashboard = () => {
     console.log(teamId);
 
     try {
-      const resp = await axios.post(`${baseURL}/retro/${teamId} `);
+      const resp = await axios.post(`${baseURL}/retro/${teamId}`);
       console.log(resp);
     } catch (error) {
       console.log(error);
